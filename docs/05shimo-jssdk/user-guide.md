@@ -1,0 +1,357 @@
+---
+title: 使用说明
+sidebar_position: 3
+---
+
+### 初始化 iframe
+
+```js
+const { connect } = require('shimo-js-sdk')
+
+connect({
+  fileId: '您系统中的 file id',
+  endpoint: '石墨服务的地址',
+  signature: '用您的 app id 和 secret 签发的签名',
+  token: '用于您系统识别用户请求的 token',
+  container: document.querySelector('#shimo-file'), // iframe 挂载的目标容器元素
+  lang: 'en' // 未指定此参数时，使用浏览器默认语言
+}).then((shimoSDK) => {
+  // ...
+})
+```
+
+返回值：
+
+```
+Promise<ShimoSDK>
+```
+
+**使用传统的 `<script>` 的方式加载：**
+
+1. 使用 [npm view](https://docs.npmjs.com/cli/v7/commands/npm-view) 和 [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack) 下载代码包 (`.tgz` 格式)
+2. 将 `.tgz` 解压缩后的 `dist` 目录下的文件放置到您托管静态资源的空间，然后使用 `<script>` 引入 `index.js` 资源
+3. 通过 `window.ShimoJSSDK` 对象获取对应的方法
+
+```js
+const { connect, FileType } = window.ShimoJSSDK
+// 等价于
+const { connect, FileType } = require('shimo-js-sdk')
+```
+
+#### 使用示例
+
+```js
+const { connect } = require('shimo-js-sdk')
+
+const fileId = '1234'
+
+// 从您的后端服务获取用于石墨鉴权的签名和 token
+const { signature, token } = await getCredentialsFromServer()
+
+connect({
+  fileId: fileId,
+  endpoint: 'https://shimo-sdk-endpoint/', // endpoint 因环境而异，请联系技术支持
+  signature: signature,
+  token: token,
+  container: document.querySelector('#shimo-file') // iframe 挂载的目标容器元素
+}).then((sdk) => {
+  // sdk 即为 ShimoSDK 实例
+})
+```
+
+调用 `connect()` 时，会以传入参数为基础，初始化一个 `<iframe>` 并插入 `container` 对应的元素中。
+
+返回的 `sdk` 为 `ShimoSDK` 实例，用于和 SDK、编辑器交互。
+
+### SDK 和编辑器实例
+
+石墨 JS SDK 共有两种实例用于和 JS SDK 交互：
+
+- `ShimoSDK` 由 `connect()` 返回，处理初始化编辑器和编辑器交互的工作
+- `Editor` 文档编辑器，直接和文档内容交互。**`Editor` 所有接口均返回 Promise**
+
+两者之间各有独立的方法和事件，具体请查看 `docs` 目录的文档。
+
+获取编辑器实例和与其交互：
+
+```js
+const { FileType } = require('shimo-js-sdk')
+
+// 获取编辑器实例
+const editor = sdk.getEditor()
+
+// 调用通用事件
+editor.on('saveStatusChanged', (payload) => {
+  console.log(payload.status)
+})
+
+// 调用特定类型文档的方法
+if (sdk.fileType === FileType.Document) {
+  editor.showHistory()
+}
+```
+
+若为 `TypeScript`，可使用 `Generic`：
+
+```typescript
+const { Document } = require('shimo-js-sdk')
+
+const editor = sdk.getEditor<Document.Editor>()
+editor.on('saveStatusChanged', (payload) => {
+  console.log(payload.status)
+})
+
+await editor.showHistory()
+```
+
+### `signature` 和 `token`
+
+- `signature` 为石墨区分请求来源，并实现数据隔离的基础
+- `token` 为您用于识别回调请求来源、是否合法的依据
+
+具体说明请查阅在线文档：[https://platform.shimo.im/v2/docs/concepts/](https://platform.shimo.im/v2/docs/concepts/)。
+
+由于 `signature` 和 `token` 有过期时间，一般也不建议设置过长的时间，但为了减少因过期导致的用户体验问题，`ShimoSDK` 提供 `setCredentials({ signature, token })` 方法用于动态更新。
+
+```js
+// 从您的后端服务获取用于石墨鉴权的签名和 token
+let { signature, token, expires } = await getCredentialsFromServer()
+
+const shimoSDK = await connect({ ... })
+
+setInterval(
+  () => {
+    // 当签名不到一分钟就过期时进行更新
+    if (Date.now() - expires < 60000) {
+      const resp = await getCredentialsFromServer()
+      await shimoSDK.setCredentials({
+        signature: resp.signature,
+        token: resp.token
+      })
+      expires = resp.expires
+    }
+  },
+  60 * 1000
+)
+```
+
+### 如何处理 URL
+
+由于石墨 SDK 以 `iframe` 的形式挂载到当前页面，`iframe.src` 对应的 URL 并不适合用于分享，而且在一些功能上，比如 @ 文件，需要用到您系统中对应的 URL 格式，比如 `https://your-domain/files/:id`。
+
+为了解决这个问题，石墨 SDK 引入 `generateUrl()` 和 `openLink()` 方法：
+
+```js
+import { UrlSharingType } from 'shimo-js-sdk'
+
+const shimoSDK = await connect({
+  ...,
+
+  generateUrl(fileId: string, info: GenerateUrlInfo): string {
+    if (info?.sharingType === UrlSharingType.FormFill) {
+      return `https://your-domain/files/${fileId}/fill-form`
+    }
+
+    if (info?.sharingText) {
+      return `https://your-domain/files/${fileId} ${info.sharingText}`
+    }
+
+    return `https://your-domain/files/${fileId}`
+  },
+
+  openLink(url: string): void {
+    // 以 React Router 为例
+
+    // 假设 url 是 'https://your-domain/files/1'，在当前页跳转，其他则新窗口打开
+    if (url.includes('your-domain/files/')) {
+      const u = new URL(url)
+      history.push(u.pathname)
+    } else {
+      window.open(url)
+    }
+  }
+})
+```
+
+#### URL 的上下文信息
+
+为了在 URL 上传递上下文信息，比如 URL 指向的段落、单元格，在调用 `generateUrl()` 生成 URL 后，会在 URL 后附加一个 `smParams=PARAMS` 的参数：
+
+```
+https://your-domain/files/:id?smParams=PARAMS
+```
+
+**如无特殊需要，请保留该参数。**
+
+默认情况下，调用 `connect()` 会从当前 `location.search` 中提取 `smParams`，如果遇到需要自定义参数的场合，可以通过 `connect({ smParams: PARAMS })` 参数修改。
+
+`smParams` 为经过 [base62](https://github.com/felipecarrillo100/base62str) 序列化后的 `Record<string, unknown>` 对象。
+
+**在传入 `smParams` 参数时，将不会从 `location.search` 中获取数据**，如果想保留原有信息，可以这样传递：
+
+```js
+const paramsList: Array<string | Record<string, unknown>>
+
+const originParams = new URLSearchParams(location.search).get('smParams')
+// 保留原来的上下文信息
+if (originParams) {
+  paramsList.push(originParams)
+}
+
+// 添加自定义的上下文信息
+paramsList.push({
+  myVar: 'myVal'
+})
+
+connect({
+  smParams: paramsList
+})
+```
+
+#### URL Info
+
+`generateUrl(fileId, info)` 中的 `info` 是用于对 URL 进行一些特殊处理的。
+
+`sharingText`：石墨默认提供的分享文本：比如
+
+- `https://your-domain/files/1 xxx 邀请您参与《标题》协作，请复制粘贴后在浏览器打开`
+- `https://your-domain/files/1/fill-form xxx 邀请您填写《标题》表单，……`
+
+`sharingType`：表示此次 `generateUrl()` 对应的行为类型，比如：
+
+- `UrlSharingType.Form` 代表一般的打开编辑表单的行为
+- `UrlSharingType.FormPreview` 代表打开预览表单页面的行为
+- `UrlSharingType.FormFill` 代表打开填写表单页面的行为
+
+您需要根据具体类型，生成不同的 URL，比如：
+
+- `UrlSharingType.Form`、`UrlSharingType.FormPreview` 等一般需要进行鉴权，因此可以用 `/files/${fileId}`
+- `UrlSharingType.FormFill` 填写表单一般不需要登录鉴权，因此可以用另一个独立的路由，比如 `/files/${fileId}/fill-form`
+
+在实际操作中，您可以根据 `sharingType` 按需为 URL 添加分享文本。**若添加了分享文本，则需要您在 `parseUrl()` 中对 URL 进行处理**，比如：
+
+```js
+// url: 'https://your-domain/files/1 xxx 邀请您参与《标题》协作，请复制粘贴后在浏览器打开'
+parseUrl(url: string) {
+  return url.split(' ')[0] // 返回 'https://your-domain/files/1
+}
+```
+
+### 打开表格编辑器时展示指定工作表 (Sheet)
+
+**使用本章节用法时，请先了解 [URL 的上下文信息](#url-的上下文信息) 章节**。
+
+此用法适用于表格中存在多个工作表 (Sheet) ，希望在打开编辑器时，直接展示某个工作表格而非默认的第一个工作表。如用于希望直接分享表格的某个工作表链接给其他协作者，他人在打开后可直接查看指定的工作表。
+
+首先通过 `docs/interfaces/Spreadsheet.Editor.md` 表格的编辑器 `getActiveSheetId` 方法获取当前处于激活状态的工作表 ID ，此 ID 可用于追加在接入方自身的 URL 上作为参数。
+
+如通过 `URL QueryString` 方式传递：`https://your-domain.com/files/abcdefg?sheetId=XXXXX&smParams=XXXXXXXXXXXXXXXXXXXXXX`
+
+`sheetId` 仅为参数名举例，接入方可结合自身业务命名。
+
+```js
+const paramsList: Array<string | Record<string, unknown>>
+const queryParams = new URLSearchParams(location.search)
+
+const originParams = queryParams.get('smParams')
+const sheetId = queryParams.get('sheetId')
+
+// 保留原来的上下文信息
+if (originParams) {
+  paramsList.push(originParams)
+}
+// paramsList
+// => [originParamsStringValue]
+
+// 添加自定义的上下文信息
+paramsList.push({ sheetId: '通过 QueryString 中获取的 sheetId' })
+// paramsList
+// => [originParamsStringValue, {"sheetId": "XXXXX"}]
+
+connect({
+  smParams: paramsList
+})
+```
+
+### 打开编辑器时，定位至在正文中 at 某用户的位置
+
+支持类型：
+
+- `轻文档` - `document`
+- `表格` - `spreadsheet`
+- `传统文档` - `documentPro`
+
+**使用本章节用法时，请先了解 [URL 的上下文信息](#url-的上下文信息) 章节**。
+
+此用法适用于在接入方系统的文件中 at 了指定用户，在回调接口种收到 `石墨 SDK 事件` 中的 `MentionAt` 类型事件，并获取 `mentionAt.guid` 字段作为参数拼接至接入方的访问链接上，在接入方系统通知对应用户时，推送的链接可直接打开对应文件并定位至当前用户被 at 的正文位置，以便于查看对应位置相关内容。
+
+如通过 `URL QueryString` 方式传递：`https://your-domain.com/files/abcdefg?mentionId=XXXXX&smParams=XXXXXXXXXXXXXXXXXXXXXX`
+
+`mentionId` 仅为参数名举例，接入方可结合自身业务命名。
+
+```js
+const paramsList: Array<string | Record<string, unknown>>
+const queryParams = new URLSearchParams(location.search)
+
+const originParams = queryParams.get('smParams')
+const mentionId = queryParams.get('mentionId')
+
+// 保留原来的上下文信息
+if (originParams) {
+  paramsList.push(originParams)
+}
+// paramsList
+// => [originParamsStringValue]
+
+// 添加自定义的上下文信息
+paramsList.push({ hash: '通过 QueryString 中获取的 mentionId' })
+// paramsList
+// => [originParamsStringValue, {"hash": "XXXXX"}]
+
+connect({
+  smParams: paramsList
+})
+```
+
+### 修改编辑器 API 请求参数
+
+> 修改 API 请求有可能破坏接口行为，进而影响功能，请谨慎使用。
+> 需要修改编辑器 API 请求参数时，可使用 `ConnectOptions.apiAdaptor` 。APIAdaptor 有以下限制：
+
+- 请不要修改 `body`
+- 需要可以被 `toString()` 且可以 `new Function()` 的方式调用
+- 由于 Web Worker 的特性
+  - `apiApadator` 尽量使用标准的、目标浏览器内置的语法、方法
+  - 如果需要传递一些变量，可以使用 `ConnectOptions.apiAdaptorContext`，此对象需要可以被 `JSON.stringify()` 处理
+    - 请尽量使用 `boolean | number | string` 类型的数据，否则有可能无法通过 `postMessage` 和 `JSON.stringify()` 的处理
+- `url` 不一定带有 protocol、hostname 信息，比如 `/sdk/v2/users/me`，请注意
+- `header`、`query` 中原有的数据请尽量保留、不修改
+
+```typescript
+connect({
+  apiAdaptor(options: RequestOptions, context?: RequestContext) {
+    // 修改 URL host
+    if (options.url.includes('some_pattern')) {
+      const url = new URL(options.url, context.host)
+      url.host = context.host
+      url.protocol = context.protocol
+      options.url = url.toString()
+    }
+    options.headers = {
+      // 保留原 header
+      ...options.headers,
+      // 复制 context header
+      ...context.headers
+    }
+    // options.query 修改参考 headers
+    return options
+  },
+  apiAdaptorContext: {
+    host: 'new-host.com',
+    protocol: 'https',
+    header: {
+      'x-my-var': 'my-value'
+    }
+  }
+})
+```
