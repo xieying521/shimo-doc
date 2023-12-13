@@ -25,5 +25,5 @@ jobs:
         run: ./obsutil_linux_amd64_5.5.9/obsutil config -i ${{ secrets.OBS_ACCESS_KEY_ID }} -k ${{ secrets.OBS_ACCESS_KEY_SECRET }} -e https://obs.cn-north-4.myhuaweicloud.com
       - name: Upload docs by obsutil
         run: |
-          ls -l
-          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc-dev/ -f -r -flat
+          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc-dev/ -f -r -flat --exclude '*.html'
+          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc-dev/ -f -r -flat --include '*.html' --exclude '*'
