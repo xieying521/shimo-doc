@@ -18,7 +18,7 @@ jobs:
             cp -rf docs ./gen-doc/
             cd gen-doc
             npm i
-            export PUBLIC_PATH=${{ vars.PUBLISH_PUBLIC_CDN }} && npm run build
+            export PUBLIC_PATH=${{ vars.PUBLISH_PUBLIC_CDN_PRO }} && npm run build
             cd ../
       - name: Install obsutil
         run: wget https://obs-community.obs.cn-north-1.myhuaweicloud.com/obsutil/current/obsutil_linux_amd64.tar.gz && tar -zxvf obsutil_linux_amd64.tar.gz && chmod 755 ./obsutil_linux_amd64_5.5.9/obsutil
@@ -26,5 +26,5 @@ jobs:
         run: ./obsutil_linux_amd64_5.5.9/obsutil config -i ${{ secrets.OBS_ACCESS_KEY_ID }} -k ${{ secrets.OBS_ACCESS_KEY_SECRET }} -e https://obs.cn-north-4.myhuaweicloud.com
       - name: Upload docs by obsutil
         run: |
-          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc/ -f -r -flat --exclude '*.html'
-          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc/ -f -r -flat --include '*.html'
+          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build ${{ vars.OBS_PRO }} -f -r -flat --exclude '*.html'
+          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build ${{ vars.OBS_PRO }} -f -r -flat --include '*.html'
