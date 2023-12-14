@@ -27,4 +27,4 @@ jobs:
       - name: Upload docs by obsutil
         run: |
           ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc/ -f -r -flat --exclude '*.html'
-          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc/ -f -r -flat --include '*.html' --exclude '*'
+          ./obsutil_linux_amd64_5.5.9/obsutil cp ./gen-doc/build obs://open-read/shimo-doc/ -f -r -flat --include '*.html'
