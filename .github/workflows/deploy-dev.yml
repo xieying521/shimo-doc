@@ -14,9 +14,9 @@ jobs:
       - name: Build Doc
         run: |
             git clone https://${{ secrets.GIT_REPO_TOKEN }}:x-oauth-basic@github.com/shimo-open/gen-doc.git
-            git checkout dev
             cp -rf docs ./gen-doc/
             cd gen-doc
+            git checkout dev
             npm i
             export PUBLIC_PATH=${{ vars.PUBLISH_PUBLIC_CDN_DEV }} && npm run build
             cd ../
