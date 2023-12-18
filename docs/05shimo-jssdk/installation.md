@@ -7,7 +7,7 @@ sidebar_position: 2
 
 以下提供两种下载方式：
 
-- 通过github下载：https://github.com/shimohq/shimo-js-sdk/releases
+- 通过github下载：https://github.com/shimo-open/shimo-js-sdk/releases
 - 通过 npm 等包管理工具安装：
 
 ```json
