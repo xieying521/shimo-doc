@@ -144,16 +144,16 @@ file: string
 |名称|类型|必选|约束|中文名|说明|
 |---|---|---|---|---|---|
 |code|integer|true|none|-|none|
-|» data|object|true|none|-|none|
+| data|object|true|none|-|none|
 |GUID|string|true|none|GUID|附件GUID|
 |filename|string|true|none|文件名称|文件名称|
-|»» key|string|true|none|key|附件key|
+| key|string|true|none|key|附件key|
 |mimeType|string|true|none|mimeType|例如 application/gzip|
 |images|string|true|none|同url|none|
 |url|string|true|none|附件url|none|
 |audio|null|true|none|音频信息|none|
 |video|null|true|none|视频信息|例如 {"width":"640","height":"352","duration":"17.333333","fps":"","fileFormat":"","bitrate":"49710"}|
-|»» width|string|true|none|图片宽度|none|
+| width|string|true|none|图片宽度|none|
 |height|string|true|none|图片高度|none|
 |size|integer|true|none|大小|字节|
 

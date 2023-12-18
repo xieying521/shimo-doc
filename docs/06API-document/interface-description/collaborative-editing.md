@@ -2447,7 +2447,7 @@ PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 ```json
 {
   "text": "foo.pdf",
-  "link": "https://shimo.mihoyo.com/f/foo.pdf",
+  "link": "https://bar.com/f/foo.pdf",
   "type": "attach"
 }
 ```
@@ -2460,9 +2460,9 @@ PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 |sheetName|path|string| 是 |Sheet 名称|
 |cell|path|string| 是 |单元格位置|
 |body|body|object| 否 |none|
-|» text|body|string| 是 |链接显示的文本|
-|» link|body|string| 是 |链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接|
-|» type|body|string¦null| 是 |链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接。|
+| text|body|string| 是 |链接显示的文本|
+| link|body|string| 是 |链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接|
+| type|body|string¦null| 是 |链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接。|
 
 **返回结果**
 
@@ -3213,8 +3213,8 @@ interface DataValidationCustomFormula extends DataValidationBase {
 |providerFileID|path|string| 是 |文件 ID|
 |sheetName|path|string| 是 |Sheet 名称|
 |body|body|object| 否 |none|
-|» range|body|string| 是 |none|
-|» rule|body|object| 是 |参照描述部分中的 **DataValidationRule** 类型声明|
+| range|body|string| 是 |none|
+| rule|body|object| 是 |参照描述部分中的 **DataValidationRule** 类型声明|
 
 ### 返回结果
 
