@@ -1,9 +1,8 @@
 name: Deploy docs
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - master
+    tags:
+      - "v**"
 jobs:
   deploy:
     runs-on: ubuntu-latest
