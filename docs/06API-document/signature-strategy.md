@@ -5,6 +5,10 @@ sidebar_position: 4
 
 石墨 SDK 在进行数据传输时，会使用签名作为校验方法。签名过期导致的报错是对接时的常见问题，使用建议的签名续期策略能够帮您快速解决问题。
 
+## 签名流程示意
+
+![callback-gateway](./../image/skd-signature.png)
+
 ## 签名的种类
 
 在使用石墨 SDK 的过程中，有两种签名，分别是 signature 和 token。

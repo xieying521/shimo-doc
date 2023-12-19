@@ -12,12 +12,14 @@ JWT 通常形式为 xxxxx.yyyyy.zzzzz
 - Header 部分
 
   - 默认包含的字段：alg 、typ
+
     - **alg** 表示签名算法，通常默认为 **HS256**
     - **typ** 标识 Token 类型，JSON Web Token 的类型默认为 **JWT**
 
-  - 添加 **kid** 字段，值为 **App ID** 
+  - 添加 **kid** 字段，值为 **App ID**
 
-- Payload部分
+- Payload 部分
+
   - 仅添加 **exp** 字段即可，值为 JWT 的过期时间的秒数 ，例如 1612411882 （如当前时间的秒数值比 exp 字段的值要小，说明还没有到达过期时间，此签名不会被判断为失效）
 
   - 当请求 `/admin` 相关 API 时，会额外增加 `fileId` 信息
@@ -33,12 +35,15 @@ Header
   "kid": "your AppId"
 }
 ```
+
 Payload
+
 ```json
 {
   "exp": 1612411882
 }
 ```
+
 Payload 参数
 
 | 字段名 | 字段名 | 值示例     | 必选 | 说明                                                         |
@@ -60,10 +65,10 @@ Payload 参数
 
 ```java
 // JDK8或以上
+// “获取App详情”和“更新App回调地址”接口需要带上 scope: license
 String signature = JWT.create()
-                // .withClaim("scope", "license") //  如果调用需要scope参数的接口，需要添加此行
+                // .withClaim("scope", "license") //  如果调用需要scope参数的接口，需要添加此行，且将过期时间改为4分钟
                 .withKeyId("your shimo sdk AppId")
-                .withExpiresAt(new Date().toInstant().plus(4, ChronoUnit.MINUTES))
+                .withExpiresAt(new Date().toInstant().plus(7, ChronoUnit.DAYS))
                 .sign(Algorithm.HMAC256("your shimo sdk AppSecret"));
 ```
-
