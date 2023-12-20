@@ -33,6 +33,7 @@ toc_max_heading_level: 4
 
 :::tip 提示
 ⚠️ 实现最基本的功能（能看到编辑器并编辑）至少需要接入方开发以下两个接口：
+
 - [`获取文件元信息`](./impl.md#获取文件元信息-协同文档)
 - [`获取当前用户信息`](./impl.md#获取当前用户信息)
 
@@ -56,7 +57,7 @@ toc_max_heading_level: 4
 ### 支持格式 {#preview-supported-types}
 
 | 文件类型   | 支持的扩展名格式                                           |
-|:---------|:-----------------------------------------------------------|
+| :--------- | :--------------------------------------------------------- |
 | Word 文件  | `.doc` `.docx` `.wps` `.wpt`                               |
 | Excel 文件 | `.xls` `.xlsx` `.xlsm` `.csv`                              |
 | PPT 文件   | `.ppt` `.pptx`                                             |
@@ -65,6 +66,7 @@ toc_max_heading_level: 4
 | 音频 文件  | `.mp3` `.mp4`                                              |
 | 图片 文件  | `.jpg` `.jpeg` `.png` `.gif` `.bmp` `.svg` `.heic` `.heif` |
 | 其它 文件  | `.ofd` `.rtf` `.md`                                        |
+
 开始接入文件预览前，需要接入方了解或准备以下事项：
 
 - [签名的实现细节](./resources.md#签名)
@@ -93,12 +95,12 @@ Content-Disposition: attachment; filename="yourfilename.docx"
 
 HTTP Response**Header**中需要**返回正确的 Content-Type 信息**，如下
 
-![图片](/img/sdk-preview-header.png)
+![图片](./img/sdk-preview-header.png)
 
 几种类型的 Content-Type 示例
 
 | 扩展名 | 对应的 Content-Type 值                                                    |
-|:-------|:--------------------------------------------------------------------------|
+| :----- | :------------------------------------------------------------------------ |
 | doc    | application/msword                                                        |
 | docx   | application/vnd.openxmlformats-officedocument.wordprocessingml.document   |
 | xlsx   | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet         |
@@ -115,6 +117,7 @@ HTTP Response**Header**中需要**返回正确的 Content-Type 信息**，如下
 如：
 
 预览的文件下载地址 (`downloadUrl`) 为 `https://your-domain/static/files/1234` ，请求下载时接入方无法返回以下任意一种 Header 信息用于石墨 SDK 识别文件类型：
+
 - `Content-Type`
 - `Content-Disposition`
 

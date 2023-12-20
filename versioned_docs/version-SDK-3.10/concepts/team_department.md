@@ -86,6 +86,7 @@ team1
 `部门成员` 可以属于多个 `部门`，也可仅属于一个 `部门` ，取决于接入方系统的实现，石墨 SDK 暂无限制，但一个成员仅属于一个部门的用法较为常见。
 
 由于理解上的不同可能最终实现结果不同：
+
 - 成员属于 **多个部门**：`张三` 属于 `研发部 - 后端组` ，张三既包含在 `后端组` 部门中，也包含在 `研发部` 部门中。
 - 成员属于 **一个部门**：`张三` 属于 `研发部 - 后端组` ，张三直属部门为 `后端组` ，而非直属 `研发部`。
 
@@ -111,11 +112,11 @@ team1
 
 在石墨 SDK 中，团队（或认为是企业）是一个较为特殊的部门，默认作为部门中的顶级节点（或根节点），而团队在接入方的系统中，团队
 
-![团队部门层级结构](/img/team_department_structure.png)
+![团队部门层级结构](../img/team_department_structure.png)
 
 ### 部门节点类型图示 {#department-node-types}
 
-![部门节点类型](/img/department_node_types.png)
+![部门节点类型](../img/department_node_types.png)
 
 ## 实现
 
@@ -126,7 +127,9 @@ team1
 接入团队与部门相关功能，主要涉及接入方实现的回调接口的开发，包括若干 `接口变更` 和 `接口新增`：
 
 #### 接口变更
+
 - [获取当前用户信息](../impl.md#user-current)
+
 ```diff title="Response Body Example"
 {
   "id": "userid123",
@@ -139,6 +142,7 @@ team1
 ```
 
 - [获取元信息-协同文档](../impl.md#file-meta-collab)
+
 ```diff title="Response Body Example"
 {
   "id": "ba13551165cc5066",
@@ -160,6 +164,7 @@ team1
 ```
 
 - [根据关键字搜索文件、用户、团队成员、部门](../impl.md#search-by-keyword)
+
 ```diff title="Request Body Example"
 {
   "fileId": "file1234",
@@ -172,7 +177,6 @@ team1
   // highlight-end
 }
 ```
-
 
 ```diff title="Response Body Example"
 {
@@ -256,6 +260,7 @@ team1
 ```
 
 #### 接口新增
+
 - [获取当前用户所在团队信息](../impl.md#user-current-team)
 - [获取用户部门路径](../impl.md#user-department-paths)
 - [获取团队下的成员列表](../impl.md#team-members)
@@ -266,6 +271,7 @@ team1
 ### ❗ 特殊部门 ID 说明 {#depatment-id-tips}
 
 在石墨 SDK 中，默认 `根节点部门` 对应 `团队` 信息，因此在获取
+
 - `部门信息`
 - `部门的下级部门`
 - `部门下的成员列表`
@@ -288,9 +294,11 @@ team1
 ### ❗ `表格锁定` 中设置 `全员锁定` 设置说明
 
 石墨 SDK 表格编辑器中，若添加 `表格锁定` 时，选择对 `企业全员` 设置锁定权限时，回调接口需要满足以下条件：
+
 1. `currentUser.teamGuid` 不为空
 1. `file.teamGuid` 不为空
 1. `currentUser.teamGuid` 与 `file.teamGuid` 相等时，当前用户才会被判定属于全员锁定的范围内
 
 ### ❗ `表格锁定` 限制说明
+
 在使用接入团队、部门功能后，由于表格编辑器会检查 `当前用户` 及 `当前文件` 的 `teamGuid` 是否相等，若不相等，则无法进行表格锁定操作。
