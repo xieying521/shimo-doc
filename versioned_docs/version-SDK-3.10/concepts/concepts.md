@@ -26,7 +26,7 @@ sidebar_position: 2
 
 ## 基本流程
 
-![time-queue-image](/img/sdk_intro.png)
+![time-queue-image](../img/sdk_intro.png)
 
 ## 接入须知
 
