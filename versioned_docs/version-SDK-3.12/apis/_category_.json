@@ -1,9 +1,4 @@
 {
   "label": "石墨 API 列表",
-  "position": 5,
-  "link": {
-    "type": "doc",
-    "id": "main"
-  },
-  "collapsed": false
+  "position": 5
 }
