@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 toc_max_heading_level: 4
 ---
 
@@ -10,6 +10,7 @@ toc_max_heading_level: 4
 <!-- 石墨 SDK 支持两种鉴权方式： -->
 
 <!-- - [header](#auth-with-header)，推荐使用，文档中示例代码主要用此方式。 -->
+
 - [query string](#auth-with-querystring)
 
 <!-- ## Header 鉴权方式 {#auth-with-header}
@@ -129,22 +130,22 @@ axios(config)
 
 ### Query string 鉴权方式 {#auth-with-querystring}
 
-| 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                            |
-|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------|
-| token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递         |
+| 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                            |
+| :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------------- |
+| token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递        |
 | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串，详见[签名](../resources#signature)一节 |
-| appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 否   | **已废弃，可传可不传**。接入服务商从石墨获取的 AppId                                               |
+| appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 否   | **已废弃，可传可不传**。接入服务商从石墨获取的 AppId                                                            |
 
 **请求示例**
 
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -209,11 +210,11 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'GET',
-  url: 'https://shimo-domain/sdk/v2/api/fake-api?signature=your_signature&token=your_token'
+  method: "GET",
+  url: "https://shimo-domain/sdk/v2/api/fake-api?signature=your_signature&token=your_token",
 };
 
 axios(config)
@@ -224,9 +225,9 @@ axios(config)
     console.log(error);
   });
 ```
+
 </TabItem>
 </Tabs>
-
 
 ## 账号与应用管理
 
@@ -246,13 +247,13 @@ _GET_ https://shimo-domain/sdk/v2/api/license/apps/{appId}
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -323,23 +324,22 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 axios({
-	"method": "GET",
-	"url": "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId",
+  method: "GET",
+  url: "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId",
   headers: {
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
 })
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -348,21 +348,21 @@ axios({
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
-| 字段名             | 类型   | 值示例                                                          | 说明                                                                        |
-|:-------------------|:-------|:----------------------------------------------------------------|:--------------------------------------------------------------------------|
-| appName            | string | your app name                                                   | 应用名                                                                      |
-| availableFileTypes | Array  | ["document","documentPro","spreadsheet","presentation","table"] | 可用石墨套件列表                                                            |
-| activatedUserCount | number | 43                                                              | 已激活席位用户数                                                            |
+| 字段名             | 类型   | 值示例                                                          | 说明                                                                            |
+| :----------------- | :----- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| appName            | string | your app name                                                   | 应用名                                                                          |
+| availableFileTypes | Array  | ["document","documentPro","spreadsheet","presentation","table"] | 可用石墨套件列表                                                                |
+| activatedUserCount | number | 43                                                              | 已激活席位用户数                                                                |
 | userCount          | number | 50                                                              | 用户数总数，包含`已激活`、`已禁用`、`未使用` 用户总数，仅 `已激活` 数量占用席位 |
-| memberLimit        | number | 99                                                              | license 席位限制用户数，即 `已激活` 用户数量最大限制                         |
-| validFrom          | string | 2020-12-31T16:00:00Z                                            | license 生效时间                                                            |
-| validUntil         | string | 2022-12-30T16:00:00Z                                            | license 有效期截止时间                                                      |
-| endpointUrl        | string | http://your-domain                                              | 服务商回调地址                                                              |
+| memberLimit        | number | 99                                                              | license 席位限制用户数，即 `已激活` 用户数量最大限制                            |
+| validFrom          | string | 2020-12-31T16:00:00Z                                            | license 生效时间                                                                |
+| validUntil         | string | 2022-12-30T16:00:00Z                                            | license 有效期截止时间                                                          |
+| endpointUrl        | string | http://your-domain                                              | 服务商回调地址                                                                  |
 
 Example
 
@@ -402,18 +402,18 @@ _PUT_ https://shimo-domain/sdk/v2/api/license/apps/{appId}/endpoint-url
 **HTTP Request Body**
 
 | 字段名 | 类型   | 值示例             | 必选 | 说明                     |
-|:-------|:-------|:-------------------|:----|:-----------------------|
+| :----- | :----- | :----------------- | :--- | :----------------------- |
 | url    | string | http://your-domain | 是   | 需要更新的服务商回调地址 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -494,20 +494,20 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  url: "http://your-domain"
+  url: "http://your-domain",
 });
 
 var config = {
-  method: 'PUT',
-  url: 'https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url',
+  method: "PUT",
+  url: "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
@@ -525,7 +525,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 创建成功 |
 
 **HTTP Response Body**
@@ -553,6 +553,7 @@ axios(config)
 **`-1 未启用` 状态自动激活**
 
 当用户处于未启用状态时，当通过此用户身份进行如下操作时，将会自动激活，成为 `激活` 状态，此时占用相应席位，若席位不足，则会被拒绝访问:
+
 - 创建文件
 - 创建副本
 - 访问编辑页
@@ -572,20 +573,20 @@ _GET_ http(s)://shimo-domain/sdk/v2/api/license/users
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Query    | page      | number | 1                                    | 是   | 请求页码                                                                                                |
-| Query    | size      | number | 30                                   | 是   | 单页返回用户数量                                                                                        |
+| 传参方式 | 参数名 | 类型   | 值示例 | 必选 | 说明             |
+| :------- | :----- | :----- | :----- | :--- | :--------------- |
+| Query    | page   | number | 1      | 是   | 请求页码         |
+| Query    | size   | number | 30     | 是   | 单页返回用户数量 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -657,15 +658,15 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/api/license/users?page=1&size=30',
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/api/license/users?page=1&size=30",
   headers: {
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
-  }
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
+  },
 };
 
 axios(config)
@@ -694,10 +695,10 @@ axios(config)
 ]
 ```
 
-| 字段名    | 类型   | 值示例                    | 说明                                            |
-|:----------|:-------|:--------------------------|:----------------------------------------------|
-| userId    | string | 1                         | 用户 ID                                         |
-| createdAt | string | 2021-05-20T14:56:53+08:00 | 创建时间                                        |
+| 字段名    | 类型   | 值示例                    | 说明                                    |
+| :-------- | :----- | :------------------------ | :-------------------------------------- |
+| userId    | string | 1                         | 用户 ID                                 |
+| createdAt | string | 2021-05-20T14:56:53+08:00 | 创建时间                                |
 | status    | number | 1                         | 见[用户席位状态说明](#user-status-desc) |
 
 ### 激活用户席位
@@ -711,18 +712,18 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/activate
 请求体示例：
 
 | 字段名  | 类型     | 值示例     | 必选 | 说明                       |
-|:--------|:---------|:-----------|:----|:-------------------------|
+| :------ | :------- | :--------- | :--- | :------------------------- |
 | userIds | []string | ["1", "2"] | 是   | 需要激活席位的用户 ID 列表 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -803,33 +804,29 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "userIds": [
-    "1",
-    "2"
-  ]
+  userIds: ["1", "2"],
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/license/users/activate',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/license/users/activate",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -842,7 +839,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |
 
 ### 取消用户席位
@@ -858,18 +855,18 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/deactivate
 请求体示例：
 
 | 字段名  | 类型     | 值示例     | 必选 | 说明                       |
-|:--------|:---------|:-----------|:----|:-------------------------|
+| :------ | :------- | :--------- | :--- | :------------------------- |
 | userIds | []string | ["1", "2"] | 是   | 需要取消席位的用户 ID 列表 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -950,33 +947,29 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "userIds": [
-    "1",
-    "2"
-  ]
+  userIds: ["1", "2"],
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/license/users/deactivate',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/license/users/deactivate",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -989,7 +982,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |
 
 ### 批量设置用户席位 {#batch-set-user-status}
@@ -1002,10 +995,10 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/set-status
 
 请求体示例：
 
-| 字段名  | 类型     | 值示例     | 必选 | 说明                       |
-|:--------|:---------|:-----------|:----|:-------------------------|
-| userIds | []string | ["1", "2"] | 是   | 需要修改席位状态的用户 ID 列表 |
-| status | number | -1 | 是   | 见[用户席位状态说明](#user-status-desc) |
+| 字段名  | 类型     | 值示例     | 必选 | 说明                                    |
+| :------ | :------- | :--------- | :--- | :-------------------------------------- |
+| userIds | []string | ["1", "2"] | 是   | 需要修改席位状态的用户 ID 列表          |
+| status  | number   | -1         | 是   | 见[用户席位状态说明](#user-status-desc) |
 
 :::caution 注意
 设置为 `-1 未启用` 并不能阻止用户继续使用石墨 SDK，比如用户打开的石墨 SDK 页面并没有关闭，signature 和 token 仍有效，即使设置为 `-1 未启用`，只要用户未关闭的页面发起了请求，状态也会被自动设置为 `1 激活`。
@@ -1013,13 +1006,13 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/set-status
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1100,24 +1093,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "userIds": [
-    "1",
-    "2"
-  ],
-  "status": 1
+  userIds: ["1", "2"],
+  status: 1,
 });
 
 var config = {
-  method: 'POST',
-  url: 'https://shimo-domain/sdk/v2/api/license/users/set-status',
+  method: "POST",
+  url: "https://shimo-domain/sdk/v2/api/license/users/set-status",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
@@ -1139,5 +1129,5 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |

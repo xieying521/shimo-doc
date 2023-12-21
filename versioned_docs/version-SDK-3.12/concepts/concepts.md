@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
-# 核心概念
+# 基础概念
 
 目前支持以网页的形式接入以下功能：
 

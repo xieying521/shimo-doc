@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 toc_max_heading_level: 4
 ---
 
@@ -33,12 +33,12 @@ POST https://shimo-domain/sdk/v2/api/uploader/token
 
 ##### 请求参数
 
-|名称|位置|类型|必选|说明|
-|---|---|---|---|---|
-|X-Shimo-Signature|header|string| 是 |X-Shimo-Signature|
-|X-Shimo-Token|header|string| 是 |X-Shimo-Token|
-|Content-Type|header|string| 是 |application/json|
-|body|body|array[object]| 否 |none|
+| 名称              | 位置   | 类型          | 必选 | 说明              |
+| ----------------- | ------ | ------------- | ---- | ----------------- |
+| X-Shimo-Signature | header | string        | 是   | X-Shimo-Signature |
+| X-Shimo-Token     | header | string        | 是   | X-Shimo-Token     |
+| Content-Type      | header | string        | 是   | application/json  |
+| body              | body   | array[object] | 否   | none              |
 
 > 返回示例
 
@@ -56,32 +56,32 @@ POST https://shimo-domain/sdk/v2/api/uploader/token
     "images": "string",
     "key": "string",
     "serverUrl": "string",
-    "url": "string",
+    "url": "string"
   }
 ]
 ```
 
 ##### 返回结果
 
-|状态码|状态码含义|说明|数据模型|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+| 状态码 | 状态码含义                                              | 说明 | 数据模型 |
+| ------ | ------------------------------------------------------- | ---- | -------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功 | Inline   |
 
 ##### 返回数据结构
 
 状态码 **200**
 
-|名称|类型|必选|约束|中文名|说明|
-|---|---|---|---|---|---|
-|» fileFieldKey|string|false|none|file|第二步上传时 file 应该使用的 key name。固定值 file|
-|» formData|object|false|none||第二步上传时的 post form data|
-|»» accessToken|string|true|none||第二部上传时候使用的 accessToken|
-|»» download|string|true|none||控制生成的 url 是否携带 download=1 参数|
-|» guid|string|false|none|附件guid|附件guid|
-|» images|string|false|none|url|同 url，兼容使用|
-|» key|string|false|none|附件key|附件key|
-|» serverUrl|string|false|none|上传地址|下一步上传需要提交 post 表单到的服务器地址|
-|» url|string|false|none|url|附件访问 url|
+| 名称           | 类型   | 必选  | 约束 | 中文名    | 说明                                               |
+| -------------- | ------ | ----- | ---- | --------- | -------------------------------------------------- |
+| » fileFieldKey | string | false | none | file      | 第二步上传时 file 应该使用的 key name。固定值 file |
+| » formData     | object | false | none |           | 第二步上传时的 post form data                      |
+| »» accessToken | string | true  | none |           | 第二部上传时候使用的 accessToken                   |
+| »» download    | string | true  | none |           | 控制生成的 url 是否携带 download=1 参数            |
+| » guid         | string | false | none | 附件 guid | 附件 guid                                          |
+| » images       | string | false | none | url       | 同 url，兼容使用                                   |
+| » key          | string | false | none | 附件 key  | 附件 key                                           |
+| » serverUrl    | string | false | none | 上传地址  | 下一步上传需要提交 post 表单到的服务器地址         |
+| » url          | string | false | none | url       | 附件访问 url                                       |
 
 #### 第二步执行上传
 
@@ -93,20 +93,19 @@ POST https://shimo-domain/sdk/v2/api/uploader/upload
 accessToken: string
 download: true, false
 file: string
-
 ```
 
 ##### 请求参数
 
-|名称|位置|类型|必选|说明|
-|---|---|---|---|---|
-|Content-Type|header|string| 是 |表单|
-|X-Shimo-Signature|header|string| 是 |X-Shimo-Signature|
-|X-Shimo-Token|header|string| 是 |X-Shimo-Token|
-|body|body|object| 否 |none|
-|» accessToken|body|string| 是 |第一步中获取到的accessToken|
-|» download|body|string| 否 |是否在返回结果url 中增加download 参数|
-|» file|body|string(binary)| 是 |文件|
+| 名称              | 位置   | 类型           | 必选 | 说明                                    |
+| ----------------- | ------ | -------------- | ---- | --------------------------------------- |
+| Content-Type      | header | string         | 是   | 表单                                    |
+| X-Shimo-Signature | header | string         | 是   | X-Shimo-Signature                       |
+| X-Shimo-Token     | header | string         | 是   | X-Shimo-Token                           |
+| body              | body   | object         | 否   | none                                    |
+| » accessToken     | body   | string         | 是   | 第一步中获取到的 accessToken            |
+| » download        | body   | string         | 否   | 是否在返回结果 url 中增加 download 参数 |
+| » file            | body   | string(binary) | 是   | 文件                                    |
 
 > 返回示例
 
@@ -134,37 +133,38 @@ file: string
 
 ##### 返回结果
 
-|状态码|状态码含义|说明|数据模型|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+| 状态码 | 状态码含义                                              | 说明 | 数据模型 |
+| ------ | ------------------------------------------------------- | ---- | -------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | 成功 | Inline   |
 
 ##### 返回数据结构
 
 状态码 **200**
 
-|名称|类型|必选|约束|中文名|说明|
-|---|---|---|---|---|---|
-|» code|integer|true|none||none|
-|» data|object|true|none||none|
-|»» GUID|string|true|none|GUID|附件GUID|
-|»» filename|string|true|none|文件名称|文件名称|
-|»» key|string|true|none|key|附件key|
-|»» mimeType|string|true|none|mimeType|例如 application/gzip|
-|»» images|string|true|none|同url|none|
-|»» url|string|true|none|附件url|none|
-|»» audio|null|true|none|音频信息|none|
-|»» video|null|true|none|视频信息|例如 {"width":"640","height":"352","duration":"17.333333","fps":"","fileFormat":"","bitrate":"49710"}|
-|»» width|string|true|none|图片宽度|none|
-|»» height|string|true|none|图片高度|none|
-|»» size|integer|true|none|大小|字节|
+| 名称        | 类型    | 必选 | 约束 | 中文名   | 说明                                                                                                  |
+| ----------- | ------- | ---- | ---- | -------- | ----------------------------------------------------------------------------------------------------- |
+| » code      | integer | true | none |          | none                                                                                                  |
+| » data      | object  | true | none |          | none                                                                                                  |
+| »» GUID     | string  | true | none | GUID     | 附件 GUID                                                                                             |
+| »» filename | string  | true | none | 文件名称 | 文件名称                                                                                              |
+| »» key      | string  | true | none | key      | 附件 key                                                                                              |
+| »» mimeType | string  | true | none | mimeType | 例如 application/gzip                                                                                 |
+| »» images   | string  | true | none | 同 url   | none                                                                                                  |
+| »» url      | string  | true | none | 附件 url | none                                                                                                  |
+| »» audio    | null    | true | none | 音频信息 | none                                                                                                  |
+| »» video    | null    | true | none | 视频信息 | 例如 {"width":"640","height":"352","duration":"17.333333","fps":"","fileFormat":"","bitrate":"49710"} |
+| »» width    | string  | true | none | 图片宽度 | none                                                                                                  |
+| »» height   | string  | true | none | 图片高度 | none                                                                                                  |
+| »» size     | integer | true | none | 大小     | 字节                                                                                                  |
 
 ## 导入导出 {#import-export}
 
 ### 导入文件 {#import-v1}
 
 :::caution
-⚠️ 此接口为新版导入文件接口，建议优先使用。新版导入文件接口要求接入方必须解析结果中的 taskId，并且在调用「[获取导入进度](#import-progress-v1)」时带上 taskId 参数。任务执行的最长时间为10分钟。
+⚠️ 此接口为新版导入文件接口，建议优先使用。新版导入文件接口要求接入方必须解析结果中的 taskId，并且在调用「[获取导入进度](#import-progress-v1)」时带上 taskId 参数。任务执行的最长时间为 10 分钟。
 :::
+
 > 导入文件过程是一个异步处理过程，接口请求成功仅代表导入服务收到并开始处理导入请求，实际是否成功需要轮询「[获取导入进度](#import-progress-v1)」接口查询导入任务是否完成。
 
 **请求地址**
@@ -173,13 +173,13 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
 
 **HTTP Request Body**
 
-| 传参方式 | 参数名   | 类型   | 值示例                                        | 必选 | 说明                                                    |
-|:---------|:---------|:-------|:----------------------------------------------|:----|:------------------------------------------------------|
-| Form     | fileId   | string | file1001                                      | 是   | 服务商文件的唯一 ID                                     |
-| Form     | type     | string | documentPro                                   | 是   | 需要导入的文件类型                                      |
-| Form     | file     | file   |                                               | 否   | 需要导入的文件（如果不发送文件，就必须传fileUrl、fileName） |
-| Form     | fileUrl  | string | <https://domain.com/files/download/test.docx> | 否   | 需要导入的文件下载地址（有参数file，可以不用传）           |
-| Form     | fileName | string | test.docx                                     | 否   | 需要导入的文件名称（有参数file，可以不用传）               |
+| 传参方式 | 参数名   | 类型   | 值示例                                        | 必选 | 说明                                                         |
+| :------- | :------- | :----- | :-------------------------------------------- | :--- | :----------------------------------------------------------- |
+| Form     | fileId   | string | file1001                                      | 是   | 服务商文件的唯一 ID                                          |
+| Form     | type     | string | documentPro                                   | 是   | 需要导入的文件类型                                           |
+| Form     | file     | file   |                                               | 否   | 需要导入的文件（如果不发送文件，就必须传 fileUrl、fileName） |
+| Form     | fileUrl  | string | <https://domain.com/files/download/test.docx> | 否   | 需要导入的文件下载地址（有参数 file，可以不用传）            |
+| Form     | fileName | string | test.docx                                     | 否   | 需要导入的文件名称（有参数 file，可以不用传）                |
 
 :::caution
 ⚠️ 如无特别说明，导入文件 file 文件名需要附带扩展名，否则可能解析失败，如「`测试文件.doc`」或使用 `FormData` 时 `filename` 字段中传入带扩展名的文件名，参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/append#%E7%A4%BA%E4%BE%8B)。
@@ -187,13 +187,13 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -301,23 +301,23 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
-var FormData = require('form-data');
-var fs = require('fs');
+var axios = require("axios");
+var FormData = require("form-data");
+var fs = require("fs");
 var data = new FormData();
-data.append('fileId', '{importFileId}');
-data.append('type', 'document');
-data.append('file', fs.createReadStream('/your/local/path/测试.docx'));
+data.append("fileId", "{importFileId}");
+data.append("type", "document");
+data.append("file", fs.createReadStream("/your/local/path/测试.docx"));
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/import',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/import",
   headers: {
     ...data.getHeaders(),
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
@@ -326,7 +326,7 @@ axios(config)
   })
   .catch(function (error) {
     console.log(error);
-});
+  });
 ```
 
 </TabItem>
@@ -334,20 +334,20 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例           | 说明                                                                             |
-|:------------|:-------|:-----------------|:-------------------------------------------------------------------------------|
-| status      | number | 0                | 导入状态，非零值表示异常                                                          |
-| message     | string |                  | 导入异常时的提示信息                                                             |
+| 字段名      | 类型   | 值示例           | 说明                                                                                |
+| :---------- | :----- | :--------------- | :---------------------------------------------------------------------------------- |
+| status      | number | 0                | 导入状态，非零值表示异常                                                            |
+| message     | string |                  | 导入异常时的提示信息                                                                |
 | data.taskId | string | TnJdQS8Wk70wNHuB | 导入任务的标识 ID，调用导入进度接口时，请带上该参数。导入失败时请提供此 ID 用于调试 |
 
 **导入支持的文件格式**
 
-| 石墨文件类型 | 支持导入的文件类型 |
-|:-------------|:-------------------|
-| document     | .docx，.doc，.md，.txt    |
-| documentPro  | .docx，.doc，.wps       |
+| 石墨文件类型 | 支持导入的文件类型       |
+| :----------- | :----------------------- |
+| document     | .docx，.doc，.md，.txt   |
+| documentPro  | .docx，.doc，.wps        |
 | spreadsheet  | .xlsx，.xls，.csv, .xlsm |
-| presentation | .pptx，.ppt           |
+| presentation | .pptx，.ppt              |
 
 ### 获取导入进度 {#import-progress-v1}
 
@@ -360,19 +360,19 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import/progress
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | taskId    | string | TnJdQS8Wk70wNHuB                     | 是   | 导入文件接口返回的 taskId                                                                                 |
+| 传参方式 | 参数名 | 类型   | 值示例           | 必选 | 说明                      |
+| :------- | :----- | :----- | :--------------- | :--- | :------------------------ |
+| Query    | taskId | string | TnJdQS8Wk70wNHuB | 是   | 导入文件接口返回的 taskId |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -450,17 +450,17 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
-var data = '';
+var axios = require("axios");
+var data = "";
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/import/progress?taskId={taskId}',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/import/progress?taskId={taskId}",
   headers: {
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
@@ -477,10 +477,10 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名        | 类型   | 值示例 | 说明                                 |
-|:--------------|:-------|:-------|:-----------------------------------|
+| 字段名        | 类型   | 值示例 | 说明                                  |
+| :------------ | :----- | :----- | :------------------------------------ |
 | status        | number | 0      | 导入状态，非零值表示异常              |
-| message       | string |        | 导入异常时的提示信息                 |
+| message       | string |        | 导入异常时的提示信息                  |
 | data.progress | number | 100    | 导入进度百分比，为 100 时表示导入完成 |
 
 **说明**
@@ -502,14 +502,14 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
 
 **HTTP Request Body**
 
-| 传参方式 | 参数名 | 类型   | 值示例 | 必选 | 说明                                      |
-|:---------|:-------|:-------|:-------|:----|:----------------------------------------|
+| 传参方式 | 参数名 | 类型   | 值示例 | 必选 | 说明                                       |
+| :------- | :----- | :----- | :----- | :--- | :----------------------------------------- |
 | Body     | type   | string | docx   | 否   | 需要导出的文件类型，不传时按照默认类型导出 |
 
 **导出支持的文件格式**
 
 | 石墨文件类型 | 默认导出的文件类型 | 支持导出的文件类型 |
-|:-------------|:-------------------|:-------------------|
+| :----------- | :----------------- | :----------------- |
 | document     | docx               | docx, md, jpg, pdf |
 | documentPro  | docx               | docx, pdf, wps     |
 | spreadsheet  | xlsx               | xlsx               |
@@ -517,13 +517,13 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -604,20 +604,20 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "type": "docx"
+  type: "docx",
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/export/{exportFileId}',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/export/{exportFileId}",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
@@ -634,11 +634,11 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例                       | 说明                                                                          |
-|:------------|:-------|:-----------------------------|:----------------------------------------------------------------------------|
-| status      | number | 0                            | 导出状态，非零值表示异常                                                       |
-| data.taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 导出任务的标识ID，调用导出进度接口时，请带上该参数，导出失败时请提供此ID用于调试 |
-| message     | string |                              | 导出异常时的提示信息                                                          |
+| 字段名      | 类型   | 值示例                       | 说明                                                                                |
+| :---------- | :----- | :--------------------------- | :---------------------------------------------------------------------------------- |
+| status      | number | 0                            | 导出状态，非零值表示异常                                                            |
+| data.taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 导出任务的标识 ID，调用导出进度接口时，请带上该参数，导出失败时请提供此 ID 用于调试 |
+| message     | string |                              | 导出异常时的提示信息                                                                |
 
 ### 获取导出进度 {#export-progress-v1}
 
@@ -651,19 +651,19 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/progress
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | taskId    | string | 3oo4vnBJgcG5HxMm:1:603:xmind         | 是   | 导出文件接口返回的 taskId                                                                                 |
+| 传参方式 | 参数名 | 类型   | 值示例                       | 必选 | 说明                      |
+| :------- | :----- | :----- | :--------------------------- | :--- | :------------------------ |
+| Query    | taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 是   | 导出文件接口返回的 taskId |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -741,15 +741,15 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'POST',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/export/progress?taskId={taskId}',
+  method: "POST",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/export/progress?taskId={taskId}",
   headers: {
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
-  }
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
+  },
 };
 
 axios(config)
@@ -766,12 +766,12 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名           | 类型   | 值示例 | 说明                                 |
-|:-----------------|:-------|:-------|:-----------------------------------|
+| 字段名           | 类型   | 值示例 | 说明                                  |
+| :--------------- | :----- | :----- | :------------------------------------ |
 | status           | number | 0      | 导出状态，非零值表示异常              |
-| message          | string |        | 导出异常时的提示信息                 |
+| message          | string |        | 导出异常时的提示信息                  |
 | data.progress    | number | 100    | 导出进度百分比，为 100 时表示导入完成 |
-| data.downloadUrl | string |        | 导出文件的下载地址                   |
+| data.downloadUrl | string |        | 导出文件的下载地址                    |
 
 **说明**
 
@@ -787,19 +787,19 @@ _POST_ https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
-| Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
+| 传参方式 | 参数名 | 类型   | 值示例           | 必选 | 说明                                                                                                                                             |
+| :------- | :----- | :----- | :--------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path     | fileId | string | qeK4Xdxvxg8jF5gz | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -876,16 +876,16 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'POST',
-  url: 'https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}',
+  method: "POST",
+  url: "https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}",
   headers: {
-    'Content-Type': 'application/json',
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
-  }
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
+  },
 };
 
 axios(config)
@@ -902,11 +902,11 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例 | 说明                    |
-|:------------|:-------|:-------|:----------------------|
+| 字段名      | 类型   | 值示例 | 说明                     |
+| :---------- | :----- | :----- | :----------------------- |
 | status      | number | 0      | 导出状态，非零值表示异常 |
-| message     | string |        | 导出异常时的提示信息    |
-| downloadUrl | string |        | .xlsx 文件下载地址      |
+| message     | string |        | 导出异常时的提示信息     |
+| downloadUrl | string |        | .xlsx 文件下载地址       |
 
 ## 文件预览
 
@@ -924,19 +924,19 @@ _POST_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/create
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
-| Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
+| 传参方式 | 参数名 | 类型   | 示例值           | 必选 | 说明                                                                                                                                             |
+| :------- | :----- | :----- | :--------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path     | fileId | string | qeK4Xdxvxg8jF5gz | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1010,15 +1010,15 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/cloud-files/acd87e72-946c-4182-b864-f1a7e9c74ddb/create',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/cloud-files/acd87e72-946c-4182-b864-f1a7e9c74ddb/create",
   headers: {
-    'X-Shimo-Signature': 'your_signature',
-    'X-Shimo-Token': 'your_token'
-  }
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
+  },
 };
 
 axios(config)
@@ -1035,10 +1035,10 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名  | 类型   | 值示例             | 说明                                                      |
-|:--------|:-------|:-------------------|:--------------------------------------------------------|
+| 字段名  | 类型   | 值示例             | 说明                                                        |
+| :------ | :----- | :----------------- | :---------------------------------------------------------- |
 | code    | string | 90028              | 创建预览结果状态码，空字符串代表创建成功， 非空代表创建失败 |
-| message | string | file is converting | 创建失败错误信息                                          |
+| message | string | file is converting | 创建失败错误信息                                            |
 
 **Example**
 
@@ -1057,7 +1057,7 @@ axios(config)
 
 ### 访问预览
 
-用于在浏览器上渲染出预览的页面， 需要嵌入Iframe使用
+用于在浏览器上渲染出预览的页面， 需要嵌入 Iframe 使用
 
 > 对于同一个文件， 第一次调用该接口时， 后台会异步调用「[创建预览](#创建预览)」接口创建任务， 创建成功后才会渲染出预览页面。 如果需要加快第一次打开文件的速度， 可在服务端提前调用「[创建预览](#创建预览)」接口创建预览
 
@@ -1067,10 +1067,10 @@ _GET_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/page
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
-| Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | lang      | string | zh-CN                                | 否   | 页面中的语言设置， 默认zh-CN， 可选 en-US，ja-JP                                                                                                  |
+| 传参方式 | 参数名 | 类型   | 示例值           | 必选 | 说明                                                                                                                                             |
+| :------- | :----- | :----- | :--------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path     | fileId | string | qeK4Xdxvxg8jF5gz | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
+| Query    | lang   | string | zh-CN            | 否   | 页面中的语言设置， 默认 zh-CN， 可选 en-US，ja-JP                                                                                                |
 
 嵌入 iframe 使用
 

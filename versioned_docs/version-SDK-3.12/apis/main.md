@@ -1,8 +1,8 @@
 ---
-sidebar_position: 5
+sidebar_position: 1
 ---
 
-# 石墨 API 列表
+# 注意事项
 
 :::caution 注意
 ⚠️ 如无特别说明，所有请求均为 `HTTP`，请求头和返回头的 `Content-Type` 均为 `application/json`。
