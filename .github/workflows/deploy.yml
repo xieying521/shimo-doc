@@ -14,7 +14,7 @@ jobs:
       - name: Build Doc
         run: |
             git clone https://${{ secrets.GIT_REPO_TOKEN }}:x-oauth-basic@github.com/shimo-open/gen-doc.git
-            cp -rf docs ./gen-doc/
+            cp -rf docs versioned_docs versioned_sidebars ./gen-doc/
             cd gen-doc
             yarn
             export PUBLIC_PATH=${{ vars.PUBLISH_PUBLIC_CDN_PRO }} && yarn build:pro
