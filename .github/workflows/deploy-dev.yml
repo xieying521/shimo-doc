@@ -15,7 +15,7 @@ jobs:
       - name: Build Doc
         run: |
             git clone https://${{ secrets.GIT_REPO_TOKEN }}:x-oauth-basic@github.com/shimo-open/gen-doc.git
-            cp -rf docs versioned_docs versioned_sidebars co ./gen-doc/
+            find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'gen-doc' -exec cp -rf {} ./gen-doc/ \;
             cd gen-doc
             git checkout dev
             yarn
