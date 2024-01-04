@@ -1,4 +1,9 @@
-
+---
+title: 搜索功能
+description: 介绍 at 功能的用户/文件补全及搜索
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, @功能, 用户补全, 文件补全, 搜索]
+sidebar_position: 7
+---
 
 ## 获取与文件相关的用户列表{#users-recent}
 
