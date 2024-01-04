@@ -1,5 +1,7 @@
 ---
 title: 流程详述
+description: 介绍对接流程的详细操作步骤。
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 应用, 创建, 服务器, 接入, 企业]
 sidebar_position: 2
 ---
 

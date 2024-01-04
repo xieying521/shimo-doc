@@ -1,5 +1,7 @@
 ---
 title: 概述
+description: 为什么要配置回调接口
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 接入方, 回调接口, 回调凭证]
 sidebar_position: 1
 ---
 

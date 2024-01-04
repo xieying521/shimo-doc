@@ -1,5 +1,7 @@
 ---
 title: 对接流程
+description: 介绍文件预览和协同编辑的对接流程
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 文档, 编辑, 文件, 预览, 格式]
 sidebar_position: 1
 ---
 

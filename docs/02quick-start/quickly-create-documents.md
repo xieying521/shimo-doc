@@ -1,5 +1,7 @@
 ---
 title: 10分钟创建协同文档
+description: 10分钟创建协同文档
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 接口,  文档元信息]
 sidebar_position: 3
 ---
 
@@ -55,7 +57,7 @@ POST 调用接口 https://office.shimoapi.com/sdk/v2/api/files ，
 - query参数包括：appId，signature，token。
   - appId：license的appId。
   - signature：签名算法算出的结果。
-  - token：接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递。
+  - token：接入方提供的 token ，在石墨请求接入方的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递。
 
 - body使用json格式，参数包括：type，fileId。
   - type：documentPro

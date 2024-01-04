@@ -1,5 +1,7 @@
 ---
 title: FAQ
+description: 常见问题解答和使用帮助
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, FAQ, 计费, 导出, 预览, 编辑]
 sidebar_position: 7
 ---
 

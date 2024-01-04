@@ -1,7 +1,7 @@
 ---
 title: 私有化云 Office 前端性能指标对接
 description: 采集链路数据，分析耗时指标
-keywords: [采集指标, 分布式跟踪]
+keywords: [石墨文档, 协同办公, 采集指标, 分布式跟踪]
 sidebar_position: 3
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: 下载安装
+description: 如何下载并安装石墨 JSSDK
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, JSSDK]
 sidebar_position: 2
 ---
 

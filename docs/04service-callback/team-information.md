@@ -1,5 +1,7 @@
 ---
 title: 团队和部门
+description: 如何获取部门相关信息
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 团队, 部门, 成员]
 sidebar_position: 6
 ---
 ## 获取团队下的成员列表{#team-members}

@@ -1,5 +1,7 @@
 ---
 title: 回调网关
+description: 如何配置并验证回调网关
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 回调网关, 回调接口, AppID]
 sidebar_position: 2
 ---
 
@@ -23,11 +25,7 @@ https://your_domain.com/callback/api
 
 **步骤1：**进入石墨开发服务平台，单击右上角【控制台】按钮，进入文档中台控制台页面。
 
-![gateway1](./../image/gateway1.png)
-
 **步骤2：**单击左侧导航栏的【应用管理】，选择状态正常的应用，在操作栏单击![setting](./../image/setting.png)按钮。选择【回调配置】页签，设置回调网关。
-
-
 
 ![gateway2](./../image/gateway2.png)
 
@@ -48,7 +46,7 @@ curl "https://office.shimoapi.com/sdk/v2/api/license/apps/yourShimoAppId?appId=y
 | Path     | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入方从石墨获取的 AppId                                     |
 | Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入方从石墨获取的 AppId                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入方提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
-| Query    | signature | string | 参考签名方法一节                     | 是   | 接入方，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串 |
+| Query    | signature | string | -                                    | 是   | 接入方，使用从石墨获取的 AppId 、AppSecret 根据 [签名方法](./../02quick-start/signature.md) 生成的字符串 |
 
 示例返回值：
 

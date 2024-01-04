@@ -1,5 +1,7 @@
 ---
 title: 概述
+description: 介绍API的功能及使用方法
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, API, 文档处理, 鉴权]
 sidebar_position: 1
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: 签名方式
+description: 如何进行签名？
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 签名, Token]
 sidebar_position: 4
 ---
 

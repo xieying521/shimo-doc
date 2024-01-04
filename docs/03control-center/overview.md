@@ -1,5 +1,7 @@
 ---
 title: 概述
+description: 文档中台控制台功能简介
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 控制台, 自助对接]
 sidebar_position: 1
 ---
 

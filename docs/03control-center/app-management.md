@@ -1,5 +1,7 @@
 ---
 title: 应用管理
+description: 在应用管理界面，查看应用信息和应用列表，配置回调网关
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 应用, 回调, 服务]
 sidebar_position: 4
 ---
 
@@ -10,8 +12,6 @@ sidebar_position: 4
 您还可以对应用进行相关操作，以管理应用的状态。
 
 ![app-list](./../image/app-list.png)
-
-
 
 
 ## 应用信息

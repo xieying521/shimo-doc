@@ -1,5 +1,7 @@
 ---
 title: 使用说明
+description: 如何使用石墨 JSSDK
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, iframe, 编辑器, 获取, 文档]
 sidebar_position: 3
 ---
 

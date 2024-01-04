@@ -1,5 +1,7 @@
 ---
 title: 消息推送
+description: 消息推送的触发场景
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 触发, 推送, 通知]
 sidebar_position: 8
 ---
 ## 概述

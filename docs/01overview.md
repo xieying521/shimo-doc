@@ -1,5 +1,7 @@
 ---
 title: '产品介绍'
+description: 介绍石墨文档中台的定义、功能、优势和使用场景
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 文档, 文件, 文件类型, 编辑, 预览]
 sidebar_position: 1
 slug: /
 ---

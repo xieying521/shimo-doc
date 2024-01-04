@@ -1,5 +1,7 @@
 ---
 title: 系统接口
+description: 如何使用API接口进行鉴权、管理席位
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 用户, 状态, 席位, 激活]
 sidebar_position: 1
 ---
 

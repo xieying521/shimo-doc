@@ -1,5 +1,7 @@
 ---
 title: 企业管理
+description: 如何申请企业认证、修改认证信息及查询认证进展。
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 企业认证]
 sidebar_position: 3
 ---
 

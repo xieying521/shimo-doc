@@ -1,15 +1,18 @@
 ---
 title: 文件操作
+description: 如何使用API接口导入导出文件、创建预览
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 导入, 导出, 预览]
 sidebar_position: 3
+
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-# 上传下载
+## 上传下载
 
-## 上传附件
+### 上传附件
 
 **步骤一：获取 Token**
 
@@ -157,9 +160,9 @@ file: string
 |height|string|true|none|图片高度|none|
 |size|integer|true|none|大小|字节|
 
-# 导入导出 {#import-export}
+## 导入导出 {#import-export}
 
-## 导入文件 {#import-v1}
+### 导入文件 {#import-v1}
 
 导入文件过程是一个异步处理过程，接口请求成功仅代表导入服务收到并开始处理导入请求，实际是否成功需要轮询 [获取导入进度](#import-progress-v1) 接口查询导入任务是否完成。
 
@@ -355,7 +358,7 @@ axios(config)
 
 
 
-## 获取导入进度 {#import-progress-v1}
+### 获取导入进度 {#import-progress-v1}
 
 :::info 提示
 
@@ -498,7 +501,7 @@ axios(config)
 
 :::
 
-## 导出文件 {#export-v1}
+### 导出文件 {#export-v1}
 
 将在线编辑文件导出为 Office 文件、PDF 等格式，不同套件支持的导出格式有所不同。
 
@@ -663,7 +666,7 @@ axios(config)
 | data.taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 导出任务的标识ID，调用导出进度接口时，请带上该参数，导出失败时请提供此ID用于调试 |
 | message     | string |                              | 导出异常时的提示信息                                                          |
 
-## 获取导出进度 {#export-progress-v1}
+### 获取导出进度 {#export-progress-v1}
 
 :::caution 说明
 
@@ -805,7 +808,7 @@ axios(config)
 
 :::
 
-## 导出应用表格为 Excel {#export-table-sheets}
+### 导出应用表格为 Excel {#export-table-sheets}
 
 导出应用表格为 .xlsx 文件并返回该文件的下载地址。
 
@@ -936,13 +939,13 @@ axios(config)
 | message     | string | - | 导出异常时的提示信息    |
 | downloadUrl | string | - | .xlsx 文件下载地址      |
 
-# 文件预览
+## 文件预览
 
 :::caution 说明
 此功能不支持编辑文档，如果要编辑文档，请参考 [协同文档](./collaborative-editing.md)。
 :::
 
-## 创建预览
+### 创建预览
 
 同步创建预览任务,，如果创建失败则返回失败的原因。
 
@@ -1083,7 +1086,7 @@ axios(config)
 }
 ```
 
-## 访问预览
+### 访问预览
 
 用于在浏览器上渲染出预览的页面， 需要嵌入Iframe使用。
 

@@ -1,5 +1,7 @@
 ---
 title: 用户信息
+description: 如何获取用户相关信息
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 用户信息, 接入, 水印, 地址, 部门]
 sidebar_position: 5
 ---
 

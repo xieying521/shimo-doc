@@ -1,7 +1,7 @@
 ---
 title: 静态资源加速
 description: 合理设置静态资源加速方案，提升用户访问体验
-keywords: [CDN, CDN_Cache, HTTP2, HTTP3]
+keywords: [石墨文档, 协同办公, CDN, CDN_Cache, HTTP2, HTTP3]
 sidebar_position: 1
 slug: /
 ---

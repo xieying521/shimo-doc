@@ -1,5 +1,7 @@
 ---
 title: 概述
+description: 石墨 JSSDK 的定义和功能
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, JSSDK, iframe, 编辑器]
 sidebar_position: 1
 ---
 
