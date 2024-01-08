@@ -15,9 +15,9 @@ sidebar_position: 2
 
 http://your_domain.com/api
 
-http://108.11.22.33:80/api
+http://11.22.33.44:80/api
 
-https://108.11.22.33:80/api
+https://11.22.33.44:80/api
 
 https://your_domain.com/callback/api
 
@@ -35,7 +35,7 @@ https://your_domain.com/callback/api
 
 GET请求：
 
-https://sdk-demo.shimorelease.com/sdk/v2/api/license/apps/{appId}
+https://office.shimoapi.com/sdk/v2/api/license/apps/{appId}
 
 ```
 curl "https://office.shimoapi.com/sdk/v2/api/license/apps/yourShimoAppId?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString"
