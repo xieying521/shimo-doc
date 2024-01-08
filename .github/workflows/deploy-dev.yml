@@ -1,5 +1,7 @@
 name: Deploy docs
 on:
+  repository_dispatch:
+    types: [gen_doc]
   workflow_dispatch:
   push:
     branches:
