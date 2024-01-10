@@ -1,5 +1,5 @@
 # Git命令简介
-准备工作: 如果你没有github账号, 您需要申请一个Github账号, 接下来可以继续下一步.
+准备工作: 如果你没有github账号, 您需要申请一个Github账号, 接下来可以继续下一步。
 
 ## 1 Fork 代码
 1. 访问 [https://github.com/shimo-open/shimo-doc](https://github.com/shimo-open/shimo-doc)
@@ -49,6 +49,7 @@ git push upstream my-feature
 title: 给搜索引擎看的标题；可能和正文标题不一样
 description: 关于此页的简短描述
 image: 在社交媒体卡片中显示的缩略图
+
 keywords: [描述, 中心的, 关键词]
 ---
 [https://docusaurus.io/zh-CN/docs/seo](https://docusaurus.io/zh-CN/docs/seo)
