@@ -208,7 +208,8 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
     { label: 'cURL', value: 'curl', },
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
+    { label: 'Node.js', value: 'js', }, 
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -346,6 +347,46 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$options = [
+  'multipart' => [
+    [
+      'name' => 'fileId',
+      'contents' => '{importFileId}'
+    ],
+    [
+      'name' => 'type',
+      'contents' => 'document'
+    ],
+    [
+      'name' => 'file',
+      'contents' => Utils::tryFopen('/path/to/file', 'r'),
+      'filename' => '/path/to/file',
+      'headers'  => [
+        'Content-Type' => '<Content-type header>'
+      ]
+    ]
+]];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/v1/import', $headers);
+$res = $client->sendAsync($request, $options)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP Response Body**
@@ -384,6 +425,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import/progress
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -485,6 +527,26 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/v1/import/progress?taskId={taskId}', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP Response Body**
@@ -549,6 +611,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -656,6 +719,30 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "type": "docx"
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/v1/export/{exportFileId}', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP Response Body**
@@ -692,6 +779,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/progress
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -791,6 +879,26 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/v1/export/progress?taskId={taskId}', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP Response Body**
@@ -830,6 +938,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -929,6 +1038,27 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP Response Body**
@@ -967,6 +1097,7 @@ _POST_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/create
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1059,6 +1190,27 @@ axios(config)
   .catch(function (error) {
     console.log(error);
   });
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/cloud-files/acd87e72-946c-4182-b864-f1a7e9c74ddb/create', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
 ```
 
 </TabItem>

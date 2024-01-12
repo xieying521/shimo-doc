@@ -60,6 +60,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -172,6 +173,32 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "type": "document",
+  "fileId": "83478944-8d4c-4936-baff-20ab180eb712"
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -207,6 +234,7 @@ _POST_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/copy
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -318,6 +346,31 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "fileId": "83478944-8d4c-4936-baff-20ab180eb712"
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/e0f238d1-8c10-448c-bf69-cd315051c095/copy', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -357,6 +410,7 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -454,6 +508,27 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('DELETE', 'https://shimo-domain/sdk/v2/api/files', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -492,6 +567,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/doc-sidebar-info
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -583,6 +659,25 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
+
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/doc-sidebar-info', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
 
 ```
 
@@ -774,6 +869,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/revisions
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -868,6 +964,26 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/revisions', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -944,6 +1060,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/plain-text
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1038,6 +1155,26 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/plain-text', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -1089,6 +1226,7 @@ _POST_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/plain-text/wc
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1195,6 +1333,33 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token',
+  'Content-Type' => 'application/x-www-form-urlencoded'
+];
+$options = [
+'form_params' => [
+  '{
+    "keywords": ["foo", "bar"]
+}' => ''
+]];
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/plain-text/wc', $headers);
+$res = $client->sendAsync($request, $options)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -1250,6 +1415,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/mention-at-list
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1341,6 +1507,26 @@ axios({
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/ad8ed1afa8172d91/mention-at-list', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -1407,6 +1593,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/comment-count
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1498,6 +1685,26 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/fe143ca1a08e9976/comment-count', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
 ```
 
 </TabItem>
@@ -1652,6 +1859,7 @@ _GET_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1746,6 +1954,26 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表 1!A1:C3', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -1809,6 +2037,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1945,6 +2174,42 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "range": "工作表 1!A1:C3",
+  "resource": {
+    "values": [
+      [
+        "第一行第一列的值",
+        "第一行第二列的值"
+      ],
+      [
+        "第二行第一列的值",
+        "第二行第二列的值"
+      ]
+    ]
+  }
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -1995,6 +2260,7 @@ _PUT_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -2131,6 +2397,42 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "range": "工作表 1!A1:C3",
+  "resource": {
+    "values": [
+      [
+        "第一行第一列追加文本",
+        "第一行第二列追加文本"
+      ],
+      [
+        "第二行第一列追加文本",
+        "第二行第二列追加文本"
+      ]
+    ]
+  }
+}';
+$request = new Request('PUT', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -2176,6 +2478,7 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/{sheetName}/rows/
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -2271,6 +2574,27 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('DELETE', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -2315,6 +2639,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -2419,6 +2744,31 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
+
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "name": "工作表2"
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
 
 ```
 
@@ -3901,6 +4251,7 @@ _GET_ https://shimo-domain/sdk/v2/table-api/bases/{fileId}/baseHistories
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -3995,6 +4346,27 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/table-api/bases/fe143ca1a08e9976/baseHistories?pageSize=100', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -4048,6 +4420,7 @@ _GET_ https://shimo-domain/sdk/v2/table-api/bases/{fileId}/snapshots
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -4142,6 +4515,25 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/table-api/bases/fe143ca1a08e9976/snapshots?pageSize=10', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -4191,6 +4583,7 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_cont
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -4299,6 +4692,30 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token',
+  'Content-Type' => 'application/x-www-form-urlencoded'
+];
+$options = [
+'form_params' => [
+  '{"bookmarks":["guid"]}' => ''
+]];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content', $headers);
+$res = $client->sendAsync($request, $options)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -4349,6 +4766,7 @@ _PUT_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_cont
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -4454,6 +4872,30 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token',
+  'Content-Type' => 'application/x-www-form-urlencoded'
+];
+$options = [
+'form_params' => [
+  '{"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}' => ''
+]];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content', $headers);
+$res = $client->sendAsync($request, $options)->wait();
+echo $res->getBody();
+
 ```
 
 </TabItem>
