@@ -29,6 +29,7 @@ import TabItem from '@theme/TabItem';
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -111,6 +112,29 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "url": "http://your-domain"
+}';
+$request = new Request('PUT', 'https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
 </Tabs>
 
 ## 账号与应用管理
@@ -138,6 +162,7 @@ App 详细信息，包括 app 名称、可使用文件类型、已激活用户�
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -229,6 +254,26 @@ axios({
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -300,6 +345,7 @@ HTTP 状态码用来表明特定 HTTP 请求是否成功完成。当状态码为
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -407,6 +453,29 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "url": "http://your-domain"
+}';
+$request = new Request('PUT', 'https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
 </Tabs>
 
 **HTTP 状态码**
@@ -448,6 +517,7 @@ axios(config)
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -541,6 +611,25 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/license/users?page=1&size=30', $headers);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -585,6 +674,7 @@ axios(config)
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -696,6 +786,33 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "userIds": [
+    "1",
+    "2"
+  ]
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/license/users/activate', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -730,6 +847,7 @@ axios(config)
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -841,6 +959,33 @@ axios(config)
 ```
 
 </TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "userIds": [
+    "1",
+    "2"
+  ]
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/license/users/deactivate', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
+
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -879,7 +1024,8 @@ axios(config)
     { label: 'cURL', value: 'curl', },
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
+    { label: 'Node.js', value: 'js', }, 
+    { label: 'php', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -988,6 +1134,33 @@ axios(config)
   .catch(function (error) {
     console.log(error);
   });
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'Content-Type' => 'application/json',
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token'
+];
+$body = '{
+  "userIds": [
+    "1",
+    "2"
+  ],
+  "status": 1
+}';
+$request = new Request('POST', 'https://shimo-domain/sdk/v2/api/license/users/set-status', $headers, $body);
+$res = $client->sendAsync($request)->wait();
+echo $res->getBody();
+
 ```
 
 </TabItem>
