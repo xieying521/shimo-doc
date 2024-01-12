@@ -29,7 +29,7 @@ import TabItem from '@theme/TabItem';
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -162,7 +162,7 @@ App 详细信息，包括 app 名称、可使用文件类型、已激活用户�
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -345,7 +345,7 @@ HTTP 状态码用来表明特定 HTTP 请求是否成功完成。当状态码为
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -517,7 +517,7 @@ echo $res->getBody();
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -674,7 +674,7 @@ echo $res->getBody();
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -847,7 +847,7 @@ echo $res->getBody();
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1025,7 +1025,7 @@ echo $res->getBody();
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', }, 
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">

@@ -209,7 +209,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', }, 
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -425,7 +425,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import/progress
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -611,7 +611,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -779,7 +779,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/progress
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -938,7 +938,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
@@ -1097,7 +1097,7 @@ _POST_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/create
     { label: 'Java', value: 'java', },
     { label: 'Golang', value: 'go', },
     { label: 'Node.js', value: 'js', },
-    { label: 'php', value: 'php', },
+    { label: 'PHP', value: 'php', },
   ]
 }>
 <TabItem value="curl">
