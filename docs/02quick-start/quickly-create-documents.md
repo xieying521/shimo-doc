@@ -1,18 +1,21 @@
 ---
 title: 10分钟创建协同文档
 description: 10分钟创建协同文档
-keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 接口,  文档元信息]
+keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 接口, 文档元信息]
 sidebar_position: 3
 ---
 
-如何快速创建一个word文档，并在石墨编辑器中使用，请参考下列步骤。
+如何快速创建一个 word 文档，并在石墨编辑器中使用，请参考下列步骤。
 
-**步骤1：**接入方生成文件id，例如：my-new-file-u98213。
+### 步骤 1：接入方生成文件 id
 
-**步骤2**：接入方提供两个回调接口。
+例如：my-new-file-u98213
+这个 id 完全由接入方决定是什么，建议使用 uuid 等方式避免重复
+
+### 步骤 2：接入方提供的回调接口
 
 - 文档元信息接口
-  提供一个公网可访问的HTTP接口，使公网GET请求访问
+  提供一个公网可访问的 HTTP 接口，使公网 GET 请求访问
   http://your-callback.com/files/my-new-file-u98213 时，结果为：
 
 ```json
@@ -36,30 +39,31 @@ sidebar_position: 3
 ```
 
 - 当前用户信息接口
-  提供一个公网可访问的HTTP接口，使公网GET请求访问
-   http://your-callback.com/users/current/info 时，结果为：
+  提供一个公网可访问的 HTTP 接口，使公网 GET 请求访问
+  http://your-callback.com/users/current/info 时，结果为：
 
 ```json
 {
   "id": "userid123",
   "name": "张三",
-  "avatar": "http://fake.site/user-123.png", 
-  "email": "user123@fake.site", 
+  "avatar": "http://fake.site/user-123.png",
+  "email": "user123@fake.site",
   "teamGuid": "123"
 }
 ```
 
-**步骤3**：创建协同文档。
+### 步骤 3：创建协同文档
 
 POST 调用接口 https://office.shimoapi.com/sdk/v2/api/files ，
-请求参数分为query和body两个部分。
+请求参数分为 query 和 body 两个部分。
 
-- query参数包括：appId，signature，token。
-  - appId：license的appId。
+- query 参数包括：appId，signature，token。
+
+  - appId：license 的 appId。
   - signature：签名算法算出的结果。
   - token：接入方提供的 token ，在石墨请求接入方的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递。
 
-- body使用json格式，参数包括：type，fileId。
+- body 使用 json 格式，参数包括：type，fileId。
   - type：documentPro
   - fileId：my-new-file-u98213
 
@@ -71,3 +75,8 @@ curl --location --request POST 'https://office.shimoapi.com/sdk/v2/api/files?app
 --data-raw '{"type": "document","fileId": "my-new-file-u98213"}'
 ```
 
+### 步骤 4：访问协同文档
+
+写一个最简单的 html 页面，包含一个父容器用来承载石墨的 iframe。
+引入石墨 js-sdk，填写相关参数初始化 sdk 实例，即可将石墨编辑器嵌入您的页面中。
+参考 [JS-SDK](./../05shimo-jssdk/user-guide.md)
