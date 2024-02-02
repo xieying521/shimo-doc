@@ -667,10 +667,6 @@ Example
 }
 ```
 
-#### 历史类型说明
-
-##### 操作历史 (historyType = 1)
-
 为手动操作而通常不造成文件内容文字等发生变化的记录，此类历史的类型及上下文信息存于 content 字段中，格式为 JSON 字符串形式。
 
 已知的操作如下, JSON 数据为 `histories[i].content` 字段 JSON.parse 后的结果：
@@ -2323,9 +2319,9 @@ axios(config)
 | :------- | :---------- |
 | 表格     | spreadsheet |
 
-#### 参数说明
+**参数说明**
 
-#### range
+**_range_**
 
 格式为 `{工作表}!{单元格范围}`，规范如下：
 
@@ -2336,7 +2332,7 @@ axios(config)
   - `工作表 1!A1:C1`
   - `'工作!:表'!A2:C3`
 
-#### resource
+**_resource_**
 
 类型为 `object`，里面必须包含 key 值 `"values"`。
 `values` 为一个二维数组，表示追加/更新的表格内容，第一维表示行，第二维表示列。空字符串表示当前单元格为空。
@@ -2361,7 +2357,7 @@ axios(config)
 }
 ```
 
-#### 日期类型 OADate 数值转换 {#oadate-conversion-example}
+**日期类型 OADate 数值转换 {#oadate-conversion-example}**
 
 日期类型返回值为 OADate 类型数值，如单元格中日期为 `2022/7/27` ，返回的值为 `44769`。
 
@@ -2439,6 +2435,14 @@ convertOADate(44769);
 
 ### 设置单元格链接
 
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
+
 PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 
 创建/修改单元格链接
@@ -2449,37 +2453,48 @@ PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 {
   "text": "foo.pdf",
   "link": "https://foo.bar.com/f/foo.pdf",
-  "type": "attach"
+  "type": "attach",
+  "body": {
+    "text": "123",
+    "link": "https://file-address.ext",
+    "type": "attach"
+  }
 }
 ```
 
-#### 请求参数
+**请求参数**
 
-| 名称      | 位置 | 类型        | 必选 | 说明                                                                 |
-| --------- | ---- | ----------- | ---- | -------------------------------------------------------------------- |
-| fileId    | path | string      | 是   | 服务接入方的文件 ID                                                  |
-| sheetName | path | string      | 是   | Sheet 名称                                                           |
-| cell      | path | string      | 是   | 单元格位置                                                           |
-| body      | body | object      | 否   | none                                                                 |
-| » text    | body | string      | 是   | 链接显示的文本                                                       |
-| » link    | body | string      | 是   | 链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接   |
-| » type    | body | string¦null | 是   | 链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接 |
+| 名称         | 位置 | 类型        | 必选 | 说明                                                                 |
+| ------------ | ---- | ----------- | ---- | -------------------------------------------------------------------- |
+| fileId       | path | string      | 是   | 服务接入方的文件 ID                                                  |
+| sheetName    | path | string      | 是   | Sheet 名称                                                           |
+| cell         | path | string      | 是   | 单元格位置                                                           |
+| body         | body | object      | 否   | none                                                                 |
+| body[i].text | body | string      | 是   | 链接显示的文本                                                       |
+| body[i].link | body | string      | 是   | 链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接   |
+| body[i].type | body | string¦null | 是   | 链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接 |
 
 ##### 枚举值
 
-| 属性   | 值     |
-| ------ | ------ |
-| » type | attach |
+| 属性 | 值     |
+| ---- | ------ |
+| type | attach |
 
-#### 返回结果
+**返回结果**
 
 | 状态码 | 状态码含义                                                      | 说明 | 数据模型 |
 | ------ | --------------------------------------------------------------- | ---- | -------- |
 | 204    | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 成功 | Inline   |
 
-#### 返回数据结构
-
 ### 设置单元格格式
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}
 
@@ -2579,7 +2594,7 @@ interface RichTextItem {
 
 从上面 `CellAttr` 的定义来看，除了 `format` 和 `richText` 之外，其他的属性都比较好理解，这里就对这两个属性做一个详细的说明。
 
-#### 富文本内容：richText
+**富文本内容：richText**
 
 如果单元格内容包含富文本，写入单元格内容到时候就需要用到 richText 属性。
 
@@ -2637,7 +2652,7 @@ const richTexts = [
 }
 ```
 
-#### 单元格格式：format
+**单元格格式：format**
 
 这里说的格式指的是给单元格设置成文本、数值、日期、百分比等等的格式。包含下面这些分类：
 
@@ -3038,7 +3053,7 @@ Excel 格式设置相关文档可参考：
 
 [https://www.ablebits.com/office-addins-blog/custom-excel-number-format/](https://www.ablebits.com/office-addins-blog/custom-excel-number-format/)
 
-#### 请求参数
+**请求参数**
 
 | 名称      | 位置 | 类型   | 必选 | 说明       |
 | --------- | ---- | ------ | ---- | ---------- |
@@ -3047,19 +3062,25 @@ Excel 格式设置相关文档可参考：
 | cell      | path | string | 是   | 单元格位置 |
 | body      | body | object | 否   | none       |
 
-#### 返回结果
+**返回结果**
 
 | 状态码 | 状态码含义                                                      | 说明 | 数据模型 |
 | ------ | --------------------------------------------------------------- | ---- | -------- |
 | 204    | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 成功 | Inline   |
 
-#### 返回数据结构
-
 ### 设置数据验证
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 POST /sdk/v2/api/files/{providerFileID}/sheets/{sheetName}/data-validations
 
-#### 类型声明
+**类型声明**
 
 ```typescript
 // 本接口的 Body 数据类型（In JSON）
@@ -3238,25 +3259,31 @@ interface DataValidationCustomFormula extends DataValidationBase {
 }
 ```
 
-#### 请求参数
+**请求参数**
 
 | 名称           | 位置 | 类型   | 必选 | 说明                                             |
 | -------------- | ---- | ------ | ---- | ------------------------------------------------ |
 | providerFileID | path | string | 是   | 文件 ID                                          |
 | sheetName      | path | string | 是   | Sheet 名称                                       |
 | body           | body | object | 否   | none                                             |
-| » range        | body | string | 是   | none                                             |
-| » rule         | body | object | 是   | 参照描述部分中的 **DataValidationRule** 类型声明 |
+| body[i].range  | body | string | 是   | none                                             |
+| body[i].rule   | body | object | 是   | 参照描述部分中的 **DataValidationRule** 类型声明 |
 
-#### 返回结果
+**返回结果**
 
 | 状态码 | 状态码含义                                                      | 说明 | 数据模型 |
 | ------ | --------------------------------------------------------------- | ---- | -------- |
 | 204    | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 成功 | Inline   |
 
-#### 返回数据结构
-
 ### 设置条件格式
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 POST /sdk/v2/api/files/{providerFileID}/sheets/{sheetName}/conditional-formats
 
@@ -3308,9 +3335,9 @@ export interface ConditionalFormatRule {
 }
 ```
 
-#### 针对不同规则和条件下的排列组合赋值情况详解
+**针对不同规则和条件下的排列组合赋值情况详解**
 
-#### 突出显示单元格
+**突出显示单元格**
 
 ##### 等于
 
@@ -3592,7 +3619,7 @@ const rule = {
 };
 ```
 
-#### 最前/最后规则
+**最前/最后规则**
 
 ##### 最前
 
@@ -3682,7 +3709,7 @@ const rule = {
 };
 ```
 
-#### 自定义公式
+**自定义公式**
 
 ```typescript
 // 举例：
@@ -3740,7 +3767,7 @@ const rule = {
 };
 ```
 
-#### 双色色阶
+**双色色阶**
 
 ```typescript
 // 举例：
@@ -3772,7 +3799,7 @@ const rule = {
 };
 ```
 
-#### 三色色阶
+**三色色阶**
 
 ```typescript
 // 举例：
@@ -3811,7 +3838,7 @@ const rule = {
 };
 ```
 
-#### 请求参数
+**请求参数**
 
 | 名称           | 位置 | 类型   | 必选 | 说明       |
 | -------------- | ---- | ------ | ---- | ---------- |
@@ -3819,15 +3846,21 @@ const rule = {
 | sheetName      | path | string | 是   | Sheet 名称 |
 | body           | body | object | 否   | none       |
 
-#### 返回结果
+**返回结果**
 
 | 状态码 | 状态码含义                                                      | 说明 | 数据模型 |
 | ------ | --------------------------------------------------------------- | ---- | -------- |
 | 204    | [No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5) | 成功 | Inline   |
 
-#### 返回数据结构
-
 ### 设置单元格锁定
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 POST /sdk/v2/api/files/{fileID}/sheets/{sheetName}/cell-locks
 
@@ -3924,7 +3957,7 @@ export declare type LockData<T extends "sheet" | "range"> = {
   : {});
 ```
 
-#### 请求参数
+**请求参数**
 
 | 名称      | 位置 | 类型   | 必选 | 说明       |
 | --------- | ---- | ------ | ---- | ---------- |
