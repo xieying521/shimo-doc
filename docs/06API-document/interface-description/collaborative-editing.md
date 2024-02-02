@@ -2779,6 +2779,14 @@ echo $res->getBody();
 
 ### 设置单元格链接
 
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
+
 PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 
 创建/修改单元格链接
@@ -2789,21 +2797,26 @@ PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 {
   "text": "foo.pdf",
   "link": "https://bar.com/f/foo.pdf",
-  "type": "attach"
+  "type": "attach",
+  "body": {
+    "text": "123",
+    "link": "https://file-address.ext",
+    "type": "attach"
+  }
 }
 ```
 
 **请求参数**
 
-| 名称      | 位置 | 类型        | 必选 | 说明                                                                   |
-| --------- | ---- | ----------- | ---- | ---------------------------------------------------------------------- |
-| fileId    | path | string      | 是   | 接入方的文件 ID                                                        |
-| sheetName | path | string      | 是   | Sheet 名称                                                             |
-| cell      | path | string      | 是   | 单元格位置                                                             |
-| body      | body | object      | 否   | none                                                                   |
-| text      | body | string      | 是   | 链接显示的文本                                                         |
-| link      | body | string      | 是   | 链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接     |
-| type      | body | string¦null | 是   | 链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接。 |
+| 名称         | 位置 | 类型        | 必选 | 说明                                                                   |
+| ------------ | ---- | ----------- | ---- | ---------------------------------------------------------------------- |
+| fileId       | path | string      | 是   | 接入方的文件 ID                                                        |
+| sheetName    | path | string      | 是   | Sheet 名称                                                             |
+| cell         | path | string      | 是   | 单元格位置                                                             |
+| body         | body | object      | 否   | none                                                                   |
+| body[i].text | body | string      | 是   | 链接显示的文本                                                         |
+| body[i].link | body | string      | 是   | 链接。如果需要设置附件链接，请先按照上传文件流程上传后获取附件链接     |
+| body[i].type | body | string¦null | 是   | 链接类型，不指定时为普通链接。指定时可选值为 "attach" ，代表附件链接。 |
 
 **返回结果**
 
@@ -2816,6 +2829,14 @@ PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}/link
 无
 
 ### 设置单元格格式
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 PUT /sdk/v2/api/files/{fileId}/sheets/{sheetName}/cells/{cell}
 
@@ -3395,6 +3416,14 @@ Excel 格式设置相关文档可参考：
 
 ### 设置数据验证
 
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
+
 POST /sdk/v2/api/files/{providerFileID}/sheets/{sheetName}/data-validations
 
 #### 类型定义
@@ -3583,8 +3612,8 @@ interface DataValidationCustomFormula extends DataValidationBase {
 | providerFileID | path | string | 是   | 文件 ID                                          |
 | sheetName      | path | string | 是   | Sheet 名称                                       |
 | body           | body | object | 否   | none                                             |
-| range          | body | string | 是   | none                                             |
-| rule           | body | object | 是   | 参照描述部分中的 **DataValidationRule** 类型声明 |
+| body[i].range  | body | string | 是   | none                                             |
+| body[i].rule   | body | object | 是   | 参照描述部分中的 **DataValidationRule** 类型声明 |
 
 #### 返回结果
 
@@ -3597,6 +3626,14 @@ interface DataValidationCustomFormula extends DataValidationBase {
 无
 
 ### 设置条件格式
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 POST /sdk/v2/api/files/{providerFileID}/sheets/{sheetName}/conditional-formats
 
@@ -4170,6 +4207,14 @@ const rule = {
 无
 
 ### 设置单元格锁定
+
+:::caution 说明
+
+本接口是高级接口，通常`无需对接`，接口提供的功能可在前端页面手动操作实现。
+
+由于入参复杂，存在多种排列组合的情况，本文档现只提供 ts 版的类型定义。
+
+:::
 
 POST /sdk/v2/api/files/{fileID}/sheets/{sheetName}/cell-locks
 
