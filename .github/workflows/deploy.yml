@@ -14,7 +14,7 @@ jobs:
       - name: Build Doc
         run: |
             git clone https://${{ secrets.GIT_REPO_TOKEN }}:x-oauth-basic@github.com/shimo-open/gen-doc.git
-            find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'gen-doc' -exec cp -rf {} ./gen-doc/ \;
+            find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'gen-doc' ! -name 'README.md' -exec cp -rf {} ./gen-doc/ \;
             cd gen-doc
             yarn
             export PUBLIC_PATH=${{ vars.PUBLISH_PUBLIC_CDN_PRO }} && yarn build:pro
