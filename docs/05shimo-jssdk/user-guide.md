@@ -1,25 +1,26 @@
 ---
 title: 使用说明
 description: 如何使用石墨 JSSDK
-keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, iframe, 编辑器, 获取, 文档]
+keywords:
+  [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, iframe, 编辑器, 获取, 文档]
 sidebar_position: 3
 ---
 
 ### 初始化 iframe
 
 ```js
-const { connect } = require('shimo-js-sdk')
+const { connect } = require("shimo-js-sdk");
 
 connect({
-  fileId: '您系统中的 file id',
-  endpoint: '石墨服务的地址',
-  signature: '用您的 app id 和 secret 签发的签名',
-  token: '用于您系统识别用户请求的 token',
-  container: document.querySelector('#shimo-file'), // iframe 挂载的目标容器元素
-  lang: 'en' // 未指定此参数时，使用浏览器默认语言
+  fileId: "您系统中的 file id",
+  endpoint: "石墨服务的地址", // 开放平台填写 https://office.shimoapi.com/sdk/v2，其他环境请联系技术支持
+  signature: "用您的 app id 和 secret 签发的签名",
+  token: "用于您系统识别用户请求的 token",
+  container: document.querySelector("#shimo-file"), // iframe 挂载的目标容器元素
+  lang: "en", // 未指定此参数时，使用浏览器默认语言
 }).then((shimoSDK) => {
   // ...
-})
+});
 ```
 
 返回值：
@@ -35,30 +36,30 @@ Promise<ShimoSDK>
 3. 通过 `window.ShimoJSSDK` 对象获取对应的方法
 
 ```js
-const { connect, FileType } = window.ShimoJSSDK
+const { connect, FileType } = window.ShimoJSSDK;
 // 等价于
-const { connect, FileType } = require('shimo-js-sdk')
+const { connect, FileType } = require("shimo-js-sdk");
 ```
 
 #### 使用示例
 
 ```js
-const { connect } = require('shimo-js-sdk')
+const { connect } = require("shimo-js-sdk");
 
-const fileId = '1234'
+const fileId = "1234";
 
 // 从您的后端服务获取用于石墨鉴权的签名和 token
-const { signature, token } = await getCredentialsFromServer()
+const { signature, token } = await getCredentialsFromServer();
 
 connect({
   fileId: fileId,
-  endpoint: 'https://shimo-sdk-endpoint/', // endpoint 因环境而异，请联系技术支持
+  endpoint: "https://shimo-sdk-endpoint/", // 开放平台填写 https://office.shimoapi.com/sdk/v2，其他环境请联系技术支持
   signature: signature,
   token: token,
-  container: document.querySelector('#shimo-file') // iframe 挂载的目标容器元素
+  container: document.querySelector("#shimo-file"), // iframe 挂载的目标容器元素
 }).then((sdk) => {
   // sdk 即为 ShimoSDK 实例
-})
+});
 ```
 
 调用 `connect()` 时，会以传入参数为基础，初始化一个 `<iframe>` 并插入 `container` 对应的元素中。
@@ -77,33 +78,33 @@ connect({
 获取编辑器实例和与其交互：
 
 ```js
-const { FileType } = require('shimo-js-sdk')
+const { FileType } = require("shimo-js-sdk");
 
 // 获取编辑器实例
-const editor = sdk.getEditor()
+const editor = sdk.getEditor();
 
 // 调用通用事件
-editor.on('saveStatusChanged', (payload) => {
-  console.log(payload.status)
-})
+editor.on("saveStatusChanged", (payload) => {
+  console.log(payload.status);
+});
 
 // 调用特定类型文档的方法
 if (sdk.fileType === FileType.Document) {
-  editor.showHistory()
+  editor.showHistory();
 }
 ```
 
 若为 `TypeScript`，可使用 `Generic`：
 
 ```typescript
-const { Document } = require('shimo-js-sdk')
+const { Document } = require("shimo-js-sdk");
 
-const editor = sdk.getEditor<Document.Editor>()
-editor.on('saveStatusChanged', (payload) => {
-  console.log(payload.status)
-})
+const editor = sdk.getEditor<Document.Editor>();
+editor.on("saveStatusChanged", (payload) => {
+  console.log(payload.status);
+});
 
-await editor.showHistory()
+await editor.showHistory();
 ```
 
 ### `signature` 和 `token`
@@ -333,27 +334,27 @@ connect({
 connect({
   apiAdaptor(options: RequestOptions, context?: RequestContext) {
     // 修改 URL host
-    if (options.url.includes('some_pattern')) {
-      const url = new URL(options.url, context.host)
-      url.host = context.host
-      url.protocol = context.protocol
-      options.url = url.toString()
+    if (options.url.includes("some_pattern")) {
+      const url = new URL(options.url, context.host);
+      url.host = context.host;
+      url.protocol = context.protocol;
+      options.url = url.toString();
     }
     options.headers = {
       // 保留原 header
       ...options.headers,
       // 复制 context header
-      ...context.headers
-    }
+      ...context.headers,
+    };
     // options.query 修改参考 headers
-    return options
+    return options;
   },
   apiAdaptorContext: {
-    host: 'new-host.com',
-    protocol: 'https',
+    host: "new-host.com",
+    protocol: "https",
     header: {
-      'x-my-var': 'my-value'
-    }
-  }
-})
+      "x-my-var": "my-value",
+    },
+  },
+});
 ```
