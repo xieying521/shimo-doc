@@ -21,8 +21,6 @@ POST https://shimo-domain/sdk/v2/api/uploader/token
 ```json
 [
   {
-    "fileGuid": "string",
-    "store": "string",
     "bucket": "string",
     "filename": "string",
     "fileSize": 0,
@@ -33,12 +31,16 @@ POST https://shimo-domain/sdk/v2/api/uploader/token
 
 ##### 请求参数
 
-| 名称              | 位置   | 类型          | 必选 | 说明              |
-| ----------------- | ------ | ------------- | ---- | ----------------- |
-| X-Shimo-Signature | header | string        | 是   | X-Shimo-Signature |
-| X-Shimo-Token     | header | string        | 是   | X-Shimo-Token     |
-| Content-Type      | header | string        | 是   | application/json  |
-| body              | body   | array[object] | 否   | none              |
+| 名称              | 位置   | 类型          | 必选 | 说明                                                       |
+| ----------------- | ------ | ------------- | ---- | ---------------------------------------------------------- |
+| X-Shimo-Signature | header | string        | 是   | X-Shimo-Signature                                          |
+| X-Shimo-Token     | header | string        | 是   | X-Shimo-Token                                              |
+| Content-Type      | header | string        | 是   | application/json                                           |
+| body              | body   | array[object] | 否   | none                                                       |
+| body[i].bucket    | body   | string        | 是   | 别名，必须为以下几种之一：attachments,assets,avatar,images |
+| body[i].filename  | body   | string        | 否   | 指定上传文件的文件名, 为空时使用 untitled{ext} 作为文件名  |
+| body[i].fileSize  | body   | number        | 是   | 文件大小，单位字节                                         |
+| body[i].encrypt   | body   | string        | 否   | 是否开启加密，若开启填 default                             |
 
 > 返回示例
 
