@@ -21,12 +21,10 @@ POST https://shimo-domain/sdk/v2/api/uploader/token
 ```json
 [
   {
-    "fileGuid": "string",
-    "store": "string",
-    "bucket": "string",
-    "filename": "string",
-    "fileSize": 0,
-    "encrypt": "string"
+    "bucket": "attachments",
+    "filename": "my_file.png",
+    "fileSize": 368,
+    "encrypt": "default"
   }
 ]
 ```
