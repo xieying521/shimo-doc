@@ -691,6 +691,14 @@ _POST_ /users/batch/get
 | :----- | :------- | :---------------- | :----------- |
 | ids    | []string | ["user1","user2"] | 用户 ID 列表 |
 
+**Request Body Example**
+
+```json
+{
+  "ids": ["user1", "user2"]
+}
+```
+
 **HTTP Response Body**
 
 | 字段名          | 类型   | 值示例                        | 说明                       |
