@@ -10,7 +10,7 @@ toc_max_heading_level: 4
 
 ⚠️ 接口里的 `{xxxx}` 表示需要用户在接口地址里使用自己的值来进行替换，比如 `/users/{userId}` 的真实调用地址可能是 `/users/123`，在接口描述里会将此参数以 `userId` 的形式进行描述。
 
-⚠️ /admin 前缀的接口，主要由用户动作产生的间接请求，可能无法携带用户身份或者用户身份无关，如：用户A 创建了表格1引用了表格2并分享给用户B，当用户B访问表格1时，需要检查用户A是否还有权限访问表格2。
+⚠️ /admin 前缀的接口，主要由用户动作产生的间接请求，可能无法携带用户身份或者用户身份无关，如：用户 A 创建了表格 1 引用了表格 2 并分享给用户 B，当用户 B 访问表格 1 时，需要检查用户 A 是否还有权限访问表格 2。
 
 :::
 
@@ -20,76 +20,92 @@ toc_max_heading_level: 4
 
 若接入方仅关心**部分功能**，可参考 [常见功能场景相关接口清单](#features-api-list) 部分。
 
-| 接口                                                                | 接口用途                                    | 说明                                                                                                                                                                          |
-|:--------------------------------------------------------------------|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `GET` [/files](#list-files)                                         | 获取当前用户的文件列表                      | 添加跨表格公式、合并工作表等选择用户最近使用的文件列表会请求此接口                                                                                                             |
-| `GET` [/files/{fileId}](#file-meta-collab)                          | 获取文件元信息-协同文档                     | 获取基本信息、权限等，创建、导入、编辑会请求此接口                                                                                                                                |
-| `GET` [/files/{fileId}](#file-meta-preview)                         | 获取文件元信息-文件预览                     | 获取基本信息、下载地址，预览文件时会请求此接口                                                                                                                                  |
-| `GET` [/files/{fileId}/collaborators](#file-collborators)           | 获取当前的协作用户                          | 用于获取此协作文件的协作者（接入方可自己控制哪些用户为协作者）用户列表信息，如评论实时同步给其他用户时用于获取协作者列表发送评论事件                                             |
-| `POST` [/files/{fileId}/url](#file-url)                             | 获取接入方指定文件的完整访问地址            | 在文件中 @ 其他文件时，在将此文件导出后的文件中会保留一个石墨 SDK 的跳转链接地址，打开链接时，会通过此接口获取当前完整的接入方访问链接，获取后会重定向到接入方文件地址            |
-| `GET` [/admin/files/{fileId}](#file-meta-admin)                     | 获取文件元信息-协同文档自动任务             | 自动任务获取基本信息（目前只有跨表格引用任务）时会请求此接口                                                                                                                    |
-| `GET` [/admin/files/{fileId}/by-user-id](#file-meta-by-uid)         | 根据指定用户获取文件元信息-协同文档自动任务 | 石墨 SDK 需要主动获取文件基本信息（目前只有跨表格引用场景）时会请求此接口                                                                                                       |
-| `GET` [/users/current/info](#user-current)                          | 获取当前用户信息                            | 获取当前用户的 ID、名称、头像图片地址等信息，创建、编辑、导入时需使用此接口获取用户身份信息                                                                                        |
-| `GET` [/users/current/team](#user-current-team)                     | 获取当前用户所在团队信息                    | 获取当前用户所在团队的 ID、名称、团队成员总数                                                                                                                                   |
-| `GET` [/users/{userId}](#user-by-id)                                | 获取用户信息                                | 提供用户的基本信息，ID、名称、头像图片地址等，在获取协作场景下的指定用户信息时会请求此接口                                                                                        |
-| `GET` [/users/{userId}/watermark](#user-watermark)                  | 获取用户水印信息                            | 获取指定用户的水印信息，可根据自身业务系统需要获取返回需要的水印字段或返回空                                                                                                   |
-| `GET` [/users/{userId}/department-paths](#user-department-paths)    | 获取用户部门路径                            | 获取指定用户的部门路径，可根据自身业务系统需要获取返回需要的部门路径或返回空                                                                                                   |
-| `POST` [/users/batch/get](#users-by-ids)                            | 批量获取用户信息                            | 提供多个指定用户的信息，ID、名称、头像图片地址等。如多人协作时，侧边栏历史展示时需要展示多个用户的相关信息，此时会请求此接口                                                        |
-| `GET` [/teams/{teamId}/members](#team-members)                      | 获取团队下的成员列表                        | 获取指定团队的成员列表，根据分页信息查询列表结果                                                                                                                               |
-| `GET` [/departments/{departmentId}](#department-info)               | 获取部门信息                                | 获取指定部门的信息，包括部门 ID、名称、部门成员总数                                                                                                                              |
-| `GET` [/departments/{departmentId}/children](#children-departments) | 获取部门的下级部门节点                      | 获取指定部门的下级部门节点，包括部门信息 ID、名称、部门成员总数                                                                                                                  |
-| `GET` [/departments/{departmentId}/members](#department-members)    | 获取部门下的成员分页列表                    | 获取指定部门下的成员分页列表，获取当前分页的用户信息列表以及总成员数                                                                                                           |
+| 接口                                                                | 接口用途                                    | 说明                                                                                                                                                                                  |
+| :------------------------------------------------------------------ | :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `GET` [/files](#list-files)                                         | 获取当前用户的文件列表                      | 添加跨表格公式、合并工作表等选择用户最近使用的文件列表会请求此接口                                                                                                                    |
+| `GET` [/files/{fileId}](#file-meta-collab)                          | 获取文件元信息-协同文档                     | 获取基本信息、权限等，创建、导入、编辑会请求此接口                                                                                                                                    |
+| `GET` [/files/{fileId}](#file-meta-preview)                         | 获取文件元信息-文件预览                     | 获取基本信息、下载地址，预览文件时会请求此接口                                                                                                                                        |
+| `GET` [/files/{fileId}/collaborators](#file-collborators)           | 获取当前的协作用户                          | 用于获取此协作文件的协作者（接入方可自己控制哪些用户为协作者）用户列表信息，如评论实时同步给其他用户时用于获取协作者列表发送评论事件                                                  |
+| `POST` [/files/{fileId}/url](#file-url)                             | 获取接入方指定文件的完整访问地址            | 在文件中 @ 其他文件时，在将此文件导出后的文件中会保留一个石墨 SDK 的跳转链接地址，打开链接时，会通过此接口获取当前完整的接入方访问链接，获取后会重定向到接入方文件地址                |
+| `GET` [/admin/files/{fileId}](#file-meta-admin)                     | 获取文件元信息-协同文档自动任务             | 自动任务获取基本信息（目前只有跨表格引用任务）时会请求此接口                                                                                                                          |
+| `GET` [/admin/files/{fileId}/by-user-id](#file-meta-by-uid)         | 根据指定用户获取文件元信息-协同文档自动任务 | 石墨 SDK 需要主动获取文件基本信息（目前只有跨表格引用场景）时会请求此接口                                                                                                             |
+| `GET` [/users/current/info](#user-current)                          | 获取当前用户信息                            | 获取当前用户的 ID、名称、头像图片地址等信息，创建、编辑、导入时需使用此接口获取用户身份信息                                                                                           |
+| `GET` [/users/current/team](#user-current-team)                     | 获取当前用户所在团队信息                    | 获取当前用户所在团队的 ID、名称、团队成员总数                                                                                                                                         |
+| `GET` [/users/{userId}](#user-by-id)                                | 获取用户信息                                | 提供用户的基本信息，ID、名称、头像图片地址等，在获取协作场景下的指定用户信息时会请求此接口                                                                                            |
+| `GET` [/users/{userId}/watermark](#user-watermark)                  | 获取用户水印信息                            | 获取指定用户的水印信息，可根据自身业务系统需要获取返回需要的水印字段或返回空                                                                                                          |
+| `GET` [/users/{userId}/department-paths](#user-department-paths)    | 获取用户部门路径                            | 获取指定用户的部门路径，可根据自身业务系统需要获取返回需要的部门路径或返回空                                                                                                          |
+| `POST` [/users/batch/get](#users-by-ids)                            | 批量获取用户信息                            | 提供多个指定用户的信息，ID、名称、头像图片地址等。如多人协作时，侧边栏历史展示时需要展示多个用户的相关信息，此时会请求此接口                                                          |
+| `GET` [/teams/{teamId}/members](#team-members)                      | 获取团队下的成员列表                        | 获取指定团队的成员列表，根据分页信息查询列表结果                                                                                                                                      |
+| `GET` [/departments/{departmentId}](#department-info)               | 获取部门信息                                | 获取指定部门的信息，包括部门 ID、名称、部门成员总数                                                                                                                                   |
+| `GET` [/departments/{departmentId}/children](#children-departments) | 获取部门的下级部门节点                      | 获取指定部门的下级部门节点，包括部门信息 ID、名称、部门成员总数                                                                                                                       |
+| `GET` [/departments/{departmentId}/members](#department-members)    | 获取部门下的成员分页列表                    | 获取指定部门下的成员分页列表，获取当前分页的用户信息列表以及总成员数                                                                                                                  |
 | `GET` [/search/users/recent](#users-recent)                         | 获取与文件相关的用户列表                    | 用于在文件中输入 @ 时，为展示下拉菜单，选择提及的用户，由于此时没有输入关键字，接入方可根据自己系统情况返回，如：和当前用户最相关的用户列表、和当前文件最相关的用户列表、或返回空数组 |
 | `GET` [/search/files/recent](#files-recent)                         | 获取与文件相关的文件列表                    | 用于在文件中输入 @ 时，展示下拉菜单，选择提及的文件，由于此时没有输入关键字，接入方可根据自己系统情况返回，如：和当前用户最相关的文件列表、和当前文件最相关的文件列表、或返回空数组   |
-| `POST` [/search](#search-by-keyword)                                | 根据关键字搜索文件或用户                    | 用于输入 @ 时，如需要根据关键字，通过请求接入方系统返回对应的文件列表、用户列表，如不需要可将对应字段返回空数组。表格锁定添加人员时涉及此接口                                      |
-| `POST` [/events](#events)                                           | 推送石墨 SDK 相关事件                       | 由服务商选择性处理需要关心的事件数据。如当有人对评论、讨论、提及等进行操作时，部分操作会触发此事件                                                                                |
-
+| `POST` [/search](#search-by-keyword)                                | 根据关键字搜索文件或用户                    | 用于输入 @ 时，如需要根据关键字，通过请求接入方系统返回对应的文件列表、用户列表，如不需要可将对应字段返回空数组。表格锁定添加人员时涉及此接口                                         |
+| `POST` [/events](#events)                                           | 推送石墨 SDK 相关事件                       | 由服务商选择性处理需要关心的事件数据。如当有人对评论、讨论、提及等进行操作时，部分操作会触发此事件                                                                                    |
 
 ## 常见功能场景相关接口清单 {#features-api-list}
 
 ##### 使用协同文档进行编辑时
-  - `GET` [/files/{fileId}](#file-meta-collab) 获取元信息-协同文档
-  - `GET` [/users/current/info](#user-current) 获取当前用户信息
-  - `GET` [/users/{userId}](#user-by-id) 获取用户信息
-  - `POST` [/users/batch/get](#users-by-ids) 批量获取用户信息
-  - `GET` [/files/{fileId}/collaborators](#file-collborators) 获取当前的协作用户
-  - `GET` [/users/{userId}/watermark](#user-watermark)  获取用户水印信息
+
+- `GET` [/files/{fileId}](#file-meta-collab) 获取元信息-协同文档
+- `GET` [/users/current/info](#user-current) 获取当前用户信息
+- `GET` [/users/{userId}](#user-by-id) 获取用户信息
+- `POST` [/users/batch/get](#users-by-ids) 批量获取用户信息
+- `GET` [/files/{fileId}/collaborators](#file-collborators) 获取当前的协作用户
+- `GET` [/users/{userId}/watermark](#user-watermark) 获取用户水印信息
+
 ##### 使用在协同文档的 `内容` 、`评论`、`讨论` 中提及(@)人、提及(@)文件功能时 {#feature-mention-at}
-  - `GET` [/search/users/recent](#users-recent) 获取与文件相关的用户列表
-  - `GET` [/search/files/recent](#files-recent) 获取与文件相关的文件列表
-  - `POST` [/search](#search-by-keyword)  根据关键字搜索文件或用户
+
+- `GET` [/search/users/recent](#users-recent) 获取与文件相关的用户列表
+- `GET` [/search/files/recent](#files-recent) 获取与文件相关的文件列表
+- `POST` [/search](#search-by-keyword) 根据关键字搜索文件或用户
+
 ##### 使用协同文档 `导入` 或 `导出` 功能时
-  - `GET` [/files/{fileId}](#file-meta-collab) 获取元信息-协同文档
-  - `GET` [/users/current/info](#user-current) 获取当前用户信息
-  - `POST` [/files/{fileId}/url](#file-url) 获取接入方指定文件的完整访问地址
+
+- `GET` [/files/{fileId}](#file-meta-collab) 获取元信息-协同文档
+- `GET` [/users/current/info](#user-current) 获取当前用户信息
+- `POST` [/files/{fileId}/url](#file-url) 获取接入方指定文件的完整访问地址
+
 ##### 使用专业表格跨表格公式、合并工作表时 {#feature-sheets}
+
 :::tip 提示
 
 由于跨表格、合并工作表仅针对**表格**文件，因此搜索文件列表的接口会过滤出 `type: spreadsheet` 类型文件，若无此类型文件，列表可能为空。
 
 :::
-  - `GET` [/files](#list-files) 获取当前用户的文件列表
-  - `GET` [/search/files/recent](#files-recent) 获取与文件相关的文件列表
-  - `GET` [/admin/files/{fileId}/by-user-id](#file-meta-by-uid) 根据指定用户获取文件元信息-协同文档自动任务
-  - `GET` [/admin/files/{fileId}](#file-meta-admin) 获取文件元信息-协同文档自动任务
+
+- `GET` [/files](#list-files) 获取当前用户的文件列表
+- `GET` [/search/files/recent](#files-recent) 获取与文件相关的文件列表
+- `GET` [/admin/files/{fileId}/by-user-id](#file-meta-by-uid) 根据指定用户获取文件元信息-协同文档自动任务
+- `GET` [/admin/files/{fileId}](#file-meta-admin) 获取文件元信息-协同文档自动任务
+
 ##### 使用专业表格锁定功能时
-  - `GET` [/files/{fileId}/collaborators](#file-collborators) 获取当前的协作用户
-  - `POST` [/search](#search-by-keyword) 根据关键字搜索文件或用户
+
+- `GET` [/files/{fileId}/collaborators](#file-collborators) 获取当前的协作用户
+- `POST` [/search](#search-by-keyword) 根据关键字搜索文件或用户
+
 ##### 第三方文件预览
-  - `GET` [/files/{fileId}](#file-meta-preview) 获取文件元信息-文件预览
-  - `GET` [/users/current/info](#user-current) 获取当前用户信息
+
+- `GET` [/files/{fileId}](#file-meta-preview) 获取文件元信息-文件预览
+- `GET` [/users/current/info](#user-current) 获取当前用户信息
+
 ##### 需要通过石墨协同文档事件定制业务系统功能时
-  - `POST` [/events](#events) 推送石墨 SDK 相关事件
+
+- `POST` [/events](#events) 推送石墨 SDK 相关事件
+
 ##### 在提及 at 或表格锁定时，选择部门或部门成员 {#feature-team-department}
+
 相关概念参考 [团队与部门](./concepts/team_department.md)
-  - `GET` [/users/current/info](#user-current) 获取当前用户信息
-  - `GET` [/users/current/team](#user-current-team) 获取当前用户所在团队信息
-  - `GET` [/users/{userId}/department-paths](#user-department-paths) 获取用户部门路径
-  - `GET` [/teams/{teamId}/members](#team-members) 获取团队下的成员列表
-  - `GET` [/departments/{departmentId}](#department-info) 获取部门信息
-  - `GET` [/departments/{departmentId}/children](#children-departments) 获取部门的下级部门节点
-  - `GET` [/departments/{departmentId}/members](#department-members) 获取部门下的成员分页列表
-  - `POST` [/search](#search-by-keyword) 根据关键字搜索文件、用户、团队成员、部门
+
+- `GET` [/users/current/info](#user-current) 获取当前用户信息
+- `GET` [/users/current/team](#user-current-team) 获取当前用户所在团队信息
+- `GET` [/users/{userId}/department-paths](#user-department-paths) 获取用户部门路径
+- `GET` [/teams/{teamId}/members](#team-members) 获取团队下的成员列表
+- `GET` [/departments/{departmentId}](#department-info) 获取部门信息
+- `GET` [/departments/{departmentId}/children](#children-departments) 获取部门的下级部门节点
+- `GET` [/departments/{departmentId}/members](#department-members) 获取部门下的成员分页列表
+- `POST` [/search](#search-by-keyword) 根据关键字搜索文件、用户、团队成员、部门
 
 ## 文件
 
@@ -99,14 +115,14 @@ toc_max_heading_level: 4
 
 Permissions 字段
 
-| 字段名      | 类型    | 说明                                  |
-|:------------|:--------|:------------------------------------|
-| commentable | boolean | 该用户是否可以进行评论                |
-| editable    | boolean | 该用户是否可以进行编辑                |
-| readable    | boolean | 该用户是否可以可以访问该文档          |
+| 字段名      | 类型    | 说明                                                                                |
+| :---------- | :------ | :---------------------------------------------------------------------------------- |
+| commentable | boolean | 该用户是否可以进行评论                                                              |
+| editable    | boolean | 该用户是否可以进行编辑                                                              |
+| readable    | boolean | 该用户是否可以可以访问该文档                                                        |
 | copyable    | boolean | 该用户是否可以可以复制文档内容。`editable` 为 `true` 时，`copyable` 一定为 `true`。 |
-| exportable  | boolean | 该用户是否可以进行导出                |
-| manageable  | boolean | 该用户是否可以管理文档，如进行删除操作 |
+| exportable  | boolean | 该用户是否可以进行导出                                                              |
+| manageable  | boolean | 该用户是否可以管理文档，如进行删除操作                                              |
 
 ### 获取当前用户的文件列表 {#list-files}
 
@@ -118,28 +134,28 @@ _GET_ /files
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Query Parameters**
 
-| 字段名  | 类型   | 值示例     | 说明                                                             |
-|:--------|:-------|:-----------|:---------------------------------------------------------------|
-| limit   | number | 123        | 最大条目数 ID                                                    |
-| orderBy | string | created_at | 结果按文件创建时间或最后修改时间排序，可选created_at、  updated_at |
+| 字段名  | 类型   | 值示例     | 说明                                                               |
+| :------ | :----- | :--------- | :----------------------------------------------------------------- |
+| limit   | number | 123        | 最大条目数 ID                                                      |
+| orderBy | string | created_at | 结果按文件创建时间或最后修改时间排序，可选 created_at、 updated_at |
 
 **HTTP Response Body**
 
-| 字段名               | 类型   | 值示例               | 说明                                                                                              |
-|:---------------------|:-------|:---------------------|:------------------------------------------------------------------------------------------------|
-| items[0].id          | string | ba13551165cc5066     | 服务商系统中的文档 ID                                                                             |
-| items[0].name        | string | file title           | 文档标题                                                                                          |
+| 字段名               | 类型   | 值示例               | 说明                                                                                                      |
+| :------------------- | :----- | :------------------- | :-------------------------------------------------------------------------------------------------------- |
+| items[0].id          | string | ba13551165cc5066     | 服务商系统中的文档 ID                                                                                     |
+| items[0].name        | string | file title           | 文档标题                                                                                                  |
 | items[0].type        | string | documentPro          | 文档类型列表参考[创建文档](./apis.md#create-collab-file)，若为第三方存储的非石墨协作文件，则固定传 `file` |
-| items[0].creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                                         |
-| items[0].createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                        |
-| items[0].updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                    |
-| items[0].views       | number | 100                  | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1               |
+| items[0].creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                                                 |
+| items[0].createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                            |
+| items[0].updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                        |
+| items[0].views       | number | 100                  | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1                    |
 | items[0].permissions | object |                      | [用户对文件权限信息](#file-permissions)                                                                   |
 
 Response Example
@@ -201,23 +217,23 @@ _GET_ /files/{fileId}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例               | 说明                                                                                |
-|:------------|:-------|:---------------------|:----------------------------------------------------------------------------------|
-| id          | string | 123                  | 服务商系统中的文档 ID                                                               |
-| name        | string | file title           | 文档标题                                                                            |
-| type        | string | documentPro          | 文档类型列表参考[创建文档](./apis.md#create-collab-file)                                  |
-| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                           |
-| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`          |
-| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`      |
+| 字段名      | 类型   | 值示例               | 说明                                                                                   |
+| :---------- | :----- | :------------------- | :------------------------------------------------------------------------------------- |
+| id          | string | 123                  | 服务商系统中的文档 ID                                                                  |
+| name        | string | file title           | 文档标题                                                                               |
+| type        | string | documentPro          | 文档类型列表参考[创建文档](./apis.md#create-collab-file)                               |
+| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                              |
+| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`         |
+| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`     |
 | views       | number | 100                  | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1 |
-| permissions | object |                      | [用户对文件权限信息](#file-permissions)                                                      |
-| teamGuid    | string | 123                  | 接入方文件所属团队 ID，非必需。若返回此字段，则 user.teamGuid 字段也应实现并返回                    |
+| permissions | object |                      | [用户对文件权限信息](#file-permissions)                                                |
+| teamGuid    | string | 123                  | 接入方文件所属团队 ID，非必需。若返回此字段，则 user.teamGuid 字段也应实现并返回       |
 
 :::caution
 **`manageable` 权限说明**
@@ -225,11 +241,12 @@ _GET_ /files/{fileId}
 ⚠️ 建议至少给文件的创建者指定 `manageable: true` 权限，若接入方允许有其他人拥有管理权限，则可自行设计实现。
 
 使用到 `manageable` 权限的场景如下：
+
 - 调用石墨 SDK 删除文件接口时，需要 `manageable` 为 `true`
 - 进行表格锁定操作时，若当前用户具有 `manageable` 权限为 `true` 时，则会展示为管理者
 - `更新` 或 `删除` 他人创建的版本时，当前用户对于此文件的权限需要 `manageable` 为 `true` 时，才允许操作，否则会被拒绝
 - 表格导出时，若当前用户对于此文件权限满足 `manageable` 为 `true` 时，导出的文件中会包含表格锁定的内容，否则导出文件内容不包含锁定内容。
-:::
+  :::
 
 Example
 
@@ -253,8 +270,6 @@ Example
 }
 ```
 
-
-
 ### 获取文件元信息-文件预览 {#file-meta-preview}
 
 获取基本信息、下载地址，预览文件时会请求此接口
@@ -267,23 +282,23 @@ _GET_ /files/{fileId}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例                       | 说明                                                                                                                                                                                                                                               |
-|:------------|:-------|:-----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id          | string | 123                          | 服务商系统中的文件 ID                                                                                                                                                                                                                              |
-| name        | string | file title                   | 文件标题                                                                                                                                                                                                                                           |
-| type        | string | file                         | 目前使用 `file` 表示第三方文件类型                                                                                                                                                                                                                 |
-| permissions | object |                              | [用户对文件权限信息](#file-permissions)                                                                                                                                                                                                      |
-| downloadUrl | string | http://fake.site/sample.docx | 用于预览 Office 文件时下载文件内容                                                                                                                                                                                                                 |
+| 字段名      | 类型   | 值示例                       | 说明                                                                                                                                                                                                                                                    |
+| :---------- | :----- | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id          | string | 123                          | 服务商系统中的文件 ID                                                                                                                                                                                                                                   |
+| name        | string | file title                   | 文件标题                                                                                                                                                                                                                                                |
+| type        | string | file                         | 目前使用 `file` 表示第三方文件类型                                                                                                                                                                                                                      |
+| permissions | object |                              | [用户对文件权限信息](#file-permissions)                                                                                                                                                                                                                 |
+| downloadUrl | string | http://fake.site/sample.docx | 用于预览 Office 文件时下载文件内容                                                                                                                                                                                                                      |
 | ext         | string | docx                         | 当石墨请求下载地址 (`downloadUrl`) 返回的 HTTP Response Header 中 `Content-Type` 或 `Content-Disposition` 接入方未返回可识别的信息时，此字段用于标识此文件的扩展名。不需要带 `.`，若文件为 `测试文件.docx` ，则应传 `docx`，若返回 `.docx` 可能识别失败 |
 
 :::caution
-⚠️  请求下载时接入方无法返回 `Content-Type` 以及 `Content-Disposition` 信息用于石墨 SDK 识别文件类型，此时通过元信息中返回的 `ext` 字段告知石墨 SDK 此文件的扩展名。例如 `docx` 识别为 Word 文件。
+⚠️ 请求下载时接入方无法返回 `Content-Type` 以及 `Content-Disposition` 信息用于石墨 SDK 识别文件类型，此时通过元信息中返回的 `ext` 字段告知石墨 SDK 此文件的扩展名。例如 `docx` 识别为 Word 文件。
 
 `ext` 字段不带 `.` ，例如文件为 `测试文件.docx` ，应返回 `docx`。
 :::
@@ -309,7 +324,6 @@ Example
 
 > 注：石墨服务器会下载`downloadUrl`中的文件进行解析。可能需要设置指定的 Header 供石墨来选择以何种方式解析。更多细节可以参考 [Header 要求](./roll.md#http-response-header-要求)。
 
-
 ### 获取文件的协作者列表 {#file-collborators}
 
 用于获取此协作文件的协作者（接入方可自己控制哪些用户为协作者）用户列表信息，如评论实时同步给其他用户时用于获取协作者列表发送评论事件
@@ -324,14 +338,14 @@ _GET_ /files/{fileId}/collaborators
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名             | 类型    | 值示例                        | 说明                       |
-|:-------------------|:--------|:------------------------------|:-------------------------|
+| :----------------- | :------ | :---------------------------- | :------------------------- |
 | items[0].id        | string  | userid123                     | 服务商系统的用户的 ID      |
 | items[0].name      | string  | 张三                          | 服务商系统的用户名称       |
 | items[0].avatar    | string  | http://fake.site/user-123.png | 服务商系统的用户的头像地址 |
@@ -347,14 +361,14 @@ Response Body Example
     "name": "testuser1",
     "avatar": "http://your-domain/avatar-url",
     "email": "xxx@shimo.im",
-    "isManager": true  // 指定此用户是否此文件的管理者
+    "isManager": true // 指定此用户是否此文件的管理者
   },
   {
     "id": "user2",
     "name": "testuser2",
     "avatar": "http://your-domain/avatar-url",
     "email": "xxx2@shimo.im",
-    "isManager": false  // 指定此用户是否此文件的管理者
+    "isManager": false // 指定此用户是否此文件的管理者
   }
 ]
 ```
@@ -375,9 +389,9 @@ _POST_ /files/{fileId}/url
 
 **HTTP Request Headers**
 
-| Header 名         | 值 | 说明                                                                                        |
-|:------------------|:---|:------------------------------------------------------------------------------------------|
-| X-Shimo-Signature |    | 石墨根据 AppId、AppSecret 以及 fileId 签名出的 Signature 字符串，用于接入方校验请求来源合法性 |
+| Header 名         | 值  | 说明                                                                                          |
+| :---------------- | :-- | :-------------------------------------------------------------------------------------------- |
+| X-Shimo-Signature |     | 石墨根据 AppId、AppSecret 以及 fileId 签名出的 Signature 字符串，用于接入方校验请求来源合法性 |
 
 **HTTP Request Body**
 
@@ -405,24 +419,23 @@ _GET_ /admin/files/{fileId}
 
 **HTTP Request Headers**
 
-| Header 名               | 值 | 说明                                                                                                               |
-|:------------------------|:---|:-----------------------------------------------------------------------------------------------------------------|
-| X-Shimo-Credential-Type | 3  | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                                                 |
-| X-Shimo-Signature       |    | 石墨根据服务商的 AppId 以及 Secret 信息签名的Signature，payload 中包含 `fileId` ，若与请求参数中不一致说明非合法请求 |
-
+| Header 名               | 值  | 说明                                                                                                                  |
+| :---------------------- | :-- | :-------------------------------------------------------------------------------------------------------------------- |
+| X-Shimo-Credential-Type | 3   | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                                                    |
+| X-Shimo-Signature       |     | 石墨根据服务商的 AppId 以及 Secret 信息签名的 Signature，payload 中包含 `fileId` ，若与请求参数中不一致说明非合法请求 |
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例               | 说明                                                                                |
-|:------------|:-------|:---------------------|:----------------------------------------------------------------------------------|
-| id          | string | 123                  | 服务商系统中的文档 ID                                                               |
-| name        | string | file title           | 文档标题                                                                            |
-| type        | string | documentPro          | 文档类型列表参考[创建文档](./apis.md#create-collab-file)                                  |
-| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                           |
-| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`          |
-| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`      |
+| 字段名      | 类型   | 值示例               | 说明                                                                                   |
+| :---------- | :----- | :------------------- | :------------------------------------------------------------------------------------- |
+| id          | string | 123                  | 服务商系统中的文档 ID                                                                  |
+| name        | string | file title           | 文档标题                                                                               |
+| type        | string | documentPro          | 文档类型列表参考[创建文档](./apis.md#create-collab-file)                               |
+| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                              |
+| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`         |
+| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`     |
 | views       | number | 100                  | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1 |
-| permissions | object |                      | [用户对文件权限信息](#file-permissions)，`readable` 需为 `true`                               |
+| permissions | object |                      | [用户对文件权限信息](#file-permissions)，`readable` 需为 `true`                        |
 
 Example
 
@@ -459,30 +472,29 @@ _GET_ /admin/files/{fileId}/by-user-id
 
 **HTTP Request Headers**
 
-| Header 名               | 值 | 说明                                                                                                                           |
-|:------------------------|:---|:-----------------------------------------------------------------------------------------------------------------------------|
-| X-Shimo-Credential-Type | 3  | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                                                             |
-| X-Shimo-Signature       |    | 石墨根据服务商的 AppId 以及 AppSecret 信息签名的 Signature，Payload 中包含 `fileId`,`userId` 若与请求参数中不一致说明非合法请求 |
-
+| Header 名               | 值  | 说明                                                                                                                            |
+| :---------------------- | :-- | :------------------------------------------------------------------------------------------------------------------------------ |
+| X-Shimo-Credential-Type | 3   | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                                                              |
+| X-Shimo-Signature       |     | 石墨根据服务商的 AppId 以及 AppSecret 信息签名的 Signature，Payload 中包含 `fileId`,`userId` 若与请求参数中不一致说明非合法请求 |
 
 **HTTP Query Parameters**
 
 | 参数名 | 值        | 说明                                               |
-|:-------|:----------|:-------------------------------------------------|
+| :----- | :-------- | :------------------------------------------------- |
 | userId | user12345 | 表示当前查询需要获取服务商的哪个用户 ID 的文件权限 |
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例               | 说明                                                                                |
-|:------------|:-------|:---------------------|:----------------------------------------------------------------------------------|
-| id          | string | 123                  | 服务商系统中的文档 ID                                                               |
-| name        | string | file title           | 文档标题                                                                            |
-| type        | string | documentPro          | 文档类型列表参考 [创建文档](./apis.md#create-collab-file)                                 |
-| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                           |
-| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`          |
-| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`      |
+| 字段名      | 类型   | 值示例               | 说明                                                                                   |
+| :---------- | :----- | :------------------- | :------------------------------------------------------------------------------------- |
+| id          | string | 123                  | 服务商系统中的文档 ID                                                                  |
+| name        | string | file title           | 文档标题                                                                               |
+| type        | string | documentPro          | 文档类型列表参考 [创建文档](./apis.md#create-collab-file)                              |
+| creatorId   | string | 1                    | 接入方文件的创建者用户 ID                                                              |
+| createdAt   | string | 2021-08-01T00:00:00Z | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`         |
+| updatedAt   | string | 2021-08-02T00:00:00Z | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`     |
 | views       | number | 100                  | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1 |
-| permissions | object |                      | [用户对文件权限信息](#file-permissions)，`readable` 需为 `true`                                          |
+| permissions | object |                      | [用户对文件权限信息](#file-permissions)，`readable` 需为 `true`                        |
 
 Example
 
@@ -505,8 +517,6 @@ Example
 }
 ```
 
-
-
 ## 用户
 
 ### 获取当前用户信息 {#user-current}
@@ -519,18 +529,18 @@ _GET_ /users/current/info
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名   | 类型   | 值示例                        | 说明                          |
-|:---------|:-------|:------------------------------|:----------------------------|
-| id       | string | userid123                     | 服务商系统的用户的 ID         |
-| name     | string | 张三                          | 服务商系统的用户名称          |
-| avatar   | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址    |
-| email    | string | user123@fake.site             | 服务商系统的用户的邮箱        |
+| 字段名   | 类型   | 值示例                        | 说明                                                             |
+| :------- | :----- | :---------------------------- | :--------------------------------------------------------------- |
+| id       | string | userid123                     | 服务商系统的用户的 ID                                            |
+| name     | string | 张三                          | 服务商系统的用户名称                                             |
+| avatar   | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址                                       |
+| email    | string | user123@fake.site             | 服务商系统的用户的邮箱                                           |
 | teamGuid | string | 123                           | 服务商系统的用户的所属团队 ID，返回时需和 file.teamGuid 同时实现 |
 
 Response Body Example
@@ -555,17 +565,17 @@ _GET_ /users/current/team
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例          | 说明                           |
-|:------------|:-------|:----------------|:-----------------------------|
-| id          | string | 123             | 服务商系统的团队的 ID          |
-| name        | string | XXX公司效率团队 | 服务商系统的团队的名称         |
-| memberCount | number | 99              | 服务商系统的团队的所有成员数量 |
+| 字段名      | 类型   | 值示例           | 说明                           |
+| :---------- | :----- | :--------------- | :----------------------------- |
+| id          | string | 123              | 服务商系统的团队的 ID          |
+| name        | string | XXX 公司效率团队 | 服务商系统的团队的名称         |
+| memberCount | number | 99               | 服务商系统的团队的所有成员数量 |
 
 Response Body Example
 
@@ -587,14 +597,14 @@ _GET_ /users/{userId}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名 | 类型   | 值示例                        | 说明                       |
-|:-------|:-------|:------------------------------|:-------------------------|
+| :----- | :----- | :---------------------------- | :------------------------- |
 | id     | string | userid123                     | 服务商系统的用户的 ID      |
 | name   | string | 张三                          | 服务商系统的用户名称       |
 | avatar | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址 |
@@ -621,20 +631,21 @@ _GET_ /users/{userId}/watermark
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名     | 类型  | 值示例                                             | 说明                                                                                                                        |
-|:-----------|:------|:------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------|
-| watermarks | Array | ["自定义字段1", "自定义字段2", "自定义字段3", ...] | 服务商返回的水印字段，以字符串数组的形式返回，每个字符串代表一行。返回**空数组**时，石墨编辑器将**不会**在编辑器上展示水印信息。 |
+| 字段名     | 类型  | 值示例                                                | 说明                                                                                                                             |
+| :--------- | :---- | :---------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| watermarks | Array | ["自定义字段 1", "自定义字段 2", "自定义字段 3", ...] | 服务商返回的水印字段，以字符串数组的形式返回，每个字符串代表一行。返回**空数组**时，石墨编辑器将**不会**在编辑器上展示水印信息。 |
 
 :::tip
 **水印字段的内容建议**
 
 由于水印字段目前使用字符串传递，目前未限制此字段长度，为了更好的水印体验，建议返回字段遵循如下规则：
+
 1. `字段数量`不超过 `3` 个，即`水印内容`不超过 `3` 行
 2. `每个字段`不超过 `20` 个字，即`水印单行`内容不超过 `20` 字
 
@@ -645,7 +656,8 @@ Response Body Example
 
 ```json title="返回自定义水印信息用于展示"
 {
-  "watermarks": [ // 结果为字符串数组，按顺序每个单独字符串为一行显示
+  "watermarks": [
+    // 结果为字符串数组，按顺序每个单独字符串为一行显示
     "张三",
     "userid",
     "XX团队-部门-子部门"
@@ -669,20 +681,28 @@ _POST_ /users/batch/get
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Request Body**
 
 | 字段名 | 类型     | 值示例            | 说明         |
-|:-------|:---------|:------------------|:-----------|
+| :----- | :------- | :---------------- | :----------- |
 | ids    | []string | ["user1","user2"] | 用户 ID 列表 |
+
+**Request Body Example**
+
+```json
+{
+  "ids": ["user1", "user2"]
+}
+```
 
 **HTTP Response Body**
 
 | 字段名          | 类型   | 值示例                        | 说明                       |
-|:----------------|:-------|:------------------------------|:-------------------------|
+| :-------------- | :----- | :---------------------------- | :------------------------- |
 | items[0].id     | string | userid123                     | 服务商系统的用户的 ID      |
 | items[0].name   | string | 张三                          | 服务商系统的用户名称       |
 | items[0].avatar | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址 |
@@ -729,11 +749,7 @@ XX 公司效率团队      // 团队层级
 ```
 
 ```json title="该用户应返回的部门路径示例"
-[
-  "XX 研发部",
-  "基础设置组",
-  "后端组"
-]
+["XX 研发部", "基础设置组", "后端组"]
 ```
 
 **请求地址**
@@ -742,14 +758,14 @@ _GET_ /users/{userId}/department-paths
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名          | 类型   | 值示例    | 说明                   |
-|:----------------|:-------|:----------|:---------------------|
+| :-------------- | :----- | :-------- | :--------------------- |
 | list[0][0].id   | string | 123       | 服务商系统的部门的 ID  |
 | list[0][0].name | string | XX 研发部 | 服务商系统的部门的名称 |
 
@@ -758,9 +774,9 @@ _GET_ /users/{userId}/department-paths
 ```json title="用户仅属于一个部门"
 [
   [
-    {"id": "123", "name": "XX 研发部"},
-    {"id": "456", "name": "基础设施组"},
-    {"id": "789", "name": "后端组"}
+    { "id": "123", "name": "XX 研发部" },
+    { "id": "456", "name": "基础设施组" },
+    { "id": "789", "name": "后端组" }
   ]
 ]
 ```
@@ -768,14 +784,14 @@ _GET_ /users/{userId}/department-paths
 ```json title="用户仅属于多个部门"
 [
   [
-    {"id": "123", "name": "XX 研发部"},
-    {"id": "456", "name": "基础设施组"},
-    {"id": "1789", "name": "后端组"}
+    { "id": "123", "name": "XX 研发部" },
+    { "id": "456", "name": "基础设施组" },
+    { "id": "1789", "name": "后端组" }
   ],
   [
-    {"id": "123", "name": "XX 研发部"},
-    {"id": "456", "name": "基础设施组"},
-    {"id": "2789", "name": "前端端组"}
+    { "id": "123", "name": "XX 研发部" },
+    { "id": "456", "name": "基础设施组" },
+    { "id": "2789", "name": "前端端组" }
   ]
 ]
 ```
@@ -790,14 +806,14 @@ _GET_ /teams/{teamGuid}/members?pagination=true&page={page}&pageSize={pageSize}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Query Parameters**
 
 | 参数名     | 类型    | 值   | 说明           |
-|:-----------|:--------|:-----|:-------------|
+| :--------- | :------ | :--- | :------------- |
 | pagination | boolean | true | 是否为分页查询 |
 | page       | number  | 1    | 分页查询第几页 |
 | pageSize   | number  | 10   | 分页大小       |
@@ -805,7 +821,7 @@ _GET_ /teams/{teamGuid}/members?pagination=true&page={page}&pageSize={pageSize}
 **HTTP Response Body**
 
 | 字段名          | 类型   | 值示例                        | 说明                       |
-|:----------------|:-------|:------------------------------|:-------------------------|
+| :-------------- | :----- | :---------------------------- | :------------------------- |
 | items[0].id     | string | userid123                     | 服务商系统的用户的 ID      |
 | items[0].name   | string | 张三                          | 服务商系统的用户名称       |
 | items[0].avatar | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址 |
@@ -844,14 +860,14 @@ _GET_ /departments/{departmentId}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名         | 类型   | 值示例 | 说明                           |
-|:---------------|:-------|:-------|:-----------------------------|
+| :------------- | :----- | :----- | :----------------------------- |
 | id             | string | 123    | 服务商系统的部门 ID            |
 | name           | string | 研发部 | 服务商系统的部门名称           |
 | allMemberCount | number | 99     | 服务商当前部门下的所有成员数量 |
@@ -880,14 +896,14 @@ _GET_ /departments/{departmentId}/children
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名                  | 类型   | 值示例 | 说明                           |
-|:------------------------|:-------|:-------|:-----------------------------|
+| :---------------------- | :----- | :----- | :----------------------------- |
 | items[0].id             | string | 123    | 服务商系统的部门 ID            |
 | items[0].name           | string | 研发部 | 服务商系统的部门名称           |
 | items[0].allMemberCount | number | 99     | 服务商当前部门下的所有成员数量 |
@@ -923,21 +939,21 @@ _GET_ /departments/{departmentId}/members?page={page}&pageSize={pageSize}
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Query Parameters**
 
-| 参数名   | 类型   | 值 | 说明           |
-|:---------|:-------|:---|:-------------|
-| page     | number | 1  | 分页查询第几页 |
-| pageSize | number | 20 | 分页大小       |
+| 参数名   | 类型   | 值  | 说明           |
+| :------- | :----- | :-- | :------------- |
+| page     | number | 1   | 分页查询第几页 |
+| pageSize | number | 20  | 分页大小       |
 
 **HTTP Response Body**
 
 | 字段名            | 类型   | 值示例                        | 说明                         |
-|:------------------|:-------|:------------------------------|:---------------------------|
+| :---------------- | :----- | :---------------------------- | :--------------------------- |
 | total             | number | 20                            | 服务商系统的部门下的成员总数 |
 | members[0].id     | string | userid123                     | 服务商系统的用户的 ID        |
 | members[0].name   | string | 张三                          | 服务商系统的用户名称         |
@@ -980,19 +996,19 @@ _GET_ /search/users/recent?fileId=file12345
 **HTTP Query Parameters**
 
 | 参数名 | 值        | 说明                                |
-|:-------|:----------|:----------------------------------|
+| :----- | :-------- | :---------------------------------- |
 | fileId | file12345 | 表示当前查询来自服务商的哪个文件 ID |
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
 | 字段名          | 类型   | 值示例                        | 说明                       |
-|:----------------|:-------|:------------------------------|:-------------------------|
+| :-------------- | :----- | :---------------------------- | :------------------------- |
 | items[0].id     | string | userid123                     | 服务商系统的用户的 ID      |
 | items[0].name   | string | 张三                          | 服务商系统的用户名称       |
 | items[0].avatar | string | http://fake.site/user-123.png | 服务商系统的用户的头像地址 |
@@ -1027,10 +1043,11 @@ Response Body Example
 :::tip
 
 由于第三方文件无法进行协作，仅支持在 SDK 中插入 @ 时保留引用，因此需要达到点击后跳转至第三方页面，需要满足以下条件：
+
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-:::
+   :::
 
 **请求地址**
 
@@ -1039,28 +1056,28 @@ _GET_ /search/files/recent?fileId=file12345
 **HTTP Query Parameters**
 
 | 参数名 | 值        | 说明                                |
-|:-------|:----------|:----------------------------------|
+| :----- | :-------- | :---------------------------------- |
 | fileId | file12345 | 表示当前查询来自服务商的哪个文件 ID |
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Response Body**
 
-| 字段名               | 类型   | 值示例                                   | 说明                                                                                              |
-|:---------------------|:-------|:-----------------------------------------|:------------------------------------------------------------------------------------------------|
-| items[0].id          | string | ba13551165cc5066                         | 服务商系统中的文档 ID                                                                             |
-| items[0].name        | string | file title                               | 文档标题                                                                                          |
+| 字段名               | 类型   | 值示例                                   | 说明                                                                                                      |
+| :------------------- | :----- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| items[0].id          | string | ba13551165cc5066                         | 服务商系统中的文档 ID                                                                                     |
+| items[0].name        | string | file title                               | 文档标题                                                                                                  |
 | items[0].type        | string | documentPro                              | 文档类型列表参考[创建文档](./apis.md#create-collab-file)，若为第三方存储的非石墨协作文件，则固定传 `file` |
-| items[0].creatorId   | string | 1                                        | 接入方文件的创建者用户 ID                                                                         |
-| items[0].createdAt   | string | 2021-08-01T00:00:00Z                     | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                        |
-| items[0].updatedAt   | string | 2021-08-02T00:00:00Z                     | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                    |
-| items[0].views       | number | 100                                      | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1               |
-| items[0].permissions | object |                                          | [用户对文件权限信息](#file-permissions)                                                                                      |
-| items[0].fullUrl     | string | https://customer-system.com/path/to/file | 访问文件的完整地址                                                                                |
+| items[0].creatorId   | string | 1                                        | 接入方文件的创建者用户 ID                                                                                 |
+| items[0].createdAt   | string | 2021-08-01T00:00:00Z                     | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                            |
+| items[0].updatedAt   | string | 2021-08-02T00:00:00Z                     | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                        |
+| items[0].views       | number | 100                                      | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1                    |
+| items[0].permissions | object |                                          | [用户对文件权限信息](#file-permissions)                                                                   |
+| items[0].fullUrl     | string | https://customer-system.com/path/to/file | 访问文件的完整地址                                                                                        |
 
 Response Body Example
 
@@ -1122,10 +1139,11 @@ Response Body Example
 :::tip 说明
 
 由于第三方文件无法进行协作，仅支持在 SDK 中插入 @ 时保留引用，因此需要达到点击后跳转至第三方页面，需要满足以下条件：
+
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-:::
+   :::
 
 **请求地址**
 
@@ -1133,18 +1151,18 @@ _POST_ /search
 
 **HTTP Request Headers**
 
-| Header 名     | 值 | 说明                                        |
-|:--------------|:---|:------------------------------------------|
-| X-Shimo-Token |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| Header 名     | 值  | 说明                                         |
+| :------------ | :-- | :------------------------------------------- |
+| X-Shimo-Token |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
 
 **HTTP Request Body**
 
-| 字段名   | 类型   | 值示例                                                       | 说明                                                                                                                             |
-|:---------|:-------|:-------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------|
-| fileId   | string | fileid1234                                                   | 服务商系统的文件 ID                                                                                                              |
-| keyword  | string | test                                                         | 文件名或者用户名的关键字                                                                                                         |
-| page     | number | 0                                                            | 搜索的结果第几页                                                                                                                 |
-| pageSize | number | 6                                                            | 搜索结果每页数量                                                                                                                 |
+| 字段名   | 类型   | 值示例                                                       | 说明                                                                                                                                |
+| :------- | :----- | :----------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| fileId   | string | fileid1234                                                   | 服务商系统的文件 ID                                                                                                                 |
+| keyword  | string | test                                                         | 文件名或者用户名的关键字                                                                                                            |
+| page     | number | 0                                                            | 搜索的结果第几页                                                                                                                    |
+| pageSize | number | 6                                                            | 搜索结果每页数量                                                                                                                    |
 | type     | string | file_name,recent_contact,collaborator,team_member,department | 指定搜索请求需要搜索的结果包括哪些类型，按照传入的类型按需返回不同的搜索结果。通过英文逗号 `,` 分割后根据命中的类型返回相应的结果。 |
 
 #### `type` 字段说明
@@ -1173,56 +1191,55 @@ _POST_ /search
 
 **HTTP Response Body**
 
-| 字段名                                          | 类型   | 值示例                                   | 说明                                                                                                                                                                                                                                                 |
-|:------------------------------------------------|:-------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| files.count                                     | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                            |
-| files.page                                      | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                      |
-| files.pageSize                                  | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                               |
-| files.pageCount                                 | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                         |
-| files.results[0].id                             | string | ba13551165cc5066                         | 服务商系统中的文档 ID                                                                                                                                                                                                                                |
-| files.results[0].name                           | string | file title                               | 文档标题                                                                                                                                                                                                                                             |
-| files.results[0].type                           | string | documentPro                              | 文档类型列表参考[创建文档](./apis.md#create-collab-file)，若为第三方存储的非石墨协作文件，则固定传 `file`                                                                                                                                                    |
-| files.results[0].creatorId                      | string | 1                                        | 接入方文件的创建者用户 ID                                                                                                                                                                                                                            |
-| files.results[0].createdAt                      | string | 2021-08-01T00:00:00Z                     | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                                                                                                                                                                           |
-| files.results[0].updatedAt                      | string | 2021-08-02T00:00:00Z                     | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                                                                                                                                                                       |
-| files.results[0].views                          | number | 100                                      | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1                                                                                                                                                                  |
-| files.results[0].permissions                    | object |                                          | [用户对文件权限信息](#file-permissions)                                                                                                                                                                                                                   |
-| files.results[0].fullUrl                        | string | https://customer-system.com/path/to/file | 访问文件的完整地址                                                                                                                                                                                                                                   |
-| recentUsers.count                               | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                            |
-| recentUsers.page                                | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                      |
-| recentUsers.pageSize                            | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                               |
-| recentUsers.pageCount                           | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                         |
-| recentUsers.results[0].id                       | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                |
-| recentUsers.results[0].name                     | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                 |
-| recentUsers.results[0].avatar                   | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                           |
-| recentUsers.results[0].email                    | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                               |
-| collaborators.count                             | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                            |
-| collaborators.page                              | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                      |
-| collaborators.pageSize                          | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                               |
-| collaborators.pageCount                         | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                         |
-| collaborators.results[0].id                     | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                |
-| collaborators.results[0].name                   | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                 |
-| collaborators.results[0].avatar                 | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                           |
-| collaborators.results[0].email                  | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                               |
-| teamMembers.count                               | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                            |
-| teamMembers.page                                | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                      |
-| teamMembers.pageSize                            | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                               |
-| teamMembers.pageCount                           | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                         |
-| teamMembers.results[0].id                       | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                |
-| teamMembers.results[0].name                     | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                 |
-| teamMembers.results[0].avatar                   | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                           |
-| teamMembers.results[0].email                    | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                               |
-| department.count                                | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                            |
-| department.page                                 | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                      |
-| department.pageSize                             | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                               |
-| department.pageCount                            | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                         |
-| department.results[0].id                        | string | 123                                      | 服务商系统的部门 ID                                                                                                                                                                                                                                  |
-| department.results[0].name                      | string | 张三                                     | 服务商系统的部门名称                                                                                                                                                                                                                                 |
-| department.results[0].allMemberCount            | number | 10                                       | 服务商系统的当前部门成员总数                                                                                                                                                                                                                         |
+| 字段名                                          | 类型   | 值示例                                   | 说明                                                                                                                                                                                                                                                           |
+| :---------------------------------------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| files.count                                     | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                                     |
+| files.page                                      | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                               |
+| files.pageSize                                  | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                                         |
+| files.pageCount                                 | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                                   |
+| files.results[0].id                             | string | ba13551165cc5066                         | 服务商系统中的文档 ID                                                                                                                                                                                                                                          |
+| files.results[0].name                           | string | file title                               | 文档标题                                                                                                                                                                                                                                                       |
+| files.results[0].type                           | string | documentPro                              | 文档类型列表参考[创建文档](./apis.md#create-collab-file)，若为第三方存储的非石墨协作文件，则固定传 `file`                                                                                                                                                      |
+| files.results[0].creatorId                      | string | 1                                        | 接入方文件的创建者用户 ID                                                                                                                                                                                                                                      |
+| files.results[0].createdAt                      | string | 2021-08-01T00:00:00Z                     | 接入方记录的文件创建时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                                                                                                                                                                                 |
+| files.results[0].updatedAt                      | string | 2021-08-02T00:00:00Z                     | 接入方记录的文件最后更新时间，`UTC` 时间（0 时区）， 格式为 `2022-01-01T09:00:01Z`                                                                                                                                                                             |
+| files.results[0].views                          | number | 100                                      | 接入方统计的文件阅读次数，用于在文档信息中展示阅读次数。若接入方未返回，则默认显示为 1                                                                                                                                                                         |
+| files.results[0].permissions                    | object |                                          | [用户对文件权限信息](#file-permissions)                                                                                                                                                                                                                        |
+| files.results[0].fullUrl                        | string | https://customer-system.com/path/to/file | 访问文件的完整地址                                                                                                                                                                                                                                             |
+| recentUsers.count                               | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                                     |
+| recentUsers.page                                | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                               |
+| recentUsers.pageSize                            | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                                         |
+| recentUsers.pageCount                           | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                                   |
+| recentUsers.results[0].id                       | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                          |
+| recentUsers.results[0].name                     | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                           |
+| recentUsers.results[0].avatar                   | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                                     |
+| recentUsers.results[0].email                    | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                                         |
+| collaborators.count                             | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                                     |
+| collaborators.page                              | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                               |
+| collaborators.pageSize                          | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                                         |
+| collaborators.pageCount                         | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                                   |
+| collaborators.results[0].id                     | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                          |
+| collaborators.results[0].name                   | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                           |
+| collaborators.results[0].avatar                 | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                                     |
+| collaborators.results[0].email                  | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                                         |
+| teamMembers.count                               | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                                     |
+| teamMembers.page                                | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                               |
+| teamMembers.pageSize                            | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                                         |
+| teamMembers.pageCount                           | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                                   |
+| teamMembers.results[0].id                       | string | userid123                                | 服务商系统的用户的 ID                                                                                                                                                                                                                                          |
+| teamMembers.results[0].name                     | string | 张三                                     | 服务商系统的用户名称                                                                                                                                                                                                                                           |
+| teamMembers.results[0].avatar                   | string | http://fake.site/user-123.png            | 服务商系统的用户的头像地址                                                                                                                                                                                                                                     |
+| teamMembers.results[0].email                    | string | user123@fake.site                        | 服务商系统的用户的邮箱                                                                                                                                                                                                                                         |
+| department.count                                | number | 3                                        | 搜索到结果的总条数，包括所有分页结果的总和                                                                                                                                                                                                                     |
+| department.page                                 | number | 0                                        | 当前为第几页，第如第一页的值为 0                                                                                                                                                                                                                               |
+| department.pageSize                             | number | 6                                        | 每一页分页的结果的数量                                                                                                                                                                                                                                         |
+| department.pageCount                            | number | 1                                        | 分搜索结果的总条数按照分页大小计算后的总页数                                                                                                                                                                                                                   |
+| department.results[0].id                        | string | 123                                      | 服务商系统的部门 ID                                                                                                                                                                                                                                            |
+| department.results[0].name                      | string | 张三                                     | 服务商系统的部门名称                                                                                                                                                                                                                                           |
+| department.results[0].allMemberCount            | number | 10                                       | 服务商系统的当前部门成员总数                                                                                                                                                                                                                                   |
 | department.results[0].parentDepartments         | Array  |                                          | 服务商系统当前部门数据对应的所有父级部门，顺序 **`从高到底`** ，不包括 `团队` 层级，从一级部门开始，若已是一级部门，则返回空数组。由于在 `表格锁定` 场景搜索部门时可能遇到同名部门，可以通过所有父级部门来帮助区分部门，若无需区分，可选择不返回父级部门列表。 |
-| department.results[0].parentDepartments[0].id   | string |                                          | 服务商系统中当前部门父级部门的 ID                                                                                                                                                                                                                    |
-| department.results[0].parentDepartments[0].name | name   |                                          | 服务商系统中当前部门父级部门的名称                                                                                                                                                                                                                   |
-
+| department.results[0].parentDepartments[0].id   | string |                                          | 服务商系统中当前部门父级部门的 ID                                                                                                                                                                                                                              |
+| department.results[0].parentDepartments[0].name | name   |                                          | 服务商系统中当前部门父级部门的名称                                                                                                                                                                                                                             |
 
 **HTTP Response Example**
 
@@ -1371,7 +1388,6 @@ _POST_ /search
 }
 ```
 
-
 ## 推送石墨 SDK 相关事件 {#events}
 
 此接口用于用户在石墨文件触发特定行为时，向服务商发送通知。
@@ -1394,10 +1410,10 @@ _POST_ /events
 
 **HTTP Request Headers**
 
-| Header 名         | 值 | 说明                                        |
-|:------------------|:---|:------------------------------------------|
-| X-Shimo-Token     |    | 服务商提供的 token，用于服务商对该次请求鉴权 |
-| X-Shimo-Sdk-Event |    | 用于识别具体的事件类型                      |
+| Header 名         | 值  | 说明                                         |
+| :---------------- | :-- | :------------------------------------------- |
+| X-Shimo-Token     |     | 服务商提供的 token，用于服务商对该次请求鉴权 |
+| X-Shimo-Sdk-Event |     | 用于识别具体的事件类型                       |
 
 请求参数和请求体根据不同事件有所不同。
 
@@ -1408,7 +1424,7 @@ _POST_ /events
 **HTTP Request Headers**
 
 | Header 名         | 值      | 说明                   |
-|:------------------|:--------|:---------------------|
+| :---------------- | :------ | :--------------------- |
 | X-Shimo-Sdk-Event | Comment | 用于识别具体的事件类型 |
 
 #### 轻文档
@@ -1423,10 +1439,10 @@ _POST_ /events
   "fileId": "file1", // 接入方文件 ID
   "userId": "user1", // 接入方用户 ID
   "comment": {
-    "guid": "wS2uTQBMuujrwaGZ",    // 评论 ID
-    "content": "这是评论内容",       // 评论内容
+    "guid": "wS2uTQBMuujrwaGZ", // 评论 ID
+    "content": "这是评论内容", // 评论内容
     "userIds": ["user1", "user2"], // 评论中若有 at 用户，此参数会传递一份，也可通过 mention_at 事件中获取
-    "selectionGuid": "comment-Ynimup3kBXoxwF4j",  // 评论划词高亮区域的 ID
+    "selectionGuid": "comment-Ynimup3kBXoxwF4j", // 评论划词高亮区域的 ID
     "selectionContent": "123123123123"
   }
 }
@@ -1436,14 +1452,14 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"delete",
-  "fileId":"5b4f80b2aeb9d47d",
-  "userId":"1",
-  "deleteComment":{
-    "guid":"EGhnSobUZWujKG2g", // 评论 ID
-    "selectionGuid":"comment-Ynimup3kBXoxwF4j" // 划词高亮区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "delete",
+  "fileId": "5b4f80b2aeb9d47d",
+  "userId": "1",
+  "deleteComment": {
+    "guid": "EGhnSobUZWujKG2g", // 评论 ID
+    "selectionGuid": "comment-Ynimup3kBXoxwF4j" // 划词高亮区域 ID
   }
 }
 ```
@@ -1452,13 +1468,13 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"closeComments",
-  "fileId":"5b4f80b2aeb9d47d",
-  "userId":"1",
-  "closeComment":{
-    "selectionGuid":"comment-Ynimup3kBXoxwF4j" // 划词高亮区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "closeComments",
+  "fileId": "5b4f80b2aeb9d47d",
+  "userId": "1",
+  "closeComment": {
+    "selectionGuid": "comment-Ynimup3kBXoxwF4j" // 划词高亮区域 ID
   }
 }
 ```
@@ -1469,17 +1485,17 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"create",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "comment":{
-    "guid":"8dkDnFH6HPaGPqD1", // 评论 ID
-    "selectionTitle":"MODOC",  // 评论所在表格 sheet ID
-    "selectionGuid":"comment-OWTDgRUtF1LDoLwh", // 评论所在位置 ID
-    "content":"测试表格评论", // 评论内容
-    "userIds":["user1", "user2"] // at 的用户列表，没有则空
+  "kind": "comment",
+  "type": "comment",
+  "action": "create",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "comment": {
+    "guid": "8dkDnFH6HPaGPqD1", // 评论 ID
+    "selectionTitle": "MODOC", // 评论所在表格 sheet ID
+    "selectionGuid": "comment-OWTDgRUtF1LDoLwh", // 评论所在位置 ID
+    "content": "测试表格评论", // 评论内容
+    "userIds": ["user1", "user2"] // at 的用户列表，没有则空
   }
 }
 ```
@@ -1488,14 +1504,14 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"delete",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "deleteComment":{
-    "guid":"bfdbJyDNlctJXcnw", // 评论 ID
-    "selectionGuid":"comment-OWTDgRUtF1LDoLwh" // 评论位置区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "delete",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "deleteComment": {
+    "guid": "bfdbJyDNlctJXcnw", // 评论 ID
+    "selectionGuid": "comment-OWTDgRUtF1LDoLwh" // 评论位置区域 ID
   }
 }
 ```
@@ -1504,13 +1520,13 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"closeComments",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "closeComment":{
-    "selectionGuid":"comment-OWTDgRUtF1LDoLwh" // 评论位置区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "closeComments",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "closeComment": {
+    "selectionGuid": "comment-OWTDgRUtF1LDoLwh" // 评论位置区域 ID
   }
 }
 ```
@@ -1521,16 +1537,16 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"create",
-  "fileId":"691f6abc72f769a4",
-  "userId":"1",
-  "comment":{
-    "guid":"ZwOJjlTDHcPda0V4", // 评论 ID
-    "selectionGuid":"comment-Y29tbWVudD05Ng==", // 划词高亮区域 ID
-    "content":"3123123", // 评论内容
-    "userIds":["user1"] // 评论中 at 的用户，若无则为空
+  "kind": "comment",
+  "type": "comment",
+  "action": "create",
+  "fileId": "691f6abc72f769a4",
+  "userId": "1",
+  "comment": {
+    "guid": "ZwOJjlTDHcPda0V4", // 评论 ID
+    "selectionGuid": "comment-Y29tbWVudD05Ng==", // 划词高亮区域 ID
+    "content": "3123123", // 评论内容
+    "userIds": ["user1"] // 评论中 at 的用户，若无则为空
   }
 }
 ```
@@ -1539,16 +1555,16 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"update",
-  "fileId":"691f6abc72f769a4",
-  "userId":"1",
-  "comment":{
-    "guid":"ZwOJjlTDHcPda0V4", // 评论 ID
-    "selectionGuid":"comment-Y29tbWVudD05Ng==", // 划词高亮区域 ID
-    "content":"312312345666", // 更新的评论内容
-    "userIds":["user1"]  // 评论中 at 的用户，若无则为空
+  "kind": "comment",
+  "type": "comment",
+  "action": "update",
+  "fileId": "691f6abc72f769a4",
+  "userId": "1",
+  "comment": {
+    "guid": "ZwOJjlTDHcPda0V4", // 评论 ID
+    "selectionGuid": "comment-Y29tbWVudD05Ng==", // 划词高亮区域 ID
+    "content": "312312345666", // 更新的评论内容
+    "userIds": ["user1"] // 评论中 at 的用户，若无则为空
   }
 }
 ```
@@ -1557,14 +1573,14 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"delete",
-  "fileId":"691f6abc72f769a4",
-  "userId":"1",
-  "deleteComment":{
-    "guid":"JrJWv9VuuOWlEo64", // 评论 ID
-    "selectionGuid":"comment-Y29tbWVudD05Ng==" // 划词高亮区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "delete",
+  "fileId": "691f6abc72f769a4",
+  "userId": "1",
+  "deleteComment": {
+    "guid": "JrJWv9VuuOWlEo64", // 评论 ID
+    "selectionGuid": "comment-Y29tbWVudD05Ng==" // 划词高亮区域 ID
   }
 }
 ```
@@ -1575,17 +1591,17 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"create",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "comment":{
-    "guid":"Ddg3iIcz1nfqJSo9", // 评论 ID
-    "selectionTitle":"s2f6cb94",  // 评论所在幻灯片页面 ID
-    "selectionGuid":"comment-rrsIAvomFD3girqU", // 评论所在位置 ID
-    "content":"测试评论", // 评论内容
-    "userIds":[] // 幻灯片暂不支持 at 用户，为空
+  "kind": "comment",
+  "type": "comment",
+  "action": "create",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "comment": {
+    "guid": "Ddg3iIcz1nfqJSo9", // 评论 ID
+    "selectionTitle": "s2f6cb94", // 评论所在幻灯片页面 ID
+    "selectionGuid": "comment-rrsIAvomFD3girqU", // 评论所在位置 ID
+    "content": "测试评论", // 评论内容
+    "userIds": [] // 幻灯片暂不支持 at 用户，为空
   }
 }
 ```
@@ -1594,14 +1610,14 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"delete",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "deleteComment":{
-    "guid":"Ddg3iIcz1nfqJSo9", // 评论 ID
-    "selectionGuid":"comment-rrsIAvomFD3girqU" // 评论位置区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "delete",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "deleteComment": {
+    "guid": "Ddg3iIcz1nfqJSo9", // 评论 ID
+    "selectionGuid": "comment-rrsIAvomFD3girqU" // 评论位置区域 ID
   }
 }
 ```
@@ -1610,13 +1626,13 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"closeComments",
-  "fileId":"6ee9f8da39498a33",
-  "userId":"1",
-  "closeComment":{
-    "selectionGuid":"comment-rrsIAvomFD3girqU" // 评论位置区域 ID
+  "kind": "comment",
+  "type": "comment",
+  "action": "closeComments",
+  "fileId": "6ee9f8da39498a33",
+  "userId": "1",
+  "closeComment": {
+    "selectionGuid": "comment-rrsIAvomFD3girqU" // 评论位置区域 ID
   }
 }
 ```
@@ -1627,18 +1643,18 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"create",
-  "fileId":"794821fa1c537c88",
-  "userId":"5",
-  "comment":{
-    "guid":"vi3sZCU3SPmYkaPL",
-    "selectionTitle":"tiAtgfY7iRH", // 工作表 ID
-    "selectionGuid":"comment-5CZl3gADOnG", // 评论位置
-    "selectionContent":"JAuXsJM8obN:标题", //
-    "content":"123123123 @yanjixiong ",
-    "userIds":["5"]
+  "kind": "comment",
+  "type": "comment",
+  "action": "create",
+  "fileId": "794821fa1c537c88",
+  "userId": "5",
+  "comment": {
+    "guid": "vi3sZCU3SPmYkaPL",
+    "selectionTitle": "tiAtgfY7iRH", // 工作表 ID
+    "selectionGuid": "comment-5CZl3gADOnG", // 评论位置
+    "selectionContent": "JAuXsJM8obN:标题", //
+    "content": "123123123 @yanjixiong ",
+    "userIds": ["5"]
   }
 }
 ```
@@ -1651,14 +1667,14 @@ _POST_ /events
   "fileId": "794821fa1c537c88",
   "userId": "5",
   "comment": {
-    "guid": "wY2THFlt3HoxbpMI",      // 评论 ID
+    "guid": "wY2THFlt3HoxbpMI", // 评论 ID
     "selectionTitle": "tiAtgfY7iRH", // 工作表 ID
     "selectionGuid": "comment-r3Zmnqa1lm2", // 评论位置
-    "content": "123132",             // 评论内容
+    "content": "123132", // 评论内容
     "userIds": [],
-    "replyTo": "JIyRqgGY3GzyNj0d",   // 回复的评论 ID
+    "replyTo": "JIyRqgGY3GzyNj0d", // 回复的评论 ID
     "replyComment": {
-      "userId": "5",                 // 被回复评论的创建者
+      "userId": "5", // 被回复评论的创建者
       "commentGuid": "JIyRqgGY3GzyNj0d", // 被回复评论的 ID
       "selectionTitle": "tiAtgfY7iRH", // 工作表 ID
       "selectionGuid": "comment-r3Zmnqa1lm2" // 评论位置
@@ -1671,14 +1687,14 @@ _POST_ /events
 
 ```json
 {
-  "kind":"comment",
-  "type":"comment",
-  "action":"delete",
-  "fileId":"794821fa1c537c88",
-  "userId":"5",
-  "deleteComment":{
-    "guid":"vi3sZCU3SPmYkaPL", // 评论 ID
-    "selectionGuid":"comment-5CZl3gADOnG" // 评论位置
+  "kind": "comment",
+  "type": "comment",
+  "action": "delete",
+  "fileId": "794821fa1c537c88",
+  "userId": "5",
+  "deleteComment": {
+    "guid": "vi3sZCU3SPmYkaPL", // 评论 ID
+    "selectionGuid": "comment-5CZl3gADOnG" // 评论位置
   }
 }
 ```
@@ -1690,7 +1706,7 @@ _POST_ /events
 **HTTP Request Headers**
 
 | Header 名         | 值         | 说明                   |
-|:------------------|:-----------|:---------------------|
+| :---------------- | :--------- | :--------------------- |
 | X-Shimo-Sdk-Event | Discussion | 用于识别具体的事件类型 |
 
 #### 轻文档
@@ -1703,12 +1719,12 @@ _POST_ /events
   "type": "discussion", // 预留讨论下的小分类，目前就 discussion
   "action": "create",
   "fileId": "5b4f80b2aeb9d47d", // 接入方文件 ID
-  "userId": "user1",            // 接入方用户 ID
+  "userId": "user1", // 接入方用户 ID
   "discussion": {
     "id": "61f0bc916014eb0006c85c6f", // 讨论消息 ID
     "unixus": 1643166865906215, // 时间，微秒
     "content": "123",
-    "positionId": ""            // 预留字段，目前无用
+    "positionId": "" // 预留字段，目前无用
   }
 }
 ```
@@ -1722,7 +1738,7 @@ _POST_ /events
 **HTTP Request Headers**
 
 | Header 名         | 值        | 说明                   |
-|:------------------|:----------|:---------------------|
+| :---------------- | :-------- | :--------------------- |
 | X-Shimo-Sdk-Event | MentionAt | 用于识别具体的事件类型 |
 
 #### 轻文档
@@ -1873,18 +1889,18 @@ HTTP Request Body
 
 ```json
 {
-  "kind":"mention_at",
-  "type":"comment",
-  "action":"create",
-  "fileId":"794821fa1c537c88",
-  "userId":"5",
-  "comment":{
-    "guid":"61p3ftQ8XuE31oba", // 评论 ID
-    "selectionTitle":"tiAtgfY7iRH", // 工作表 ID
-    "selectionGuid":"comment-5ehKQW140LZ", // 评论位置 ID
-    "selectionContent":"JAuXsJM8obN:标题",
-    "content":"12312312313 @zhangsan", // 评论 at 内容
-    "userIds":["2"]   // 提及用户
+  "kind": "mention_at",
+  "type": "comment",
+  "action": "create",
+  "fileId": "794821fa1c537c88",
+  "userId": "5",
+  "comment": {
+    "guid": "61p3ftQ8XuE31oba", // 评论 ID
+    "selectionTitle": "tiAtgfY7iRH", // 工作表 ID
+    "selectionGuid": "comment-5ehKQW140LZ", // 评论位置 ID
+    "selectionContent": "JAuXsJM8obN:标题",
+    "content": "12312312313 @zhangsan", // 评论 at 内容
+    "userIds": ["2"] // 提及用户
   }
 }
 ```
@@ -1893,18 +1909,17 @@ HTTP Request Body
 
 ```json
 {
-  "kind":"mention_at",
-  "type":"mention_at",
-  "action":"create",
-  "fileId":"794821fa1c537c88",
-  "userId":"5",
-  "mentionAt":{
-    "guid":"tiAtgfY7iRHthWE9C0jIFcskBkByFcwVAhFQMQVEgj0B",
-    "userId":"1" // 提及用户
+  "kind": "mention_at",
+  "type": "mention_at",
+  "action": "create",
+  "fileId": "794821fa1c537c88",
+  "userId": "5",
+  "mentionAt": {
+    "guid": "tiAtgfY7iRHthWE9C0jIFcskBkByFcwVAhFQMQVEgj0B",
+    "userId": "1" // 提及用户
   }
 }
 ```
-
 
 ### **日期提醒 (DateMention)**
 
@@ -1917,7 +1932,7 @@ HTTP Request Body
 **HTTP Request Headers**
 
 | Header 名         | 值          | 说明                   |
-|:------------------|:------------|:---------------------|
+| :---------------- | :---------- | :--------------------- |
 | X-Shimo-Sdk-Event | DateMention | 用于识别具体的事件类型 |
 
 #### 轻文档
@@ -1932,13 +1947,13 @@ HTTP Request Body
   "type": "date_mention",
   "action": "create",
   "createData": {
-    "id":"MlRFslp55Mrt19Iq",        // 提醒 ID
-    "fileId":"ac4ce108419f103c",    // 文件 ID
-    "authorId":"12",                // 创建者用户 ID
-    "content":"<a>2022年1月19日 </a>", // 提醒文字
-    "remindUserIds":["12"],         // 提醒用户
-    "remindAt":"2021-12-07T15:00:00Z", // 提醒时间
-    "positionId": "12"              // 预留字段，暂无用途
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
+    "fileId": "ac4ce108419f103c", // 文件 ID
+    "authorId": "12", // 创建者用户 ID
+    "content": "<a>2022年1月19日 </a>", // 提醒文字
+    "remindUserIds": ["12"], // 提醒用户
+    "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
+    "positionId": "12" // 预留字段，暂无用途
   }
 }
 ```
@@ -1950,12 +1965,12 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "update",
-  "updateData":{
-    "id":"MlRFslp55Mrt19Iq",          // 提醒 ID
-    "content":"<a>2022年1月20日 </a>", // 提醒文字
-    "remindUserIds":["user1"],        // 提醒用户
-    "remindAt":"2021-12-07T15:00:00Z", // 提醒时间
-    "positionId": "12"                // 预留字段，暂无用途
+  "updateData": {
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
+    "content": "<a>2022年1月20日 </a>", // 提醒文字
+    "remindUserIds": ["user1"], // 提醒用户
+    "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
+    "positionId": "12" // 预留字段，暂无用途
   }
 }
 ```
@@ -1967,8 +1982,8 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "remove",
-  "removeData":{
-    "id":"MlRFslp55Mrt19Iq" // 提醒 ID
+  "removeData": {
+    "id": "MlRFslp55Mrt19Iq" // 提醒 ID
   }
 }
 ```
@@ -1985,13 +2000,13 @@ HTTP Request Body
   "type": "date_mention",
   "action": "create",
   "createData": {
-    "id":"MlRFslp55Mrt19Iq",        // 提醒 ID
-    "fileId":"ac4ce108419f103c",    // 文件 ID
-    "authorId":"12",                // 创建者用户 ID
-    "content":"123",                // 提醒文字，若未设置文字，则为空
-    "remindUserIds":["12"],         // 提醒用户
-    "remindAt":"2021-12-07T15:00:00Z", // 提醒时间
-    "positionId":"MODOC-QjUpDSt3swY6Tlir" // 预留字段，暂无用途
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
+    "fileId": "ac4ce108419f103c", // 文件 ID
+    "authorId": "12", // 创建者用户 ID
+    "content": "123", // 提醒文字，若未设置文字，则为空
+    "remindUserIds": ["12"], // 提醒用户
+    "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
+    "positionId": "MODOC-QjUpDSt3swY6Tlir" // 预留字段，暂无用途
   }
 }
 ```
@@ -2003,12 +2018,12 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "update",
-  "updateData":{
-    "id":"MlRFslp55Mrt19Iq",        // 提醒 ID
-    "content":"12313",              // 提醒文字
-    "remindUserIds":["12"],         // 提醒用户
-    "remindAt":"2021-12-07T15:00:00Z", // 提醒时间
-    "positionId":"MODOC-QjUpDSt3swY6Tlir" // 预留字段，暂无用途
+  "updateData": {
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
+    "content": "12313", // 提醒文字
+    "remindUserIds": ["12"], // 提醒用户
+    "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
+    "positionId": "MODOC-QjUpDSt3swY6Tlir" // 预留字段，暂无用途
   }
 }
 ```
@@ -2020,8 +2035,8 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "remove",
-  "removeData":{
-    "id":"MlRFslp55Mrt19Iq" // 提醒 ID
+  "removeData": {
+    "id": "MlRFslp55Mrt19Iq" // 提醒 ID
   }
 }
 ```
@@ -2038,12 +2053,12 @@ HTTP Request Body
   "type": "date_mention",
   "action": "create",
   "createData": {
-    "id":"MlRFslp55Mrt19Iq",        // 提醒 ID
-    "fileId":"ac4ce108419f103c",    // 文件 ID
-    "authorId":"12",                // 创建者用户 ID
-    "content":"2022年01月19日, 周三", // 提醒文字
-    "remindAt":"2021-12-07T15:00:00Z", // 提醒时间
-    "positionId":"36"                // 预留字段，暂无用途
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
+    "fileId": "ac4ce108419f103c", // 文件 ID
+    "authorId": "12", // 创建者用户 ID
+    "content": "2022年01月19日, 周三", // 提醒文字
+    "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
+    "positionId": "36" // 预留字段，暂无用途
   }
 }
 ```
@@ -2055,11 +2070,11 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "update",
-  "updateData":{
-    "id": "MlRFslp55Mrt19Iq",        // 提醒 ID
+  "updateData": {
+    "id": "MlRFslp55Mrt19Iq", // 提醒 ID
     "content": "2022年01月21日, 周五 19:56", // 提醒文字
     "remindAt": "2021-12-07T15:00:00Z", // 提醒时间
-    "positionId":"36"                // 预留字段，暂无用途
+    "positionId": "36" // 预留字段，暂无用途
   }
 }
 ```
@@ -2071,8 +2086,8 @@ HTTP Request Body
   "kind": "mention",
   "type": "date_mention",
   "action": "remove",
-  "removeData":{
-    "id":"MlRFslp55Mrt19Iq" // 提醒 ID
+  "removeData": {
+    "id": "MlRFslp55Mrt19Iq" // 提醒 ID
   }
 }
 ```
@@ -2087,10 +2102,10 @@ HTTP Request Body
 
 **HTTP Request Headers**
 
-| Header 名               | 值                                   | 说明                                                                                           |
-|:------------------------|:-------------------------------------|:---------------------------------------------------------------------------------------------|
-| X-Shimo-Credential-Type | 3                                    | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                             |
-| X-Shimo-Sdk-Event       | FileContent                          | 用于识别具体的事件类型                                                                         |
+| Header 名               | 值                                   | 说明                                                                                            |
+| :---------------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------- |
+| X-Shimo-Credential-Type | 3                                    | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                              |
+| X-Shimo-Sdk-Event       | FileContent                          | 用于识别具体的事件类型                                                                          |
 | X-Shimo-Signature       | ebc1cde3-9b57-4962-883d-54302d428600 | 当石墨无法提供接入方 token 时，使用接入方对应 appId, secret 主动生成 signature 用于回调接口校验 |
 
 **HTTP Request Body**
@@ -2108,20 +2123,22 @@ HTTP Request Body
   "timestamp": 1635732089224 // 此事件产生的时间
 }
 ```
+
 ### **文档协作者协同状态变化 (Collaborator)**
 
 当一个文档当前参与协作的用户发生改变时，推送此事件。
 
 事件可通过 `action` 的值区分用户行为：
+
 - `enter` 网络无异常情况下，进入文档，触发此事件
 - `leave` 用户关闭文档或网络断开时，触发此事件
 
 **HTTP Request Headers**
 
-| Header 名               | 值                                   | 说明                                                                                           |
-|:------------------------|:-------------------------------------|:---------------------------------------------------------------------------------------------|
-| X-Shimo-Credential-Type | 3                                    | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                             |
-| X-Shimo-Sdk-Event       | Collaborator                         | 用于识别具体的事件类型                                                                         |
+| Header 名               | 值                                   | 说明                                                                                            |
+| :---------------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------- |
+| X-Shimo-Credential-Type | 3                                    | 无法提供 token 的 [回调凭证类型](./resources.md##credential-types)                              |
+| X-Shimo-Sdk-Event       | Collaborator                         | 用于识别具体的事件类型                                                                          |
 | X-Shimo-Signature       | ebc1cde3-9b57-4962-883d-54302d428600 | 当石墨无法提供接入方 token 时，使用接入方对应 appId, secret 主动生成 signature 用于回调接口校验 |
 
 **HTTP Request Body**
@@ -2145,6 +2162,7 @@ HTTP Request Body
 当有用户创建、修改、删除版本并被服务器处理成功后，推送此事件。
 
 事件可通过 `action` 的值区分用户行为：
+
 - `create` 用户创建版本时，触发此事件
 - `update` 用户修改版本时，触发此事件
 - `delete` 用户删除版本时，触发此事件
@@ -2152,7 +2170,7 @@ HTTP Request Body
 **HTTP Request Headers**
 
 | Header 名         | 值       | 说明                   |
-|:------------------|:---------|:---------------------|
+| :---------------- | :------- | :--------------------- |
 | X-Shimo-Sdk-Event | Revision | 用于识别具体的事件类型 |
 
 **HTTP Request Body**
@@ -2183,8 +2201,8 @@ HTTP Request Body
 
 **HTTP Request Headers**
 
-| Header 名         | 值       | 说明                   |
-|:------------------|:---------|:---------------------|
+| Header 名         | 值     | 说明                   |
+| :---------------- | :----- | :--------------------- |
 | X-Shimo-Sdk-Event | System | 用于识别具体的事件类型 |
 
 #### (实验性) 回调请求错误
@@ -2200,6 +2218,7 @@ HTTP Request Body
 **HTTP Request Body**
 
 Request Headers 中的相关信息参考 [回调凭证类型](./resources.md#credential-types) 说明
+
 - `X-Shimo-Credential-Type`
 - `X-Shimo-Token`
 - `X-Shimo-Signature`
@@ -2210,19 +2229,21 @@ Request Headers 中的相关信息参考 [回调凭证类型](./resources.md#cre
   "type": "endpointCallback",
   "appId": "your app id",
   "timestamp": 1669610727509, // 此事件产生的时间戳，单位毫秒
-  "request": {                // 错误回调请求的请求数据
+  "request": {
+    // 错误回调请求的请求数据
     "headers": {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "X-Shimo-APP-ID": "your app id",
-      "X-Shimo-Credential-Type": "0",      // 0 代表使用用户 token 发起的回调请求， 3 表示石墨 SDK 主动签名发起的回调请求
+      "X-Shimo-Credential-Type": "0", // 0 代表使用用户 token 发起的回调请求， 3 表示石墨 SDK 主动签名发起的回调请求
       "X-Shimo-Token": "your user token",
       "X-Shimo-Signature": "the signature generate by sdk"
     },
     "url": "http://your-callback-api-host/callback/users/current/info",
     "body": ""
   },
-  "response": {               // 错误回调请求的响应数据
+  "response": {
+    // 错误回调请求的响应数据
     "headers": {
       "Connection": "keep-alive",
       "Content-Length": "9",
