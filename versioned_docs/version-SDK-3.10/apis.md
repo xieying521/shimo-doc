@@ -33,22 +33,22 @@ _GET_ https://shimo-domain/sdk/v2/api/license/apps/{appId}
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Path     | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Path     | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -136,24 +136,23 @@ func sendApp() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 axios({
-	"method": "GET",
-	"url": "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId",
-	"params": {
-		"appId": "yourShimoAppId",
-		"signature": "yourSignatureString",
-		"token": "yourTokenString"
-	}
+  method: "GET",
+  url: "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId",
+  params: {
+    appId: "yourShimoAppId",
+    signature: "yourSignatureString",
+    token: "yourTokenString",
+  },
 })
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -162,21 +161,21 @@ axios({
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
-| 字段名             | 类型   | 值示例                                                          | 说明                                                                        |
-|:-------------------|:-------|:----------------------------------------------------------------|:--------------------------------------------------------------------------|
-| appName            | string | your app name                                                   | 应用名                                                                      |
-| availableFileTypes | Array  | ["document","documentPro","spreadsheet","presentation","table"] | 可用石墨套件列表                                                            |
-| activatedUserCount | number | 43                                                              | 已激活席位用户数                                                            |
+| 字段名             | 类型   | 值示例                                                          | 说明                                                                            |
+| :----------------- | :----- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| appName            | string | your app name                                                   | 应用名                                                                          |
+| availableFileTypes | Array  | ["document","documentPro","spreadsheet","presentation","table"] | 可用石墨套件列表                                                                |
+| activatedUserCount | number | 43                                                              | 已激活席位用户数                                                                |
 | userCount          | number | 50                                                              | 用户数总数，包含`已激活`、`已禁用`、`未使用` 用户总数，仅 `已激活` 数量占用席位 |
-| memberLimit        | number | 99                                                              | license 席位限制用户数，即 `已激活` 用户数量最大限制                         |
-| validFrom          | string | 2020-12-31T16:00:00Z                                            | license 生效时间                                                            |
-| validUntil         | string | 2022-12-30T16:00:00Z                                            | license 有效期截止时间                                                      |
-| endpointUrl        | string | http://your-domain                                              | 服务商回调地址                                                              |
+| memberLimit        | number | 99                                                              | license 席位限制用户数，即 `已激活` 用户数量最大限制                            |
+| validFrom          | string | 2020-12-31T16:00:00Z                                            | license 生效时间                                                                |
+| validUntil         | string | 2022-12-30T16:00:00Z                                            | license 有效期截止时间                                                          |
+| endpointUrl        | string | http://your-domain                                              | 服务商回调地址                                                                  |
 
 Example
 
@@ -213,28 +212,28 @@ Example
 
 _PUT_ https://shimo-domain/sdk/v2/api/license/apps/{appId}/endpoint-url
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Path     | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Path     | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
 
 **HTTP Request Body**
 
 | 字段名 | 类型   | 值示例             | 必选 | 说明                     |
-|:-------|:-------|:-------------------|:----|:-----------------------|
+| :----- | :----- | :----------------- | :--- | :----------------------- |
 | url    | string | http://your-domain | 是   | 需要更新的服务商回调地址 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -340,29 +339,28 @@ func sendApp() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 axios({
-	"method": "PUT",
-	"url": "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url",
-	"params": {
-		"appId": "yourShimoAppId",
-		"signature": "yourSignatureString",
-		"token": "yourTokenString"
-	},
-	"headers": {
-		"Content-Type": "application/json"
-	},
-	"data": {
-		"url": "http://your-domain"
-	}
+  method: "PUT",
+  url: "https://shimo-domain/sdk/v2/api/license/apps/yourShimoAppId/endpoint-url",
+  params: {
+    appId: "yourShimoAppId",
+    signature: "yourSignatureString",
+    token: "yourTokenString",
+  },
+  headers: {
+    "Content-Type": "application/json",
+  },
+  data: {
+    url: "http://your-domain",
+  },
 })
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -371,7 +369,7 @@ axios({
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 创建成功 |
 
 **HTTP Response Body**
@@ -390,35 +388,35 @@ _POST_ https://shimo-domain/sdk/v2/api/files
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                        |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                |
-| Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                     |
-| Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                       |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                               |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                       |
+| Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                          |
+| Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                            |
 | Query    | lang      | string | en                                   | 否   | 可选。默认值为服务端默认语言设置，通常默认为 `zh-CN` 。指定创建文件时的语言信息，可选值：`zh-CN`(简体中文)、`en`(英文)、`ja`(日文) |
 
 **HTTP Request Headers**
 
-| Header 名       | 值                      | 必选 | 说明                                                                                                                                                                                                   |
-|:----------------|:------------------------|:----|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Header 名       | 值                      | 必选 | 说明                                                                                                                                                                                                     |
+| :-------------- | :---------------------- | :--- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Accept-Language | zh-CN,zh;q=0.9,en;q=0.8 | 否   | 若无 `lang` 参数默认尝试从此 Header 识别，若未传此 Header 则使用服务器默认语言。Accept-Languge 格式参考 [MDN Accept-Language](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Language) |
 
 **HTTP Request Body**
 
-| 字段名 | 类型   | 值示例     | 必选 | 说明                                                   |
-|:-------|:-------|:-----------|:----|:-----------------------------------------------------|
-| type   | string | document   | 是   | 石墨文件类型，可选值参考 「支持的文件类型」 部分          |
+| 字段名 | 类型   | 值示例     | 必选 | 说明                                                    |
+| :----- | :----- | :--------- | :--- | :------------------------------------------------------ |
+| type   | string | document   | 是   | 石墨文件类型，可选值参考 「支持的文件类型」 部分        |
 | fileId | string | fileid1001 | 是   | 接入服务商的文件的唯一 ID，必须为不超过 64 长度的字符串 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -497,39 +495,37 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "type": "document",
-  "fileId": "8ae0186b-6ee5-4c45-82d1-1bd149cd94b5"
+  type: "document",
+  fileId: "8ae0186b-6ee5-4c45-82d1-1bd149cd94b5",
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
 </Tabs>
 
-
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 创建成功 |
 
 **HTTP Response Body**
@@ -539,7 +535,7 @@ axios(config)
 **支持的文档类型**
 
 | 文件类型 | 类型值       |
-|:-------|:-------------|
+| :------- | :----------- |
 | 轻文档   | document     |
 | 表格     | spreadsheet  |
 | 传统文档 | documentPro  |
@@ -572,27 +568,27 @@ _POST_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/copy
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
 
 **HTTP Request Body**
 
-| 字段名 | 类型   | 值示例     | 必选 | 说明                                                            |
-|:-------|:-------|:-----------|:----|:--------------------------------------------------------------|
-| fileId | string | fileid1001 | 是   | 新文件ID，接入服务商的文件的唯一 ID，必须为不超过 64 长度的字符串 |
+| 字段名 | 类型   | 值示例     | 必选 | 说明                                                               |
+| :----- | :----- | :--------- | :--- | :----------------------------------------------------------------- |
+| fileId | string | fileid1001 | 是   | 新文件 ID，接入服务商的文件的唯一 ID，必须为不超过 64 长度的字符串 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -671,45 +667,43 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "fileId": "8ae0186b-6ee5-4c45-82d1-1bd149cd94b5"
+  fileId: "8ae0186b-6ee5-4c45-82d1-1bd149cd94b5",
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/e0f238d1-8c10-448c-bf69-cd315051c095/copy?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/e0f238d1-8c10-448c-bf69-cd315051c095/copy?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
 </Tabs>
 
-
 **HTTP 状态码**
 
-| 状态码 | 说明                                                                                |
-|:-------|:----------------------------------------------------------------------------------|
-| 204    | 创建成功                                                                            |
+| 状态码 | 说明                                                                                  |
+| :----- | :------------------------------------------------------------------------------------ |
+| 204    | 创建成功                                                                              |
 | 200    | 重复请求时，文件拷贝正在执行，响应数据 `{"code":70019}`                               |
 | 400    | 重复请求时，目标文件关联数据存在但无法找到创建副本任务信息，响应数据 `{"code":70016}` |
-| 400    | 重复请求时，目标文件关联数据存在，创建副本执行失败，响应数据 `{"code":70017}`          |
+| 400    | 重复请求时，目标文件关联数据存在，创建副本执行失败，响应数据 `{"code":70017}`         |
 | 500    | 重复请求时，创建副本时获取源文件内容遇到错误，响应数据 `{"code":70015}`               |
 | 500    | 重复请求时，获取创建副本任务时遇到错误，响应数据 `{"code":70018}`                     |
-| 500    | 重复请求时，未知的创建副本任务状态, 响应数据 `{"code":70020}`                        |
+| 500    | 重复请求时，未知的创建副本任务状态, 响应数据 `{"code":70020}`                         |
 
 **HTTP Response Body**
 
@@ -725,9 +719,9 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
 
@@ -737,13 +731,13 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -811,32 +805,30 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'delete',
-  url: 'https://shimo-domain/sdk/v2/api/files/2ef0f99b-6e1b-48c1-bb61-b7c2eac0914c?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
-  headers: { }
+  method: "delete",
+  url: "https://shimo-domain/sdk/v2/api/files/2ef0f99b-6e1b-48c1-bb61-b7c2eac0914c?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
 </Tabs>
 
-
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |
 
 **HTTP Response Body**
@@ -853,25 +845,25 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/doc-sidebar-info
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名      | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:------------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名      | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :---------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId      | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId       | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId       | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token       | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature   | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
-| Query    | pageSize    | number | 10                                   | 否   | 每一页返回的条数，推荐值 `10`、`20` ，设的过大将会影响响应时间。默认值为 `10`                                                                      |
+| Query    | pageSize    | number | 10                                   | 否   | 每一页返回的条数，推荐值 `10`、`20` ，设的过大将会影响响应时间。默认值为 `10`                                                                    |
 | Query    | count       | number | 0                                    | 否   | 当前页需要跳过的记录数，可通过 `count = (page - 1) * pageSize` 求得。默认值为 `0`                                                                |
-| Query    | historyType | number | 1                                    | 否   | 可选值：`1` 操作历史 （如锁定单元格此类未实际编写内容的修改产生的操作历史），`2` 编辑历史。未传时，默认返回所有类型                                  |
+| Query    | historyType | number | 1                                    | 否   | 可选值：`1` 操作历史 （如锁定单元格此类未实际编写内容的修改产生的操作历史），`2` 编辑历史。未传时，默认返回所有类型                              |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -937,22 +929,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/shimo-files/<fileId>/doc-sidebar-info?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
-  headers: { }
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/shimo-files/<fileId>/doc-sidebar-info?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -961,24 +952,24 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
-| 字段名                   | 类型    | 值示例                   | 说明                                         |
-|:-------------------------|:--------|:-------------------------|:-------------------------------------------|
-| histories                | array   |                          | 侧边栏历史数组                               |
-| histories[i].content     | string  |                          | 协作文件格式数据                             |
-| histories[i].createdAt   | string  | 2021-06-07T06:12:24Z     | 本条侧边栏历史创建时间                       |
+| 字段名                   | 类型    | 值示例                   | 说明                                           |
+| :----------------------- | :------ | :----------------------- | :--------------------------------------------- |
+| histories                | array   |                          | 侧边栏历史数组                                 |
+| histories[i].content     | string  |                          | 协作文件格式数据                               |
+| histories[i].createdAt   | string  | 2021-06-07T06:12:24Z     | 本条侧边栏历史创建时间                         |
 | histories[i].historyType | number  | 2                        | 侧边栏历史类型，1 为操作历史，2 为编辑产生     |
-| histories[i].id          | string  | 60bdb8c847a7850006bf12c1 | 侧边栏历史 ID                                |
-| histories[i].name        | string  | 历史1                    | 侧边栏历史名称                               |
-| histories[i].updatedAt   | string  | 2021-06-07T06:12:24Z     | 侧边栏历史最后更新时间                       |
+| histories[i].id          | string  | 60bdb8c847a7850006bf12c1 | 侧边栏历史 ID                                  |
+| histories[i].name        | string  | 历史 1                   | 侧边栏历史名称                                 |
+| histories[i].updatedAt   | string  | 2021-06-07T06:12:24Z     | 侧边栏历史最后更新时间                         |
 | histories[i].userId      | string  | user123,user134          | 服务商用户 ID，可能有多个，以英文逗号 "," 分隔 |
-| isLastPage               | boolean |                          | 是否最后一页                                 |
-| limit                    | number  | 100                      | 分页大小                                     |
-| users                    | object  | { "user123": "用户A" }   | 服务商用户 ID 对应用户名映射                 |
+| isLastPage               | boolean |                          | 是否最后一页                                   |
+| limit                    | number  | 100                      | 分页大小                                       |
+| users                    | object  | { "user123": "用户 A" }  | 服务商用户 ID 对应用户名映射                   |
 
 Example
 
@@ -1010,7 +1001,7 @@ Example
       "id": "622ac9034079aa0006d54f3b",
       "name": "",
       "updatedAt": "2022-03-11T03:58:59Z",
-      "userId": "user123",
+      "userId": "user123"
     },
     {
       "content": "{\"action\":\"lock_sheet\",\"name\":\"工作表1\"}",
@@ -1020,7 +1011,7 @@ Example
       "id": "622ac9084079aa0006d54f3c",
       "name": "",
       "updatedAt": "2022-03-11T03:59:04Z",
-      "userId": "user123",
+      "userId": "user123"
     }
   ],
   "isLastPage": true,
@@ -1082,9 +1073,7 @@ Example
 ```json
 {
   "action": "unlock_cell",
-  "range": [
-    "E14:E14"
-  ],
+  "range": ["E14:E14"],
   "name": "工作表1"
 }
 ```
@@ -1112,9 +1101,7 @@ Example
 ```json
 {
   "action": "update_lock_cell",
-  "range": [
-    "E17:E17"
-  ],
+  "range": ["E17:E17"],
   "name": "工作表1"
 }
 ```
@@ -1133,22 +1120,22 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/revisions
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1214,38 +1201,36 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/shimo-files/<fileId>/revisions?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
-  headers: { }
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/shimo-files/<fileId>/revisions?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
 </Tabs>
 
-
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
 | 字段名       | 类型   | 值示例                   | 说明               |
-|:-------------|:-------|:-------------------------|:-----------------|
+| :----------- | :----- | :----------------------- | :----------------- |
 | id           | string | 11089                    | 版本 ID            |
 | label        | string | 2021/6/7 星期一 14:33    | 版本 Label         |
 | title        | string | 123                      | 标题               |
@@ -1254,7 +1239,6 @@ axios(config)
 | updatedAt    | string | 2021-06-07T06:33:13Z     | 侧边栏历史更新时间 |
 | user.id      | string | user123                  | 服务商用户 ID      |
 | user.name    | string | testuser                 | 用户名             |
-
 
 Example
 
@@ -1297,22 +1281,22 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/plain-text
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1378,22 +1362,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/shimo-files/<fileId>/plain-text?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
-  headers: { }
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/shimo-files/<fileId>/plain-text?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -1402,15 +1385,14 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
 | 字段名  | 类型   | 值示例         | 说明                                     |
-|:--------|:-------|:------------|:---------------------------------------|
+| :------ | :----- | :------------- | :--------------------------------------- |
 | content | string | 文件纯文本内容 | 根据指定文件 ID 获取的石墨文件纯文本内容 |
-
 
 Example
 
@@ -1425,6 +1407,7 @@ Example
 获取文件内容中所有的 at 人信息列表
 
 支持文件类型：
+
 - `document` 轻文档
 - `documentPro` 传统文档
 - `spreadsheet` 表格
@@ -1435,22 +1418,22 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/mention-at-list
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1533,23 +1516,23 @@ func sendAt() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 axios({
-	"method": "GET",
-	"url": "https://shimo-domain/sdk/v2/shimo-files/ad8ed1afa8172d91/mention-at-list",
-	"params": {
-		"appId": "yourShimoAppId",
-		"signature": "yourSignatureString",
-		"token": "yourTokenString"
-	}
+  method: "GET",
+  url: "https://shimo-domain/sdk/v2/shimo-files/ad8ed1afa8172d91/mention-at-list",
+  params: {
+    appId: "yourShimoAppId",
+    signature: "yourSignatureString",
+    token: "yourTokenString",
+  },
 })
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -1558,13 +1541,13 @@ axios({
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
 | 字段名                  | 类型   | 值示例           | 说明                                               |
-|:------------------------|:-------|:-----------------|:-------------------------------------------------|
+| :---------------------- | :----- | :--------------- | :------------------------------------------------- |
 | mentionAtList           | Array  |                  | 根据指定文件 ID 获取的石墨文件中的所有 at 信息列表 |
 | mentionAtList[0].userId | string | user1            | at 提及的用户 ID                                   |
 | mentionAtList[0].atGuid | string | MODOCnb4HPu04G8f | at 提及在文件中对应的位置标记                      |
@@ -1599,6 +1582,7 @@ Example
 获取文件内中的评论总数
 
 支持文件类型：
+
 - `spreadsheet` 表格
 
 **请求地址**
@@ -1607,22 +1591,22 @@ _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/comment-count
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1710,17 +1694,17 @@ func send() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 axios({
-	"method": "GET",
-	"url": "https://shimo-domain/sdk/v2/shimo-files/fe143ca1a08e9976/comment-count",
-	"params": {
-		"appId": "yourShimoAppId",
-		"signature": "yourSignatureString",
-		"token": "yourTokenString"
-	}
-})
+  method: "GET",
+  url: "https://shimo-domain/sdk/v2/shimo-files/fe143ca1a08e9976/comment-count",
+  params: {
+    appId: "yourShimoAppId",
+    signature: "yourSignatureString",
+    token: "yourTokenString",
+  },
+});
 ```
 
 </TabItem>
@@ -1729,13 +1713,13 @@ axios({
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
 | 字段名 | 类型   | 值示例 | 说明     |
-|:-------|:-------|:-------|:-------|
+| :----- | :----- | :----- | :------- |
 | count  | number | 2      | 评论条数 |
 
 Example
@@ -1762,21 +1746,21 @@ _POST_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/create
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -1844,22 +1828,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/cloud-files/{{fileID}}/create?signature=yourSignatureString&token=yourTokenString',
-  headers: { }
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/cloud-files/{{fileID}}/create?signature=yourSignatureString&token=yourTokenString",
+  headers: {},
 };
 
 axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -1867,10 +1850,10 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名  | 类型   | 值示例             | 说明                                                      |
-|:--------|:-------|:-------------------|:--------------------------------------------------------|
+| 字段名  | 类型   | 值示例             | 说明                                                        |
+| :------ | :----- | :----------------- | :---------------------------------------------------------- |
 | code    | string | 90028              | 创建预览结果状态码，空字符串代表创建成功， 非空代表创建失败 |
-| message | string | file is converting | 创建失败错误信息                                          |
+| message | string | file is converting | 创建失败错误信息                                            |
 
 **Example**
 
@@ -1889,7 +1872,7 @@ axios(config)
 
 ### 访问预览
 
-用于在浏览器上渲染出预览的页面， 需要嵌入Iframe使用
+用于在浏览器上渲染出预览的页面， 需要嵌入 Iframe 使用
 
 > 对于同一个文件， 第一次调用该接口时， 后台会异步调用「[创建预览](#创建预览)」接口创建任务， 创建成功后才会渲染出预览页面。 如果需要加快第一次打开文件的速度， 可在服务端提前调用「[创建预览](#创建预览)」接口创建预览
 
@@ -1899,12 +1882,12 @@ _GET_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/page
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 示例值                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
-| Query    | lang      | string | zh-CN                                | 否   | 页面中的语言设置， 默认zh-CN， 可选 en-US，ja-JP                                                                                                  |
+| Query    | lang      | string | zh-CN                                | 否   | 页面中的语言设置， 默认 zh-CN， 可选 en-US，ja-JP                                                                                                |
 
 嵌入 iframe 使用
 
@@ -1930,8 +1913,9 @@ _GET_ https://shimo-domain/sdk/v2/api/cloud-files/{fileID}/page
 ### 导入文件 {#import-v1}
 
 :::caution
-⚠️ 此接口为新版导入文件接口，建议优先使用。新版导入文件接口要求接入方必须解析结果中的 taskId，并且在调用「[( 新版 )获取导入进度](#import-progress-v1)」时带上 taskId 参数。任务执行的最长时间为10分钟。
+⚠️ 此接口为新版导入文件接口，建议优先使用。新版导入文件接口要求接入方必须解析结果中的 taskId，并且在调用「[( 新版 )获取导入进度](#import-progress-v1)」时带上 taskId 参数。任务执行的最长时间为 10 分钟。
 :::
+
 > 导入文件过程是一个异步处理过程，接口请求成功仅代表导入服务收到并开始处理导入请求，实际是否成功需要轮询「[( 新版 )获取导入进度](#import-progress-v1)」接口查询导入任务是否完成。
 
 **请求地址**
@@ -1940,21 +1924,21 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                        |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :---------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的用户凭证 ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                     |
 
 **HTTP Request Body**
 
-| 传参方式 | 参数名   | 类型   | 值示例                                        | 必选 | 说明                                                    |
-|:---------|:---------|:-------|:----------------------------------------------|:----|:------------------------------------------------------|
-| Form     | fileId   | string | file1001                                      | 是   | 服务商文件的唯一 ID                                     |
-| Form     | type     | string | documentPro                                   | 是   | 需要导入的文件类型                                      |
-| Form     | file     | file   |                                               | 否   | 需要导入的文件（如果不发送文件，就必须传fileUrl、fileName） |
-| Form     | fileUrl  | string | <https://domain.com/files/download/test.docx> | 否   | 需要导入的文件下载地址（有参数file，可以不用传）           |
-| Form     | fileName | string | test.docx                                     | 否   | 需要导入的文件名称（有参数file，可以不用传）               |
+| 传参方式 | 参数名   | 类型   | 值示例                                        | 必选 | 说明                                                         |
+| :------- | :------- | :----- | :-------------------------------------------- | :--- | :----------------------------------------------------------- |
+| Form     | fileId   | string | file1001                                      | 是   | 服务商文件的唯一 ID                                          |
+| Form     | type     | string | documentPro                                   | 是   | 需要导入的文件类型                                           |
+| Form     | file     | file   |                                               | 否   | 需要导入的文件（如果不发送文件，就必须传 fileUrl、fileName） |
+| Form     | fileUrl  | string | <https://domain.com/files/download/test.docx> | 否   | 需要导入的文件下载地址（有参数 file，可以不用传）            |
+| Form     | fileName | string | test.docx                                     | 否   | 需要导入的文件名称（有参数 file，可以不用传）                |
 
 :::caution
 ⚠️ 如无特别说明，导入文件 file 文件名需要附带扩展名，否则可能解析失败，如「`测试文件.doc`」或使用 `FormData` 时 `filename` 字段中传入带扩展名的文件名，参考 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/append#%E7%A4%BA%E4%BE%8B)。
@@ -1962,13 +1946,13 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2071,31 +2055,30 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
-var FormData = require('form-data');
-var fs = require('fs');
+var axios = require("axios");
+var FormData = require("form-data");
+var fs = require("fs");
 var data = new FormData();
-data.append('fileId', '{{importFileId}}');
-data.append('type', 'document');
-data.append('file', fs.createReadStream('/your/local/path/测试.docx'));
+data.append("fileId", "{{importFileId}}");
+data.append("type", "document");
+data.append("file", fs.createReadStream("/your/local/path/测试.docx"));
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/import?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/import?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    ...data.getHeaders()
+    ...data.getHeaders(),
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2103,25 +2086,25 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例           | 说明                                                                             |
-|:------------|:-------|:-----------------|:-------------------------------------------------------------------------------|
-| status      | number | 0                | 导入状态，非零值表示异常                                                          |
-| message     | string |                  | 导入异常时的提示信息                                                             |
+| 字段名      | 类型   | 值示例           | 说明                                                                                |
+| :---------- | :----- | :--------------- | :---------------------------------------------------------------------------------- |
+| status      | number | 0                | 导入状态，非零值表示异常                                                            |
+| message     | string |                  | 导入异常时的提示信息                                                                |
 | data.taskId | string | TnJdQS8Wk70wNHuB | 导入任务的标识 ID，调用导入进度接口时，请带上该参数。导入失败时请提供此 ID 用于调试 |
 
 **导入支持的文件格式**
 
-| 石墨文件类型 | 支持导入的文件类型 |
-|:-------------|:-------------------|
-| document     | docx，doc，md，txt    |
+| 石墨文件类型 | 支持导入的文件类型   |
+| :----------- | :------------------- |
+| document     | docx，doc，md，txt   |
 | documentPro  | docx，doc，wps       |
 | spreadsheet  | xlsx，xls，csv, xlsm |
-| presentation | pptx，ppt           |
+| presentation | pptx，ppt            |
 
 ### 获取导入进度 {#import-progress-v1}
 
 :::caution
-⚠️ 此接口为新版获取导入进度接口，建议优先使用。当任务完成之后，进度结果将会默认缓存5分钟（可配置），过期之后再次调用进度结果将会失败。
+⚠️ 此接口为新版获取导入进度接口，建议优先使用。当任务完成之后，进度结果将会默认缓存 5 分钟（可配置），过期之后再次调用进度结果将会失败。
 :::
 **请求地址**
 
@@ -2129,22 +2112,22 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/import/progress
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | taskId    | string | TnJdQS8Wk70wNHuB                     | 是   | 导入文件接口返回的 taskId                                                                                 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                        |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :---------------------------------------------------------------------------------------------------------- |
+| Query    | taskId    | string | TnJdQS8Wk70wNHuB                     | 是   | 导入文件接口返回的 taskId                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的用户凭证 ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                     |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2216,24 +2199,23 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
-var data = '';
+var axios = require("axios");
+var data = "";
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/import/progress?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&taskId={{taskId}}',
-  headers: { },
-  data : data
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/import/progress?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&taskId={{taskId}}",
+  headers: {},
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2241,20 +2223,20 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名        | 类型   | 值示例 | 说明                                 |
-|:--------------|:-------|:-------|:-----------------------------------|
+| 字段名        | 类型   | 值示例 | 说明                                  |
+| :------------ | :----- | :----- | :------------------------------------ |
 | status        | number | 0      | 导入状态，非零值表示异常              |
-| message       | string |        | 导入异常时的提示信息                 |
+| message       | string |        | 导入异常时的提示信息                  |
 | data.progress | number | 100    | 导入进度百分比，为 100 时表示导入完成 |
 
 **说明**
 
-通过轮询该接口，直到返回的 `data.progress` 为 `100` 时表示`导入完成`，即可通过 「文件编辑」 接口进行查看或编辑
+通过轮询该接口，直到返回的 `data.progress` 为 `100` 时表示`导入完成`，即可通过对接前端 js-sdk，在页面上进行查看或编辑。
 
 ### 导出文件 {#export-v1}
 
 :::caution
-⚠️ 此接口为新版导出文件接口，建议优先使用。新版导出文件接口要求接入方必须解析结果中的 taskId，并且在调用「[( 新版 )获取导出进度](#export-progress-v1)」时带上 taskId 参数。此接口允许同时将同一个石墨文件导出为不同的文件类型，例如：同时将轻文档导出为 PDF 和 Word 两个格式。任务执行的最长时间为10分钟。
+⚠️ 此接口为新版导出文件接口，建议优先使用。新版导出文件接口要求接入方必须解析结果中的 taskId，并且在调用「[( 新版 )获取导出进度](#export-progress-v1)」时带上 taskId 参数。此接口允许同时将同一个石墨文件导出为不同的文件类型，例如：同时将轻文档导出为 PDF 和 Word 两个格式。任务执行的最长时间为 10 分钟。
 :::
 将在线编辑文件导出为 Office 文件、PDF 等格式，不同套件支持的导出格式有所不同，下文有具体列表。
 
@@ -2266,22 +2248,22 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                        |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :---------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的用户凭证 ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                     |
 
 **HTTP Request Body**
 
-| 传参方式 | 参数名 | 类型   | 值示例 | 必选 | 说明                                      |
-|:---------|:-------|:-------|:-------|:----|:----------------------------------------|
+| 传参方式 | 参数名 | 类型   | 值示例 | 必选 | 说明                                       |
+| :------- | :----- | :----- | :----- | :--- | :----------------------------------------- |
 | Body     | type   | string | docx   | 否   | 需要导出的文件类型，不传时按照默认类型导出 |
 
 **导出支持的文件格式**
 
 | 石墨文件类型 | 默认导出的文件类型 | 支持导出的文件类型 |
-|:-------------|:-------------------|:-------------------|
+| :----------- | :----------------- | :----------------- |
 | document     | docx               | docx, md, jpg, pdf |
 | documentPro  | docx               | docx, pdf, wps     |
 | spreadsheet  | xlsx               | xlsx               |
@@ -2289,13 +2271,13 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/{fileId}
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2371,28 +2353,27 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "type": "docx"
+  type: "docx",
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/export/{{exportFileId}}?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/export/{{exportFileId}}?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2400,16 +2381,16 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例                       | 说明                                                                          |
-|:------------|:-------|:-----------------------------|:----------------------------------------------------------------------------|
-| status      | number | 0                            | 导出状态，非零值表示异常                                                       |
-| data.taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 导出任务的标识ID，调用导出进度接口时，请带上该参数，导出失败时请提供此ID用于调试 |
-| message     | string |                              | 导出异常时的提示信息                                                          |
+| 字段名      | 类型   | 值示例                       | 说明                                                                                |
+| :---------- | :----- | :--------------------------- | :---------------------------------------------------------------------------------- |
+| status      | number | 0                            | 导出状态，非零值表示异常                                                            |
+| data.taskId | string | 3oo4vnBJgcG5HxMm:1:603:xmind | 导出任务的标识 ID，调用导出进度接口时，请带上该参数，导出失败时请提供此 ID 用于调试 |
+| message     | string |                              | 导出异常时的提示信息                                                                |
 
 ### 获取导出进度 {#export-progress-v1}
 
 :::caution
-⚠️ 此接口为新版获取导入进度接口，建议优先使用。进度结果将会默认缓存5分钟（可配置），过期之后再次调用进度结果将会失败。
+⚠️ 此接口为新版获取导入进度接口，建议优先使用。进度结果将会默认缓存 5 分钟（可配置），过期之后再次调用进度结果将会失败。
 :::
 **请求地址**
 
@@ -2417,22 +2398,22 @@ _POST_ https://shimo-domain/sdk/v2/api/files/v1/export/progress
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
-|:---------|:----------|:-------|:-------------------------------------|:----|:--------------------------------------------------------------------------------------------------------|
-| Query    | taskId    | string | 3oo4vnBJgcG5HxMm:1:603:xmind         | 是   | 导出文件接口返回的 taskId                                                                                 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                        |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :---------------------------------------------------------------------------------------------------------- |
+| Query    | taskId    | string | 3oo4vnBJgcG5HxMm:1:603:xmind         | 是   | 导出文件接口返回的 taskId                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的用户凭证 ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                     |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2504,24 +2485,23 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
-var data = '';
+var axios = require("axios");
+var data = "";
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/v1/export/progress?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&taskId={{taskId}}',
-  headers: { },
-  data : data
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/v1/export/progress?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&taskId={{taskId}}",
+  headers: {},
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2529,12 +2509,12 @@ axios(config)
 
 **HTTP Response Body**
 
-| 字段名           | 类型   | 值示例 | 说明                                 |
-|:-----------------|:-------|:-------|:-----------------------------------|
+| 字段名           | 类型   | 值示例 | 说明                                  |
+| :--------------- | :----- | :----- | :------------------------------------ |
 | status           | number | 0      | 导出状态，非零值表示异常              |
-| message          | string |        | 导出异常时的提示信息                 |
+| message          | string |        | 导出异常时的提示信息                  |
 | data.progress    | number | 100    | 导出进度百分比，为 100 时表示导入完成 |
-| data.downloadUrl | string |        | 导出文件的下载地址                   |
+| data.downloadUrl | string |        | 导出文件的下载地址                    |
 
 **说明**
 
@@ -2550,22 +2530,22 @@ _POST_ https://shimo-domain/sdk/v2/api/files/export/table-sheets/{fileId}
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的用户凭证 ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                      |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2654,14 +2634,14 @@ func sendExcel() {
 
 ```js
 axios({
-	"method": "POST",
-	"url": "https://shimo-domain/sdk/v2/api/files/export/table-sheets/:fileId",
-	"params": {
-		"appId": "yourShimoAppId",
-		"signature": "yourSignatureString",
-		"token": "yourTokenString"
-	},
-})
+  method: "POST",
+  url: "https://shimo-domain/sdk/v2/api/files/export/table-sheets/:fileId",
+  params: {
+    appId: "yourShimoAppId",
+    signature: "yourSignatureString",
+    token: "yourTokenString",
+  },
+});
 ```
 
 </TabItem>
@@ -2669,11 +2649,11 @@ axios({
 
 **HTTP Response Body**
 
-| 字段名      | 类型   | 值示例 | 说明                    |
-|:------------|:-------|:-------|:----------------------|
+| 字段名      | 类型   | 值示例 | 说明                     |
+| :---------- | :----- | :----- | :----------------------- |
 | status      | number | 0      | 导出状态，非零值表示异常 |
-| message     | string |        | 导出异常时的提示信息    |
-| downloadUrl | string |        | .xlsx 文件下载地址      |
+| message     | string |        | 导出异常时的提示信息     |
+| downloadUrl | string |        | .xlsx 文件下载地址       |
 
 ## 表格内容操作
 
@@ -2687,23 +2667,23 @@ _GET_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
-| Query    | range     | string | 工作表 1!A1:C3                       | 是   | 参照下方参数说明 [range](#range)                                                                                                               |
+| Query    | range     | string | 工作表 1!A1:C3                       | 是   | 参照下方参数说明 [range](#range)                                                                                                                 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2769,22 +2749,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表 1!A1:C3',
-  headers: { }
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表 1!A1:C3",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2793,13 +2772,13 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 200    | 返回成功 |
 
 **HTTP Response Body**
 
 | 字段名 | 类型  | 值示例                                    | 说明         |
-|:-------|:------|:---------------------------------------|:-----------|
+| :----- | :---- | :---------------------------------------- | :----------- |
 | values | array | [["姓名","年龄","性别"],["小明",29,"男"]] | 表格单元格值 |
 
 Example
@@ -2819,7 +2798,7 @@ Example
 **支持的文件类型**
 
 | 文件类型 | 类型值      |
-|:-------|:------------|
+| :------- | :---------- |
 | 表格     | spreadsheet |
 
 ### 更新表格内容
@@ -2832,29 +2811,29 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **HTTP Request Body**
 
 | 字段名   | 类型   | 值示例         | 说明                                   |
-|:---------|:-------|:---------------|:-------------------------------------|
+| :------- | :----- | :------------- | :------------------------------------- |
 | range    | string | 工作表 1!A1:C3 | 参照下方参数说明 [range](#range)       |
 | resource | object |                | 参照下方参数说明 [resource](#resource) |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -2946,40 +2925,33 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "range": "工作表 1!A1:C3",
-  "resource": {
-    "values": [
-      [
-        "第一行第一列的值",
-        "第一行第二列的值"
-      ],
-      [
-        "第二行第一列的值",
-        "第二行第二列的值"
-      ]
-    ]
-  }
+  range: "工作表 1!A1:C3",
+  resource: {
+    values: [
+      ["第一行第一列的值", "第一行第二列的值"],
+      ["第二行第一列的值", "第二行第二列的值"],
+    ],
+  },
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -2988,7 +2960,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 返回成功 |
 
 **HTTP Response Body**
@@ -2998,7 +2970,7 @@ axios(config)
 **支持的文件类型**
 
 | 文件类型 | 类型值      |
-|:-------|:------------|
+| :------- | :---------- |
 | 表格     | spreadsheet |
 
 ### 追加表格内容
@@ -3015,29 +2987,29 @@ _PUT_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **HTTP Request Body**
 
 | 字段名   | 类型   | 值示例         | 说明                                   |
-|:---------|:-------|:---------------|:-------------------------------------|
+| :------- | :----- | :------------- | :------------------------------------- |
 | range    | string | 工作表 1!A1:C3 | 参照下方参数说明 [range](#range)       |
 | resource | object |                | 参照下方参数说明 [resource](#resource) |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3129,40 +3101,33 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "range": "工作表 1!A1:C3",
-  "resource": {
-    "values": [
-      [
-        "第一行第一列追加文本",
-        "第一行第二列追加文本"
-      ],
-      [
-        "第二行第一列追加文本",
-        "第二行第二列追加文本"
-      ]
-    ]
-  }
+  range: "工作表 1!A1:C3",
+  resource: {
+    values: [
+      ["第一行第一列追加文本", "第一行第二列追加文本"],
+      ["第二行第一列追加文本", "第二行第二列追加文本"],
+    ],
+  },
 });
 
 var config = {
-  method: 'put',
-  url: 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "put",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -3171,7 +3136,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 返回成功 |
 
 **HTTP Response Body**
@@ -3181,7 +3146,7 @@ axios(config)
 **支持的文件类型**
 
 | 文件类型 | 类型值      |
-|:-------|:------------|
+| :------- | :---------- |
 | 表格     | spreadsheet |
 
 ### 删除表格行
@@ -3194,15 +3159,15 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/{sheetName}/rows/
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Path     | sheetName | string | 工作表 1                             | 是   | 表格中工作表的名称                                                                                                                             |
-| Path     | index     | number | 0                                    | 是   | 从第几行开始删除                                                                                                                               |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Path     | sheetName | string | 工作表 1                             | 是   | 表格中工作表的名称                                                                                                                               |
+| Path     | index     | number | 0                                    | 是   | 从第几行开始删除                                                                                                                                 |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
-| Query    | count     | number | 1                                    | 否   | 删除几行，默认为 1                                                                                                                              |
+| Query    | count     | number | 1                                    | 否   | 删除几行，默认为 1                                                                                                                               |
 
 **HTTP Request Body**
 
@@ -3210,13 +3175,13 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/{sheetName}/rows/
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3284,22 +3249,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'delete',
-  url: 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表 1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2',
-  headers: { }
+  method: "delete",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表 1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -3308,7 +3272,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 返回成功 |
 
 **HTTP Response Body**
@@ -3318,7 +3282,7 @@ axios(config)
 **支持的文件类型**
 
 | 文件类型 | 类型值      |
-|:-------|:------------|
+| :------- | :---------- |
 | 表格     | spreadsheet |
 
 ### 新增表格工作表
@@ -3331,28 +3295,28 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                           |
-|:---------|:----------|:-------|:-------------------------------------|:----|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                   |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
 
 **HTTP Request Body**
 
 | 字段名 | 类型   | 值示例   | 说明               |
-|:-------|:-------|:------|:-----------------|
+| :----- | :----- | :------- | :----------------- |
 | name   | string | 工作表 2 | 新增表格工作表名称 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3428,28 +3392,27 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "name": "工作表2"
+  name: "工作表2",
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -3458,7 +3421,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 返回成功 |
 
 **HTTP Response Body**
@@ -3468,7 +3431,7 @@ axios(config)
 **支持的文件类型**
 
 | 文件类型 | 类型值      |
-|:-------|:------------|
+| :------- | :---------- |
 | 表格     | spreadsheet |
 
 ### 参数说明
@@ -3490,13 +3453,7 @@ values 为一个二维数组，表示追加/更新的表格内容，第一维表
 ```json title="返回一行数据"
 {
   "resource": {
-    "values": [
-      [
-        1,
-        "",
-        "a"
-      ]
-    ]
+    "values": [[1, "", "a"]]
   }
 }
 ```
@@ -3505,8 +3462,8 @@ values 为一个二维数组，表示追加/更新的表格内容，第一维表
 {
   "resource": {
     "values": [
-      [1,"","a"],
-      ["b","c",2]
+      [1, "", "a"],
+      ["b", "c", 2]
     ]
   }
 }
@@ -3520,51 +3477,71 @@ values 为一个二维数组，表示追加/更新的表格内容，第一维表
 
 ```javascript title="convertOADateToLocaleDateString.js"
 function _getTimezoneOffset(date) {
-  let offset = date.getTimezoneOffset()
+  let offset = date.getTimezoneOffset();
   if (offset === -485) {
-    offset = -485 - 43 / 60
+    offset = -485 - 43 / 60;
   }
-  return offset
+  return offset;
 }
 
-
 function _fromOADate(oadate) {
-  const offsetDay = oadate - 25569
-  const date = new Date(offsetDay * 86400000)
+  const offsetDay = oadate - 25569;
+  const date = new Date(offsetDay * 86400000);
 
-  const adjustValue = offsetDay >= 0 ? 1 : -1
-  const oldDateTimezoneOffset = _getTimezoneOffset(date)
-  const ms = (oadate * 86400000 * 1440 + adjustValue - 25569 * 86400000 * 1440 + oldDateTimezoneOffset * 86400000) / 1440
-  let firstResult = new Date(ms)
+  const adjustValue = offsetDay >= 0 ? 1 : -1;
+  const oldDateTimezoneOffset = _getTimezoneOffset(date);
+  const ms =
+    (oadate * 86400000 * 1440 +
+      adjustValue -
+      25569 * 86400000 * 1440 +
+      oldDateTimezoneOffset * 86400000) /
+    1440;
+  let firstResult = new Date(ms);
 
-
-  const fixHourSign = oldDateTimezoneOffset >= 0 ? 1 : -1
-  const nextHour = new Date(ms + fixHourSign * 3600000)
-  const nextHourTimezoneOffset = _getTimezoneOffset(nextHour)
+  const fixHourSign = oldDateTimezoneOffset >= 0 ? 1 : -1;
+  const nextHour = new Date(ms + fixHourSign * 3600000);
+  const nextHourTimezoneOffset = _getTimezoneOffset(nextHour);
   if (oldDateTimezoneOffset !== nextHourTimezoneOffset) {
-    let newResult = new Date(ms + (nextHourTimezoneOffset - oldDateTimezoneOffset) * 60 * 1000)
+    let newResult = new Date(
+      ms + (nextHourTimezoneOffset - oldDateTimezoneOffset) * 60 * 1000
+    );
     if (oldDateTimezoneOffset > nextHourTimezoneOffset) {
-      if (fixHourSign === -1 || nextHourTimezoneOffset === _getTimezoneOffset(firstResult)) {
-        newResult = newResult.getMilliseconds() === 999 ? new Date(newResult.valueOf() + 1) : newResult
-        return newResult
+      if (
+        fixHourSign === -1 ||
+        nextHourTimezoneOffset === _getTimezoneOffset(firstResult)
+      ) {
+        newResult =
+          newResult.getMilliseconds() === 999
+            ? new Date(newResult.valueOf() + 1)
+            : newResult;
+        return newResult;
       }
     } else if (oldDateTimezoneOffset < nextHourTimezoneOffset) {
-      if (fixHourSign === 1 || nextHourTimezoneOffset === _getTimezoneOffset(firstResult)) {
-        newResult = newResult.getMilliseconds() === 999 ? new Date(newResult.valueOf() + 1) : newResult
-        return newResult
+      if (
+        fixHourSign === 1 ||
+        nextHourTimezoneOffset === _getTimezoneOffset(firstResult)
+      ) {
+        newResult =
+          newResult.getMilliseconds() === 999
+            ? new Date(newResult.valueOf() + 1)
+            : newResult;
+        return newResult;
       }
     }
   }
 
-  firstResult = firstResult.getMilliseconds() === 999 ? new Date(firstResult.valueOf() + 1) : firstResult
-  return firstResult
+  firstResult =
+    firstResult.getMilliseconds() === 999
+      ? new Date(firstResult.valueOf() + 1)
+      : firstResult;
+  return firstResult;
 }
 
 function convertOADate(OAdate) {
-  return _fromOADate(OAdate).toLocaleDateString()
+  return _fromOADate(OAdate).toLocaleDateString();
 }
 
-convertOADate(44769)
+convertOADate(44769);
 // '2022/7/27'
 ```
 
@@ -3580,23 +3557,23 @@ _GET_ http(s)://shimo-domain/sdk/v2/api/license/users
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
-| Query    | page      | number | 1                                    | 是   | 请求页码                                                                                                |
-| Query    | size      | number | 30                                   | 是   | 单页返回用户数量                                                                                        |
+| Query    | page      | number | 1                                    | 是   | 请求页码                                                                                                  |
+| Query    | size      | number | 30                                   | 是   | 单页返回用户数量                                                                                          |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3662,22 +3639,21 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://shimo-domain/sdk/v2/api/license/users?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&page=1&size=30',
-  headers: { }
+  method: "get",
+  url: "https://shimo-domain/sdk/v2/api/license/users?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&page=1&size=30",
+  headers: {},
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -3698,7 +3674,7 @@ axios(config)
 ```
 
 | 字段名    | 类型   | 值示例                    | 说明                                            |
-|:----------|:-------|:--------------------------|:----------------------------------------------|
+| :-------- | :----- | :------------------------ | :---------------------------------------------- |
 | userId    | string | 1                         | 用户 ID                                         |
 | createdAt | string | 2021-05-20T14:56:53+08:00 | 创建时间                                        |
 | status    | number | 1                         | 席位状态<br/>1 激活<br/>0 已禁用<br/> -1 未启用 |
@@ -3713,6 +3689,7 @@ axios(config)
 **`未启用` 状态自动激活**
 
 当用户处于未启用状态时，当通过此用户身份进行如下操作时，将会自动激活，成为 `激活` 状态，此时占用相应席位，若席位不足，则会被拒绝访问:
+
 - 创建文件
 - 创建副本
 - 访问编辑页
@@ -3723,7 +3700,7 @@ axios(config)
 - 获取文件纯文本信息
 - 获取文件 at 人列表
 - 获取文件评论数据
-:::
+  :::
 
 ### 激活用户席位
 
@@ -3733,9 +3710,9 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/activate
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                    |
-|:---------|:----------|:-------|:-------------------------------------|:----|:------------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                            |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                      |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :-------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                              |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                   |
 
@@ -3744,18 +3721,18 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/activate
 请求体示例：
 
 | 字段名  | 类型     | 值示例     | 必选 | 说明                       |
-|:--------|:---------|:-----------|:----|:-------------------------|
+| :------ | :------- | :--------- | :--- | :------------------------- |
 | userIds | []string | ["1", "2"] | 是   | 需要激活席位的用户 ID 列表 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3831,31 +3808,27 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "userIds": [
-    "1",
-    "2"
-  ]
+  userIds: ["1", "2"],
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/license/users/activate?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/license/users/activate?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -3868,7 +3841,7 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |
 
 ### 取消用户席位
@@ -3879,9 +3852,9 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/deactivate
 
 **HTTP Request Parameters**
 
-| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                   |
-|:---------|:----------|:-------|:-------------------------------------|:----|:-----------------------------------------------------------------------------------------------------|
-| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                           |
+| 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                     |
+| :------- | :-------- | :----- | :----------------------------------- | :--- | :------------------------------------------------------------------------------------------------------- |
+| Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                             |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递 |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                  |
 
@@ -3890,18 +3863,18 @@ _POST_ http(s)://shimo-domain/sdk/v2/api/license/users/deactivate
 请求体示例：
 
 | 字段名  | 类型     | 值示例     | 必选 | 说明                       |
-|:--------|:---------|:-----------|:----|:-------------------------|
+| :------ | :------- | :--------- | :--- | :------------------------- |
 | userIds | []string | ["1", "2"] | 是   | 需要取消席位的用户 ID 列表 |
 
 **请求示例**
 <Tabs
-  defaultValue="curl"
-  values={[
-    { label: 'cURL', value: 'curl', },
-    { label: 'Java', value: 'java', },
-    { label: 'Golang', value: 'go', },
-    { label: 'Node.js', value: 'js', },
-  ]
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+]
 }>
 <TabItem value="curl">
 
@@ -3977,31 +3950,27 @@ func main() {
 <TabItem value="js">
 
 ```js
-var axios = require('axios');
+var axios = require("axios");
 var data = JSON.stringify({
-  "userIds": [
-    "1",
-    "2"
-  ]
+  userIds: ["1", "2"],
 });
 
 var config = {
-  method: 'post',
-  url: 'https://shimo-domain/sdk/v2/api/license/users/deactivate?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString',
+  method: "post",
+  url: "https://shimo-domain/sdk/v2/api/license/users/deactivate?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
-  data : data
+  data: data,
 };
 
 axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 </TabItem>
@@ -4014,5 +3983,5 @@ axios(config)
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-|:-------|:-------|
+| :----- | :------- |
 | 204    | 操作成功 |
