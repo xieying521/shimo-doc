@@ -246,7 +246,7 @@ _GET_ /files/{fileId}
 - 进行表格锁定操作时，若当前用户具有 `manageable` 权限为 `true` 时，则会展示为管理者
 - `更新` 或 `删除` 他人创建的版本时，当前用户对于此文件的权限需要 `manageable` 为 `true` 时，才允许操作，否则会被拒绝
 - 表格导出时，若当前用户对于此文件权限满足 `manageable` 为 `true` 时，导出的文件中会包含表格锁定的内容，否则导出文件内容不包含锁定内容。
-  :::
+:::
 
 Example
 
@@ -1047,7 +1047,7 @@ Response Body Example
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-   :::
+:::
 
 **请求地址**
 
@@ -1143,7 +1143,7 @@ Response Body Example
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-   :::
+:::
 
 **请求地址**
 

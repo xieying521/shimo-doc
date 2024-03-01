@@ -1047,7 +1047,7 @@ Response Body Example
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-   :::
+:::
 
 **请求地址**
 
@@ -1143,7 +1143,7 @@ Response Body Example
 1. file 信息 `type` 字段值为 `file`，参考如下 Response Example
 2. file 信息增加 `fullUrl` 字段作为跳转至接入方系统的完整地址，参考如下 Response Example
 3. 前端使用 `shimo-js-sdk` 时在调用 `connect` 需要实现 `openLink` 方法用于控制编辑器内点击链接时的跳转行为。
-   :::
+:::
 
 **请求地址**
 
