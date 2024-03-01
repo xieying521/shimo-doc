@@ -497,6 +497,13 @@ echo $res->getBody();
 
 ### 获取用户列表和席位状态
 
+:::info 提示
+
+由于 App API 的特殊性，为了安全考虑，需要在 [生成签名](./../../02quick-start/signature.md)  时附加上`"scope": "license"`
+字段。
+
+:::
+
 **请求地址**
 
 *GET* http(s)://shimo-domain/sdk/v2/api/license/users
@@ -654,6 +661,13 @@ echo $res->getBody();
 ]
 ```
 ### 激活用户席位[​](https://sdk.shimo.im/v2/docs/apis/base#%E6%BF%80%E6%B4%BB%E7%94%A8%E6%88%B7%E5%B8%AD%E4%BD%8D)
+
+:::info 提示
+
+由于 App API 的特殊性，为了安全考虑，需要在 [生成签名](./../../02quick-start/signature.md)  时附加上`"scope": "license"`
+字段。
+
+:::
 
 **请求地址**
 
@@ -828,6 +842,13 @@ echo $res->getBody();
 
 被取消席位的 `userId` 只能通过重新激活才可以使用。
 
+:::info 提示
+
+由于 App API 的特殊性，为了安全考虑，需要在 [生成签名](./../../02quick-start/signature.md)  时附加上`"scope": "license"`
+字段。
+
+:::
+
 **请求地址**
 
 *POST* http(s)://shimo-domain/sdk/v2/api/license/users/deactivate
@@ -998,6 +1019,13 @@ echo $res->getBody();
 空
 
 ### 批量设置用户席位[​](https://sdk.shimo.im/v2/docs/apis/base#batch-set-user-status)
+
+:::info 提示
+
+由于 App API 的特殊性，为了安全考虑，需要在 [生成签名](./../../02quick-start/signature.md)  时附加上`"scope": "license"`
+字段。
+
+:::
 
 **请求地址**
 
