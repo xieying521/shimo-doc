@@ -1736,9 +1736,9 @@ Example
 
 - 单元格范围的格式为 `A1:C10` or `A1`，单元格起始位置不能超过表格最大的行列
 - 如果工作表名称中含有 `!:'` 这 3 种特殊字符，必须以单引号包裹工作表名称。示例:
-  - `工作表 1`
-  - `工作表 1!A1`
-  - `工作表 1!A1:C1`
+  - `工作表1`
+  - `工作表1!A1`
+  - `工作表1!A1:C1`
   - `'工作!:表'!A2:C3`
 
 #### resource
@@ -1859,7 +1859,7 @@ _GET_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 | 传参方式 | 参数名 | 类型   | 值示例           | 必选 | 说明                                                                                                                                             |
 | :------- | :----- | :----- | :--------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId | string | qeK4Xdxvxg8jF5gz | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Query    | range  | string | 工作表 1!A1:C3   | 是   | 请参考 [range](#range) 参数说明。                                                                                                                |
+| Query    | range  | string | 工作表1!A1:C3   | 是   | 请参考 [range](#range) 参数说明。                                                                                                                |
 
 **请求示例**
 <Tabs
@@ -1875,7 +1875,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --request GET 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表 1!A1:C3' \
+curl --request GET 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表1!A1:C3' \
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token'
 ```
@@ -1887,7 +1887,7 @@ curl --request GET 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表 1!A1:C3")
+  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表1!A1:C3")
   .method("GET", null)
   .addHeader("X-Shimo-Signature", "your_signature")
   .addHeader("X-Shimo-Token", "your_token")
@@ -1946,7 +1946,7 @@ var axios = require("axios");
 
 var config = {
   method: "GET",
-  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表 1!A1:C3",
+  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表1!A1:C3",
   headers: {
     "X-Shimo-Signature": "your_signature",
     "X-Shimo-Token": "your_token",
@@ -1975,7 +1975,7 @@ $headers = [
   'X-Shimo-Signature' => 'your_signature',
   'X-Shimo-Token' => 'your_token'
 ];
-$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表 1!A1:C3', $headers);
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values?range=工作表1!A1:C3', $headers);
 $res = $client->sendAsync($request)->wait();
 echo $res->getBody();
 
@@ -2033,7 +2033,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 | 字段名   | 类型   | 值示例         | 说明                                    |
 | :------- | :----- | :------------- | :-------------------------------------- |
-| range    | string | 工作表 1!A1:C3 | 请参考 [range](#range) 参数说明。       |
+| range    | string | 工作表1!A1:C3 | 请参考 [range](#range) 参数说明。       |
 | resource | object | -              | 请参考 [resource](#resource) 参数说明。 |
 
 **请求示例**
@@ -2055,7 +2055,7 @@ curl --request POST 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/value
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token' \
 --data-raw '{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列的值","第一行第二列的值"],
@@ -2072,7 +2072,7 @@ curl --request POST 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/value
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表 1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列的值\",\"第一行第二列的值\"],\n            [\"第二行第一列的值\",\"第二行第二列的值\"]\n        ]\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列的值\",\"第一行第二列的值\"],\n            [\"第二行第一列的值\",\"第二行第二列的值\"]\n        ]\n    }\n}");
 Request request = new Request.Builder()
   .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values")
   .method("POST", body)
@@ -2101,7 +2101,7 @@ func main() {
   method := "POST"
 
   payload := strings.NewReader(`{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列的值","第一行第二列的值"],
@@ -2144,7 +2144,7 @@ func main() {
 ```js
 var axios = require("axios");
 var data = JSON.stringify({
-  range: "工作表 1!A1:C3",
+  range: "工作表1!A1:C3",
   resource: {
     values: [
       ["第一行第一列的值", "第一行第二列的值"],
@@ -2188,7 +2188,7 @@ $headers = [
   'X-Shimo-Token' => 'your_token'
 ];
 $body = '{
-  "range": "工作表 1!A1:C3",
+  "range": "工作表1!A1:C3",
   "resource": {
     "values": [
       [
@@ -2231,8 +2231,8 @@ echo $res->getBody();
 - `spreadsheet` 表格
 
 根据 range 查找追加位置的逻辑是定位到需要追加的行位置：
-a. 不指定单元格范围，例如工作表 1：会遍历整个表格，找到最后一个有数据的行
-b. 指定单元格范围，例如 工作表 1!C5:E8：会找到起始单元格 C5 所在的行，从该行向下遍历，找到最后一个连续的有数据行向下插入 N 行，填充 values，其中 N = values.length
+a. 不指定单元格范围，例如工作表1：会遍历整个表格，找到最后一个有数据的行
+b. 指定单元格范围，例如 工作表1!C5:E8：会找到起始单元格 C5 所在的行，从该行向下遍历，找到最后一个连续的有数据行向下插入 N 行，填充 values，其中 N = values.length
 如果修改了不存在的列，会自动新增到该列。
 
 **请求地址**
@@ -2249,7 +2249,7 @@ _PUT_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 | 字段名   | 类型   | 值示例         | 说明                                    |
 | :------- | :----- | :------------- | :-------------------------------------- |
-| range    | string | 工作表 1!A1:C3 | 请参考 [range](#range) 参数说明。       |
+| range    | string | 工作表1!A1:C3 | 请参考 [range](#range) 参数说明。       |
 | resource | object | -              | 请参考 [resource](#resource) 参数说明。 |
 
 **请求示例**
@@ -2271,7 +2271,7 @@ curl --request PUT 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token' \
 --data-raw '{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列追加文本","第一行第二列追加文本"],
@@ -2288,7 +2288,7 @@ curl --request PUT 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表 1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列追加文本\",\"第一行第二列追加文本\"],\n            [\"第二行第一列追加文本\",\"第二行第二列追加文本\"]\n        ]\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列追加文本\",\"第一行第二列追加文本\"],\n            [\"第二行第一列追加文本\",\"第二行第二列追加文本\"]\n        ]\n    }\n}");
 Request request = new Request.Builder()
   .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values")
   .method("PUT", body)
@@ -2317,7 +2317,7 @@ func main() {
   method := "PUT"
 
   payload := strings.NewReader(`{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列追加文本","第一行第二列追加文本"],
@@ -2360,7 +2360,7 @@ func main() {
 ```js
 var axios = require("axios");
 var data = JSON.stringify({
-  range: "工作表 1!A1:C3",
+  range: "工作表1!A1:C3",
   resource: {
     values: [
       ["第一行第一列追加文本", "第一行第二列追加文本"],
@@ -2404,7 +2404,7 @@ $headers = [
   'X-Shimo-Token' => 'your_token'
 ];
 $body = '{
-  "range": "工作表 1!A1:C3",
+  "range": "工作表1!A1:C3",
   "resource": {
     "values": [
       [
@@ -2455,7 +2455,7 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/{sheetName}/rows/
 | 传参方式 | 参数名    | 类型   | 值示例           | 必选 | 说明                                                                                                                                             |
 | :------- | :-------- | :----- | :--------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Path     | sheetName | string | 工作表 1         | 是   | 表格中工作表的名称                                                                                                                               |
+| Path     | sheetName | string | 工作表1         | 是   | 表格中工作表的名称                                                                                                                               |
 | Path     | index     | number | 0                | 是   | 从第几行开始删除                                                                                                                                 |
 | Query    | count     | number | 1                | 否   | 删除几行，默认为 1                                                                                                                               |
 
@@ -2477,7 +2477,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --request DELETE 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2' \
+curl --request DELETE 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表1/rows/0?count=2' \
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token'
 ```
@@ -2491,7 +2491,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2")
+  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表1/rows/0?count=2")
   .method("DELETE", body)
   .addHeader("X-Shimo-Signature", "your_signature")
   .addHeader("X-Shimo-Token", "your_token")
@@ -2512,7 +2512,7 @@ import (
 )
 
 func main() {
-  url := "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2"
+  url := "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表1/rows/0?count=2"
   method := "DELETE"
 
   client := &http.Client {
@@ -2550,7 +2550,7 @@ var axios = require("axios");
 
 var config = {
   method: "delete",
-  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2",
+  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表1/rows/0?count=2",
   headers: {
     "X-Shimo-Signature": "your_signature",
     "X-Shimo-Token": "your_token",
@@ -2579,7 +2579,7 @@ $headers = [
   'X-Shimo-Signature' => 'your_signature',
   'X-Shimo-Token' => 'your_token'
 ];
-$request = new Request('DELETE', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表 1/rows/0?count=2', $headers);
+$request = new Request('DELETE', 'https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/工作表1/rows/0?count=2', $headers);
 $res = $client->sendAsync($request)->wait();
 echo $res->getBody();
 
@@ -2610,7 +2610,7 @@ echo $res->getBody();
 
 **请求地址**
 
-_POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets
+_POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/
 
 **HTTP Request Parameters**
 
@@ -4658,11 +4658,11 @@ echo $res->getBody();
 
 _GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content
 
-**HTTP Request Body**
+**HTTP Request Query**
 
 | 传参方式 | 参数名    | 类型     | 值示例   | 必选 | 说明             |
 | :------- | :-------- | :------- | :------- | :--- | :--------------- |
-| Body     | bookmarks | []string | ["guid"] | 是   | 数组最大长度 500 |
+| Query     | bookmarks | []string | ["guid"] | 是   | 数组最大长度 500 |
 
 **请求示例**
 <Tabs
@@ -4678,10 +4678,9 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content' \
+curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2' \
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token'
---data-raw '{"bookmarks":["guid"]}'
 ```
 
 </TabItem>
@@ -4691,10 +4690,9 @@ curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\"bookmarks\":[\"guid\"]}");
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content")
-  .method("GET", body)
+  .url("https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2")
+  .method("GET")
   .addHeader("Content-Type", "application/json")
   .addHeader("X-Shimo-Signature", "your_signature")
   .addHeader("X-Shimo-Token", "your_token")
@@ -4716,16 +4714,12 @@ import (
 )
 
 func main() {
-  url := "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content"
+  url := "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2"
   method := "GET"
-
-  payload := strings.NewReader(`{
-    "bookmarks": ["guid"]
-  }`)
 
   client := &http.Client {
   }
-  req, err := http.NewRequest(method, url, payload)
+  req, err := http.NewRequest(method, url, nil)
 
   if err != nil {
     fmt.Println(err)
@@ -4756,19 +4750,15 @@ func main() {
 
 ```js
 var axios = require("axios");
-var data = JSON.stringify({
-  bookmarks: ["guid"],
-});
 
 var config = {
   method: "get",
-  url: "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content",
+  url: "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2",
   headers: {
     "Content-Type": "application/json",
     "X-Shimo-Signature": "your_signature",
     "X-Shimo-Token": "your_token",
   },
-  data: data,
 };
 
 axios(config)
@@ -4794,11 +4784,8 @@ $headers = [
   'X-Shimo-Token' => 'your_token',
   'Content-Type' => 'application/x-www-form-urlencoded'
 ];
-$options = [
-'form_params' => [
-  '{"bookmarks":["guid"]}' => ''
-]];
-$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content', $headers);
+$options = [];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2', $headers);
 $res = $client->sendAsync($request, $options)->wait();
 echo $res->getBody();
 
@@ -4995,5 +4982,5 @@ echo $res->getBody();
 **HTTP 状态码**
 
 | 状态码 | 说明     |
-| :----- | :------- |
-| 200    | 返回成功 |
+|:----| :------- |
+| 204 | 返回成功 |
