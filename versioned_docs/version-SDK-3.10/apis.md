@@ -2677,7 +2677,7 @@ _GET_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 | Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
 | Query    | signature | string | 参考签名方法一节                     | 是   | 接入服务商，使用从石墨获取的 AppId 、AppSecret 根据签名方法生成的字符串                                                                          |
-| Query    | range     | string | 工作表 1!A1:C3                       | 是   | 参照下方参数说明 [range](#range)                                                                                                                 |
+| Query    | range     | string | 工作表1!A1:C3                       | 是   | 参照下方参数说明 [range](#range)                                                                                                                 |
 
 **请求示例**
 <Tabs
@@ -2692,7 +2692,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --location --request GET 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表 1!A1:C3'
+curl --location --request GET 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表1!A1:C3'
 ```
 
 </TabItem>
@@ -2702,7 +2702,7 @@ curl --location --request GET 'https://shimo-domain/sdk/v2/api/files/<fileId>/sh
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表 1!A1:C3")
+  .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表1!A1:C3")
   .method("GET", null)
   .build();
 Response response = client.newCall(request).execute();
@@ -2757,7 +2757,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表 1!A1:C3",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&range=工作表1!A1:C3",
   headers: {},
 };
 
@@ -2826,7 +2826,7 @@ _POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 | 字段名   | 类型   | 值示例         | 说明                                   |
 | :------- | :----- | :------------- | :------------------------------------- |
-| range    | string | 工作表 1!A1:C3 | 参照下方参数说明 [range](#range)       |
+| range    | string | 工作表1!A1:C3 | 参照下方参数说明 [range](#range)       |
 | resource | object |                | 参照下方参数说明 [resource](#resource) |
 
 **请求示例**
@@ -2845,7 +2845,7 @@ values={[
 curl --location --request POST 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列的值","第一行第二列的值"],
@@ -2862,7 +2862,7 @@ curl --location --request POST 'https://shimo-domain/sdk/v2/api/files/<fileId>/s
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表 1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列的值\",\"第一行第二列的值\"],\n            [\"第二行第一列的值\",\"第二行第二列的值\"]\n        ]\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列的值\",\"第一行第二列的值\"],\n            [\"第二行第一列的值\",\"第二行第二列的值\"]\n        ]\n    }\n}");
 Request request = new Request.Builder()
   .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString")
   .method("POST", body)
@@ -2890,7 +2890,7 @@ func main() {
   method := "POST"
 
   payload := strings.NewReader(`{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列的值","第一行第二列的值"],
@@ -2931,7 +2931,7 @@ func main() {
 ```js
 var axios = require("axios");
 var data = JSON.stringify({
-  range: "工作表 1!A1:C3",
+  range: "工作表1!A1:C3",
   resource: {
     values: [
       ["第一行第一列的值", "第一行第二列的值"],
@@ -2981,8 +2981,8 @@ axios(config)
 
 根据传入范围追加表格内容（只支持纯文本和数字）。 根据 range 查找追加位置的逻辑如下：
 找到需要追加的行位置:
-a. 不指定单元格范围，例如 工作表 1：会遍历整个表格，找到最后一个有数据的行
-b. 指定单元格范围，例如 工作表 1!C5:E8：会找到起始单元格 C5 所在的行，从该行向下遍历，找到最后一个连续的有数据行向下插入 N 行，填充 values，其中 N = values.length
+a. 不指定单元格范围，例如 工作表1：会遍历整个表格，找到最后一个有数据的行
+b. 指定单元格范围，例如 工作表1!C5:E8：会找到起始单元格 C5 所在的行，从该行向下遍历，找到最后一个连续的有数据行向下插入 N 行，填充 values，其中 N = values.length
 如果修改了不存在的列，会自动新增到该列
 
 **请求地址**
@@ -3002,7 +3002,7 @@ _PUT_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/values
 
 | 字段名   | 类型   | 值示例         | 说明                                   |
 | :------- | :----- | :------------- | :------------------------------------- |
-| range    | string | 工作表 1!A1:C3 | 参照下方参数说明 [range](#range)       |
+| range    | string | 工作表1!A1:C3 | 参照下方参数说明 [range](#range)       |
 | resource | object |                | 参照下方参数说明 [resource](#resource) |
 
 **请求示例**
@@ -3021,7 +3021,7 @@ values={[
 curl --location --request PUT 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列追加文本","第一行第二列追加文本"],
@@ -3038,7 +3038,7 @@ curl --location --request PUT 'https://shimo-domain/sdk/v2/api/files/<fileId>/sh
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表 1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列追加文本\",\"第一行第二列追加文本\"],\n            [\"第二行第一列追加文本\",\"第二行第二列追加文本\"]\n        ]\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"range\": \"工作表1!A1:C3\",\n    \"resource\": {\n        \"values\": [\n            [\"第一行第一列追加文本\",\"第一行第二列追加文本\"],\n            [\"第二行第一列追加文本\",\"第二行第二列追加文本\"]\n        ]\n    }\n}");
 Request request = new Request.Builder()
   .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/values?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString")
   .method("PUT", body)
@@ -3066,7 +3066,7 @@ func main() {
   method := "PUT"
 
   payload := strings.NewReader(`{
-    "range": "工作表 1!A1:C3",
+    "range": "工作表1!A1:C3",
     "resource": {
         "values": [
             ["第一行第一列追加文本","第一行第二列追加文本"],
@@ -3107,7 +3107,7 @@ func main() {
 ```js
 var axios = require("axios");
 var data = JSON.stringify({
-  range: "工作表 1!A1:C3",
+  range: "工作表1!A1:C3",
   resource: {
     values: [
       ["第一行第一列追加文本", "第一行第二列追加文本"],
@@ -3166,7 +3166,7 @@ _DELETE_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/{sheetName}/rows/
 | 传参方式 | 参数名    | 类型   | 值示例                               | 必选 | 说明                                                                                                                                             |
 | :------- | :-------- | :----- | :----------------------------------- | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Path     | fileId    | string | qeK4Xdxvxg8jF5gz                     | 是   | 文件 ID 位于创建预览接口的 URL 路径中，此文件 ID 为接入服务商文件列表中的唯一 ID，石墨会根据此 ID 请求接入服务商的文件接口获取文件信息和下载地址 |
-| Path     | sheetName | string | 工作表 1                             | 是   | 表格中工作表的名称                                                                                                                               |
+| Path     | sheetName | string | 工作表1                             | 是   | 表格中工作表的名称                                                                                                                               |
 | Path     | index     | number | 0                                    | 是   | 从第几行开始删除                                                                                                                                 |
 | Query    | appId     | string | ebc1cde3-9b57-4962-883d-54302d428600 | 是   | 接入服务商从石墨获取的 AppId                                                                                                                     |
 | Query    | token     | string | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9 | 是   | 接入服务商提供的 token ，在石墨请求接入服务商的接口时，会放到 HTTP Headers X-Shimo-Token 中作为值进行传递                                        |
@@ -3190,7 +3190,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --location --request DELETE 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表 1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2'
+curl --location --request DELETE 'https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2'
 ```
 
 </TabItem>
@@ -3202,7 +3202,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表 1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2")
+  .url("https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2")
   .method("DELETE", body)
   .build();
 Response response = client.newCall(request).execute();
@@ -3257,7 +3257,7 @@ var axios = require("axios");
 
 var config = {
   method: "delete",
-  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表 1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2",
+  url: "https://shimo-domain/sdk/v2/api/files/<fileId>/sheets/工作表1/rows/0?appId=yourShimoAppId&signature=yourSignatureString&token=yourTokenString&=2",
   headers: {},
 };
 
@@ -3295,7 +3295,7 @@ axios(config)
 
 **请求地址**
 
-_POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets
+_POST_ https://shimo-domain/sdk/v2/api/files/{fileId}/sheets/
 
 **HTTP Request Parameters**
 
@@ -3446,7 +3446,7 @@ axios(config)
 
 - 单元格范围的格式为 A1:C10 or A1，单元格起始位置不能超过表格最大的行列
 - 如果工作表名称中含有 !:' 这 3 种特色字符，必须以单引号包裹工作表名称。
-  示例: 工作表 1 | 工作表 1!A1 | 工作表 1!A1:C1 | '工作!:表'!A2:C3
+  示例: 工作表1 | 工作表1!A1 | 工作表1!A1:C1 | '工作!:表'!A2:C3
 
 #### resource
 
