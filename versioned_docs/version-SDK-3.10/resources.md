@@ -1,5 +1,12 @@
 ---
 sidebar_position: 7
+description: >-
+  签名是一种用于石墨服务器验证请求合法性的工具,它使用appId和secret签名,然后生成JSON Web Token(JWT)格式字符串。
+  签名后的结果包括Header、Payload、Signature三个部分。
+  Header部分默认包含的字段包括alg和typ,表示签名算法,typ标识Token类型,而kid字段为AppId的值。
+  Payload部分添加了exp字段,值为JWT的过期时间的秒数。 当请求/admin相关API时,会额外增加 fileId信息。
+  回调凭证类型分为X-Shimo-Credential-Type和JSSDK。 JSSDK生成一个指向石墨 server的编辑器地址,然后以 iframe
+  的形式加载到当前页面中。
 ---
 
 # 开发资源

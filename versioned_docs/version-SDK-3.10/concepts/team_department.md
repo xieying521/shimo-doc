@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 toc_max_heading_level: 4
+description: '为了提高大型团队的协作效率,在2022.6.1版本中引入了团队和部门的概念。 团队也可称为企业,石墨,SDK中通常使用Team来描述。'
 ---
 
 # 团队与部门

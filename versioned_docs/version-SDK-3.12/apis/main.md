@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
 toc_max_heading_level: 4
+description: >-
+  所有请求均为HTTP,请求头和返回头的Content-Type均为 application/json。 https://shimo-domain指石墨
+  SDK 服务器域名,请联系石墨人员获取此域名。
 ---
 
 # 注意事项

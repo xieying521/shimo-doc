@@ -1,6 +1,11 @@
 ---
 sidebar_position: 4
 toc_max_heading_level: 4
+description: >-
+  接入方需要了解接入须知,并按照指定的地址、方法、HTTP Header来调用。
+  申请appId和secret,获取后可获取App详情,更新app回调地址,更新石墨SDK请求接入地回调 adres.接入时需要妥善保管获取到的appId。
+  接在流程中,需要调用创建接口创建一个石墨文档,引入石墨 JSSDK,初始化编辑器。 在线预览功能将
+  Word、Excel、PPT、PDF、TXT、音频、图片和其它文件转换为能够在浏览器预览查看的形式展示。
 ---
 
 # 开始接入

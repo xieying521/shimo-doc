@@ -1,6 +1,8 @@
 ---
 sidebar_position: 3
 toc_max_heading_level: 4
+description: >-
+  本文介绍了如何创建指定类型的协同文档,包括语言信息、文件唯一ID、副本、删除协同文檔、获取文件侧边栏历史列表信息、获取ファイル纯文本内容、文件纯文本字数统计、根据传入范围获取表格内容、更新表格的内容、追加表格内容が等。
 ---
 
 import Tabs from '@theme/Tabs';
