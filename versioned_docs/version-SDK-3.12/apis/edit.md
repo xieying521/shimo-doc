@@ -4274,7 +4274,7 @@ axios(config)
 
 ### 读取传统文档书签内容
 
-读取传统文档指定书签内容
+读取传统文档指定书签内容。
 
 **请求地址**
 
@@ -4408,6 +4408,191 @@ $headers = [
 ];
 $options = [];
 $request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2', $headers);
+$res = $client->sendAsync($request, $options)->wait();
+echo $res->getBody();
+
+```
+
+</TabItem>
+</Tabs>
+
+**HTTP 状态码**
+
+| 状态码 | 说明     |
+| :----- | :------- |
+| 200    | 返回成功 |
+
+**HTTP Response Body**
+
+| 字段名           | 类型   | 值示例   | 说明     |
+| :--------------- | :----- | :------- | :------- |
+| data             | Array  | -        | 列表     |
+| data[0].bookmark | string | 测试     | 书签名称 |
+| data[0].content  | string | 学习网站 | 书签内容 |
+
+### 替换传统文档书签内容{#replace-bookmark}
+
+替换传统文档指定书签部分内容。
+
+**请求地址**
+
+_PUT_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content
+
+**HTTP Request Body**
+
+| 传参方式 | 参数名                   | 类型   | 值示例 | 必选 | 说明                     |
+| :------- | :----------------------- | :----- | :----- | :--- | :----------------------- |
+| Body     | replacements             | Array  | -      | 是   | 数组最大长度 50          |
+| Body     | replacements[0].bookmark | string | -      | 是   | 字符串最大长度 500       |
+| Body     | replacements[0].type     | string | text   | 是   | 书签类型 text / document |
+| Body     | replacements[0].value    | string | -      | 是   | 字符串最大长度 5242880   |
+
+:::caution 说明
+
+- 书签类型 text 则 value 为替换的文本内容
+- 书签类型 document 则 value 为 {fileId}
+
+:::
+
+**请求示例**
+<Tabs
+defaultValue="curl"
+values={[
+{ label: 'cURL', value: 'curl', },
+{ label: 'Java', value: 'java', },
+{ label: 'Golang', value: 'go', },
+{ label: 'Node.js', value: 'js', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="curl">
+
+```bash
+curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content' \
+--header 'X-Shimo-Signature: your_signature' \
+--header 'X-Shimo-Token: your_token'
+--data-raw '{"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}'
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"replacements\": [{\"bookmark\":\"bookmark\",\"type\":\"text\",\"value\":\"bookmark value\"}]}");
+Request request = new Request.Builder()
+  .url("https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content")
+  .method("PUT", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("X-Shimo-Signature", "your_signature")
+  .addHeader("X-Shimo-Token", "your_token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+</TabItem>
+<TabItem value="go">
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+  url := "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content"
+  method := "PUT"
+
+  payload := strings.NewReader(`{
+    "bookmarks": {"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}
+  }`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Set("Content-Type", "application/json")
+  req.Header.Set("X-Shimo-Signature", "your_signature")
+  req.Header.Set("X-Shimo-Token", "your_token")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+</TabItem>
+<TabItem value="js">
+
+```js
+var axios = require("axios");
+var data = JSON.stringify({
+  bookmarks: {
+    replacements: [
+      { bookmark: "bookmark", type: "text", value: "bookmark value" },
+    ],
+  },
+});
+
+var config = {
+  method: "put",
+  url: "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content",
+  headers: {
+    "Content-Type": "application/json",
+    "X-Shimo-Signature": "your_signature",
+    "X-Shimo-Token": "your_token",
+  },
+  data: data,
+};
+
+axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+$client = new Client();
+$headers = [
+  'X-Shimo-Signature' => 'your_signature',
+  'X-Shimo-Token' => 'your_token',
+  'Content-Type' => 'application/x-www-form-urlencoded'
+];
+$options = [
+'form_params' => [
+  '{"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}' => ''
+]];
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content', $headers);
 $res = $client->sendAsync($request, $options)->wait();
 echo $res->getBody();
 
