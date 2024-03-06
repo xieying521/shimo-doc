@@ -1,6 +1,10 @@
 ---
 sidebar_position: 4
 toc_max_heading_level: 4
+description: >-
+  然后,需要申请appId和secret,获取后可进行获取App详情和更新app回调地址等操作。 接出时,需了解或准备签名、参数、Web页面和回调接口。
+  接出的流程包括调用创建接口创建一个石墨文档,引入石墨 JSSDK,初始化编辑器,创建文件预览,支持文件类型和扩展名格式。 需要注意 HTTP
+  Response Header和文件扩展名字段。
 ---
 
 # 开始接入

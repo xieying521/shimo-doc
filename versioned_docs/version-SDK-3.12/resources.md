@@ -1,5 +1,11 @@
 ---
 sidebar_position: 7
+description: >-
+  签名是一种用于石墨服务器验证请求合法性的工具,它使用appId和secret签名,然后生成JSON Web Token(JWT)格式字符串。
+  签名前的数据结构包括header、payload和signature三个部分,其中header部分默认包含的字段包括alg和typ,而payload部分仅添加exp字段,值为JWT的过期时间的秒数。
+  签名字的数据结构还包括参数 exp number和 scope string,用于访问某些限定scope的 API。
+  回调凭证类型包括X-Shimo-Credential-Type,分别由用户的操作行为或石墨SDK主动触发。 JS SDK的作用是生成一个指向石墨
+  server的编辑器地址,然后以 iframe 的形式加载到当前页面中。 JSSDK以 npm包的形式发布,兼容版本为1.0或更早的版本。
 ---
 
 # 开发资源

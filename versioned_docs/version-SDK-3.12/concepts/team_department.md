@@ -1,6 +1,10 @@
 ---
 sidebar_position: 2
 toc_max_heading_level: 4
+description: >-
+  为了进一步提高大型团队的协作效率,在2022.6.1版本中我们引入了团队和部门的概念。 团队也可称为企业,石墨,SDK中通常使用 Team来描述
+  teamGuid与 teamInfo.id,两者皆表示团队的 ID。 SDK中一般使用 TeamMember来描述。 SDK在石墨中通常用
+  DepartmentMember来定义。
 ---
 
 # 团队与部门

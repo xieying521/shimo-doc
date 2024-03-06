@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
 toc_max_heading_level: 4
+description: >-
+  接入石墨 SDK需要了解appId和secret,开发Web页面,生成用户token,使用石墨 JSSDK和开发回调接口。
+  石笔文档支持直接创建石墨格式的文档来进行查看/编辑,也支持将本地文件通过 API接口转换成协同文檔来查看/ edit。
 ---
 
 # 基础概念

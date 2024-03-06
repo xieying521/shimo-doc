@@ -1,6 +1,10 @@
 ---
 sidebar_position: 2
 toc_max_heading_level: 4
+description: >-
+  石墨 SDK 支持两种鉴权方式,包括接入服务商提供的token和用户身份信息。
+  接入サービス商使用从石墨获取的AppId和AppSecret,根据签名方法生成的字符串。
+  接出服务商从石微获取的appid,获取app详情,更新app回调地址,创建席位管理,获取用户列表和席位状态。
 ---
 
 # 系统接口

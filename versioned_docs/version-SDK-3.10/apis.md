@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+description: >-
+  石墨SDK服务器域名指的是石墨 SDK 服务器,用于获取app的详细信息,包括名称、可使用文件类型、已激活用户数、用户总数、席位数、 license
+  有效时间和回调地址信息。 更新app回调 adres,创建指定类型的协同文档,指定创建文件时的语言信息,接入服务商的文件的唯一
+  ID,删除协同文檔,删除指定类型の协同文稿。
 ---
 
 import Tabs from '@theme/Tabs';

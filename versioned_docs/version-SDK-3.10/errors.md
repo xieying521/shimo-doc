@@ -1,5 +1,6 @@
 ---
 sidebar_position: 8
+description: '本文列出了八种错误码对照,包括不合法的endpoint地址、获取指定文件信息、当前用户信息、指定用户信息等。'
 ---
 
 # 错误码对照

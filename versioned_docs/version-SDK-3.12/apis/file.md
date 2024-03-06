@@ -1,6 +1,9 @@
 ---
 sidebar_position: 4
 toc_max_heading_level: 4
+description: >-
+  导入文件需要解析结果中的 taskId,并且在调用「获取导入进度」时带上 taskId 参数。 最后,我们可以通过嵌入 Iframe
+  使用页面来渲染预览页面。
 ---
 
 import Tabs from '@theme/Tabs';
