@@ -2443,7 +2443,7 @@ convertOADate(44769);
 
 **请求地址**
 
-_GET_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content
+_GET_ https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content
 
 **HTTP Request Query**
 
@@ -2465,7 +2465,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2' \
+curl --request GET 'https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2' \
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token'
 ```
@@ -2478,7 +2478,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2")
+  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2")
   .method("GET")
   .addHeader("Content-Type", "application/json")
   .addHeader("X-Shimo-Signature", "your_signature")
@@ -2501,7 +2501,7 @@ import (
 )
 
 func main() {
-  url := "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2"
+  url := "https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2"
   method := "GET"
 
   client := &http.Client {
@@ -2540,7 +2540,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2",
+  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2",
   headers: {
     "Content-Type": "application/json",
     "X-Shimo-Signature": "your_signature",
@@ -2572,7 +2572,7 @@ $headers = [
   'Content-Type' => 'application/x-www-form-urlencoded'
 ];
 $options = [];
-$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2', $headers);
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content?bookmarks=1&bookmarks=2', $headers);
 $res = $client->sendAsync($request, $options)->wait();
 echo $res->getBody();
 
@@ -2601,7 +2601,7 @@ echo $res->getBody();
 
 **请求地址**
 
-_PUT_ https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content
+_PUT_ https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content
 
 **HTTP Request Body**
 
@@ -2633,7 +2633,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl --request GET 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content' \
+curl --request GET 'https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content' \
 --header 'X-Shimo-Signature: your_signature' \
 --header 'X-Shimo-Token: your_token'
 --data-raw '{"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}'
@@ -2648,7 +2648,7 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\"replacements\": [{\"bookmark\":\"bookmark\",\"type\":\"text\",\"value\":\"bookmark value\"}]}");
 Request request = new Request.Builder()
-  .url("https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content")
+  .url("https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content")
   .method("PUT", body)
   .addHeader("Content-Type", "application/json")
   .addHeader("X-Shimo-Signature", "your_signature")
@@ -2671,7 +2671,7 @@ import (
 )
 
 func main() {
-  url := "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content"
+  url := "https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content"
   method := "PUT"
 
   payload := strings.NewReader(`{
@@ -2721,7 +2721,7 @@ var data = JSON.stringify({
 
 var config = {
   method: "put",
-  url: "https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content",
+  url: "https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content",
   headers: {
     "Content-Type": "application/json",
     "X-Shimo-Signature": "your_signature",
@@ -2757,7 +2757,7 @@ $options = [
 'form_params' => [
   '{"replacements": [{"bookmark":"bookmark","type":"text","value":"bookmark value"}]}' => ''
 ]];
-$request = new Request('GET', 'https://shimo-domain/sdk/v2/shimo-files/{fileId}/documentpro/bookmark_content', $headers);
+$request = new Request('GET', 'https://shimo-domain/sdk/v2/api/files/{fileId}/documentpro/bookmark_content', $headers);
 $res = $client->sendAsync($request, $options)->wait();
 echo $res->getBody();
 
