@@ -186,4 +186,5 @@ A: 文件的原始内容在石墨系统中，都是经过了特殊编码后存�
 A: 在接入方对接前端后，石墨的文档编辑器都是以 iframe 的形式嵌到接入方的前端页面中的，分享的链接实际上是接入方自己的前端地址，需要接入方自己来维护。
 例如id 为 file-001 的文档，在接入方系统内的 url 是 xxxxx.com/file-001，接入方前端获取到 file-001 后，将这个 id 传入石墨的 js-sdk 中，就会在页面渲染出这个文档编辑的页面。
 所以分享给别人的是 xxxxx.com/file-001 这个链接。
+具体实现方式参考：https://github.com/shimo-open/shimo-js-sdk?tab=readme-ov-file#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86-url
 
