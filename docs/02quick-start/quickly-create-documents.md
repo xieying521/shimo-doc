@@ -117,7 +117,7 @@ const token = "{your-customized-token}"; // 测试时直接写在这里
 connect({
   debug: true,
   fileId: fileId,
-  endpoint: "https://office.shimoapi.com/sdk/v2/api",
+  endpoint: "https://office.shimoapi.com/sdk/v2",
   signature: signature,
   token: token,
   container: document.querySelector("#iframe-container"), // iframe 挂载的目标容器元素id
