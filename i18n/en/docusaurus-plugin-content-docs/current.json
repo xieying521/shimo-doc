@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "latest",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.快速入门": {
+    "message": "快速入门",
+    "description": "The label for category 快速入门 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.控制台": {
+    "message": "控制台",
+    "description": "The label for category 控制台 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.接入方实现接口": {
+    "message": "接入方实现接口",
+    "description": "The label for category 接入方实现接口 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.石墨 JS-SDK": {
+    "message": "石墨 JS-SDK",
+    "description": "The label for category 石墨 JS-SDK in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.石墨 API 文档": {
+    "message": "石墨 API 文档",
+    "description": "The label for category 石墨 API 文档 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.接口说明": {
+    "message": "接口说明",
+    "description": "The label for category 接口说明 in sidebar tutorialSidebar"
+  }
+}

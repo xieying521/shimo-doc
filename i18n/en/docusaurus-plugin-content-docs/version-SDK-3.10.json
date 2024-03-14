@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "SDK-3.10",
+    "description": "The label for version SDK-3.10"
+  },
+  "sidebar.tutorialSidebar.category.核心概念": {
+    "message": "Core concepts",
+    "description": "The label for category 核心概念 in sidebar tutorialSidebar"
+  }
+}

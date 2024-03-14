@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "SDK-3.12",
+    "description": "The label for version SDK-3.12"
+  },
+  "sidebar.tutorialSidebar.category.核心概念": {
+    "message": "核心概念",
+    "description": "The label for category 核心概念 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.石墨 API 列表": {
+    "message": "石墨 API 列表",
+    "description": "The label for category 石墨 API 列表 in sidebar tutorialSidebar"
+  }
+}

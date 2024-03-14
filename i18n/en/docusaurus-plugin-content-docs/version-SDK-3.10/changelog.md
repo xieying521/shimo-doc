@@ -1,0 +1,748 @@
+---
+sidebar_position: 9
+description: >-
+  Documents include setting theme fonts, switching between mobile phone view and print view, setting footnotes when there are multiple sections in the document, merging worksheet internal reference optimization, fixing iPad opening tables without displaying worksheet columns, rich text content with line breaks and multiple spaces in between, custom number formatted cells are referenced across tables to the new table to display as date format, etc., there is a probability that the browser is stuck after scrolling the page to the presentation mode near the bottom line of the document title, applying table editing to push content update events, Removed the API for obtaining the history list and the API for old versions
+  URL deprecation instructions, quick open menu in JS SDK documentation, insertion of preview window in files, support for composite types of shapes and lines, full-screen mode, optimization of iOS menu bar operation experience, and addition of third-party services
+  APIs, table rendering memory usage optimizations, batch operation performance optimizations, import unsupported video formats, and other issues.
+---
+
+# Changelog
+
+## Version number rules
+
+Example 2022.1.1
+
+- `2022` year
+- `1` month
+- `1` build version number
+----
+## `Version 2022.12.1`
+
+### 2022-11
+- editor
+  - Traditional documentation
+    -  NEW FEATURES
+      - Set Theme Font: Customize the default font for your document
+      - Paste Special: Keep the original formatting, match the target formatting, text only
+      - Mobile Web supports switching between mobile view and print view:
+        - The mobile phone view is convenient for mobile phone users, removing the traditional pagination effect, and the content layout adapts to the screen size, making the editing and viewing experience better, and at the same time, it can also switch to view the traditional print layout at any time;
+      - Supported classification of history and version:
+        - History: You can preview and view the editing records and restore the history
+        - Versions can be saved, renamed, deleted, previewed, viewed, and restored
+    -  repair
+      - Mobile Web long press overlays the selected content obscured
+      - Inserting a scientific formula into a footnote endnote will result in an error
+      - The insert table of contents style is displayed incorrectly
+      - After searching in the font bar, exit the search page and open the font list again, and the search results will be displayed
+      - After switching the English font, the character spacing will be displayed incorrectly
+      - block-level content control, and the content after the hyperlink disappears
+      - When a collaborator's cursor is missing, the font size is displayed as undefined
+      - After the browser's scale is scaled, the menu at the bottom of the document displays an exception
+      - Failed to insert directory
+      - After the iPad is connected to the external keyboard, tap the @ menu, you need to click twice to select it, and the page will jump
+      - When there are multiple sections in a document, setting the footnote page layout applies to the entire document, and the settings apply only to the current section
+      - When inserting a header footer from the toolbar, no cursor is displayed
+      - The first paragraph is inserted with an endnote, the second paragraph is divided into columns, and the document reports an error
+      - When you reply to a comment, you won't be redirected to the most recent comment
+      - When the Symbols panel is open, insert frequently used symbols and then select any font symbols, and the frequently used symbols in the recent symbols list will be replaced
+  - form
+    -  NEW FEATURES
+      - Form memory input
+      - Cart
+      - Notes/Date Reminders support the display of user business cards
+      - The sort function supports Chinese & performance optimization
+      - Formula format conversion to improve import and export performance
+      - Merge worksheet internal references optimization, cross-table references in the current table in the data update results faster, improve the update speed of the citation results
+      - Data validation/conditional formatting and paste lag optimization
+      - Locked, forbidden view + global history optimization
+      - Optimized rich text rendering performance
+      - Paste Special supports calculations
+    -  repair
+      - Fixed the issue that the formula was displayed abnormally and was still incorrect after re-entering
+      - The issue that the formula in the data summary table cannot be calculated due to the error of the calculation result of the filter filter column is fixed
+      - Fixed the issue that the reference cell contained multiple attachments, and the reference result could not be opened
+      - Fixed the issue that when a link was cut and pasted to a different location and the page was refreshed, the URL of the link was still displayed in the original location
+      - Fixed the issue that the worksheet bar could not be displayed when the table was opened on the iPad
+      - Fixed the issue that when merging worksheets in the same table, the data was not synchronized
+      - Fixed the issue that pasting a large amount of rich text content caused the table to slide and freeze
+      - Fixed the issue that the calculation result of the merged worksheet was incorrect
+      - Fixed the issue that the table export format was incorrect
+      - Fixed the issue that merging permissioned worksheets prompted no permissions
+      - Fixed an issue where all the letters in the memory input list were lowercase
+      - Fixed the issue that the rich text content had line breaks and multiple spaces in the middle, and the rich text style was misplaced after pasting across tables
+      - Fixed the issue that the calculation result was incorrect if the worksheet was deleted after the worksheet was sorted
+      - Fixed the issue that the custom number format of cells was referenced to the new table across tables and displayed as date format
+      - Fixed the issue that merging date-formatted cells in a worksheet changed to number format after creating a pivot table
+      - Fixed the issue that formulas were merged with nested references across worksheets, and the result was incorrect
+      - Fixed the issue that the reference formula was not updated if the worksheet name was changed after cross-table reference
+      - Fixed the issue that the space with special characters in the cell caused the content to be found and replaced
+      - Fixed the issue that when copying a range of cells containing multiple conditional formatting, part of the conditional formatting was lost after pasting
+      - Fixed the issue that the formula was not updated after inserting a column, resulting in wrong rows
+      - Fixed the issue that when iPad opened a table and selected part of the text to set the color, it could not completely contain the text to be set
+  - Light documents
+    -  NEW FEATURES
+      - Swatches support custom colors
+    -  repair
+      - You can also end a comment if you have permission to comment or no editing permission
+      - Scroll the page near the bottom line of the document title, and there is a chance that the browser will freeze after entering the presentation mode
+      - Added translations of "Document Style" and "Set Default Font Size and Font"
+      - Web Page Preview Window - When you drag the border of the web page preview window, the position of the mouse drag does not match the actual position of the border change
+      - In English and Japanese, if the attachment name is long, the preview button will be squeezed out of the card
+      - Text hyperlinksWhen removing a link, only the link text should be selected, not the entire line of text
+      - Inserting a hyperlink, changing to card view and then back to text view, will result in the loss of LineId
+      - When multiple mention elements appear in a list row, there may be a problem when converting one of the file mentions to the preview form
+      - The level of the math formula input box is too low and may be obscured
+      - In WeChat and mobile browsers, when there are small tables with many rows, there may be a lag problem when swiping down
+      - Copying the content of the in-row code format to overwrite the original content of the minitable may fail
+  - slide
+    -  optimize
+      - History &; Version feature refactoring
+    -  repair
+      - .pptx importing, file objects may display unusual content
+      - Insert a table with more than 10 rows and rows on the slide, select all tables, and some of the content may not be highlighted
+      - Copying text from PowerPoint, pasting it into a graphite slide, the text does not display properly
+  - Application tables
+    -  NEW FEATURES
+      - When the radio option is too long, the hover can show the whole thing
+      - The expansion method of the record details page is optimized, and the interaction form is as follows: pop-up window -> to expand on the right side
+      - Comment @ file supports click-to-jump
+      - The view configuration entry is displayed on the right side of the toolbar, and the styles such as grouping have been optimized
+    -  repair
+      - Fixed an issue where the following color field in Calendar/Gantt view was rendered incorrectly
+      - Fixed the issue that when viewing attachments, images were compressed
+  - Forms
+    -  NEW FEATURES
+      - New question type "Fill-in-the-blank questions"
+      - Fill in the details on the mobile terminal to supplement the user's business card
+- Server-side
+  - Import and export
+    -  NEW FEATURES
+      - Application tables can be imported into .xlsx files as sub-tables
+      - App tables can be [exported as .xlsx files](./apis.md#export-table-sheets)
+  - SDK events
+    -  NEW FEATURES
+      - Apply table editing push content update events
+-  Access the document
+  - Graphite interface
+    -  Remove
+      - Removed the obsolete import and export interface description
+        - `(废弃)导入文件`, you need to use the [Import File](./apis.md#import-v1) interface
+          - Original address `POST https://shimo-domain/sdk/v2/api/files/import`
+        - `(废弃)获取导入进度`, you need to use the [Get Import Progress](./apis.md#import-progress-v1) interface
+          - Original address `POST https://shimo-domain/sdk/v2/api/files/import/progress`
+        - `(废弃)导出文件`, you need to use the [Export File](./apis.md#export-v1) interface
+          - Original address `POST https://shimo-domain/sdk/v2/api/files/export/{fileId}`
+        - `(废弃)获取导出进度`, you need to use the [Get Export Progress](./apis.md#export-progress-v1) API
+          - Original address `POST https://shimo-domain/sdk/v2/api/files/export/progress`
+      - Removed [ the deprecation description of the API URL of the old version of](./apis.md#doc-sidebar-info) the API for Get History List
+----
+## `Version 2022.10.1`
+### 2022-09
+- JS SDK
+  - You need to upgrade to `shimo-js-sdk@^1.0.3` ensure  proper functionality
+- editor
+  - Light documents
+    -  NEW FEATURES
+      - Enter " / in the document to open the menu quickly, and you can set the paragraph style or insert content
+      - Insert a preview window into a document to directly preview any web page content, and hyperlinks can be converted into a preview view with one click
+      - In the document, long press the menu entry on the left side of the paragraph and drag it to move the content position
+    -  repair
+      - "/" command
+        - In the reference, you can search for "web preview window" that is not allowed to be inserted
+        - The placeholder of a blank document does not synchronize the style to the placeholder itself after the title style and line spacing are set
+      - Wide tables
+        - The wide table automatically scrolls left and right as you swipe down
+      - form
+        - If you enter a space before 
+        - Entering the code highlighting syntax in the table `kind` and continuing to enter the spaces will cause the text content behind the table to be confused
+      - If the hyperlink card does not have a logo, the "broken image" will be displayed
+      - The first time a math formula with content is activated, the input box is always empty
+  - form
+    -  NEW FEATURES
+      - Added "Full Screen Mode" entry to the bottom toolbar
+      - PivotTable - Calculated Field
+      - Add "New Worksheet" to Worksheet Menu
+      - Secondary menu hover
+      - Image rotation
+    -  optimize
+      - Comments improve the functions of adding, deleting, modifying, etc
+      - iPad (M1 chip) scroll stuttering optimization
+      - 性能优化:Lookup Filter 多条件查询场景导致计算卡顿
+      - Performance optimization: Optimization of sorting algorithms
+      - Performance optimization: Optimized the lag caused by rangeCalc initialization markers
+    -  repair
+      - The data referenced across tables is inconsistent with the original table
+      - Set the problem that the lock worksheet is not visible, lock the cell editable permission, and the visible content cannot be searched
+      - Upload floating images in the next filter row, but the floating images are not displayed
+      - The font size is set to scale the scale of the table, and the font size becomes smaller after entering
+      - Table incognito mode is displayed as hyperlinks, non-incognito mode displays text
+      - filter refers to the attachment data of the form worksheet, and the attachment becomes plain text after refreshing the page
+      - An issue where you create a pivot table using merged worksheet data, and the pivot table cannot be displayed
+      - The old table commented on the issue of fetch failure
+      - Pivot table not showing issue
+      - Activate the cell, unable to enter the color value to set the color
+      - After linking to a cell in another worksheet in the current table, the cell position changes, and the link reference range is not updated
+      - An issue where the table address formula is calculated incorrectly
+  - slide
+    -  NEW FEATURES
+      - Text fills support rendering: solid colors, gradient colors, textures, image fills
+      - Text outlines can be rendered: solid color, solid line, dashed line, and line weight
+    -  repair
+      - Copy the image, paste it across the slide, the image is not displayed after pasting, and the refresh is normal
+      - Copy the table contents, paste them in the notes, and the first cell text will be missing
+      - Open the graphite slide, copy the text and paste it in the remarks area, switch to a page, continue to copy the text and paste it in the remarks, and an error will be reported in the console
+      - Copy the text with gradient fill/texture fill/picture fill, paste it into the note, and the fill color will be highlighted
+      - Insert shapes, fill with color, and set transparency. After copy-pasting, the shape loses the transparency of the fill color and should remain the same transparency
+      - Copy an image from a light document, paste it into a slideshow, and don't display it
+      - Insert a table with more than 10 rows and columns on the slide, select all tables, and some of the content will not be highlighted
+      - Copying text from PowerPoint, pasting it into a graphite slide, the text does not display properly
+      - In the imported pptx with a gradient text outline, the cursor is positioned in the text box in the screenshot, and an error is reported in the console
+  - Traditional documentation
+    -  NEW FEATURES
+      - Insert a handwritten signature
+      - Insert a divider
+      - Caret: Supports common symbols, as well as inserting a complete collection of symbols under a specific font
+      - Paste Special: You can keep the original format, match the target format, and paste text only
+      - Color panel upgrade: Support color palette color selection and custom colors
+    -  repair
+      - In comment-only mode, the right-click comment entry is grayed out and should light up
+      - If you click on the signature area to restrict editing, the signature pop-up window should not appear
+      - On a branch, after inserting a hyperlink, the cursor is positioned and the hyperlink is inserted
+      - Importing attachments, the alignment is displayed incorrectly
+      - In the case of read-only/comment-only, click on the location in the document, and the keyboard and toolbar should not appear
+      - If you use a format painter between line shapes, an error is reported in the document
+      - Crop the image, reset the crop, refresh or crop the image
+      - Mobile Web
+        - On the mobile side, the document editing page can be activated in the case of attachment preview
+        - On the mobile side, close the comment card after replying to the comment, and there will be a blank loading area on the page
+        - After the text sets the font size, the mobile positioning cursor or checking to view the font size will remain the same
+      - iOS
+        - On iOS, delete the @ symbol after @, and there will be a background bar above the toolbar
+  - Application tables
+    -  NEW FEATURES
+      - File global history feature
+        - Each piece of history can be previewed
+        - Part of the history can be restored
+        - The previewed table content can be copied and pasted
+      - Supports shortcut keys, such as `Shift + Enter` Insert Row Down,`Ctrl + Shift + v` Paste Header and Content, etc
+      - The "Add Record" entry is added to the Associated Reference Select Record page
+      - Attachments can be uploaded in batches and by drag-and-drop
+      - Supports importing subtables from Excel files
+  -  Forms
+- Server-side
+  - Import and export
+    - slide
+      - Fixed importing SmartArt charts that were not converted to diagram display
+      - Fixed the issue that after importing an image in WMF / EMF format, the background color of the image was not transparent
+
+----
+## `Version 2022.8.1`
+### 2022-07
+
+- JS SDK
+  - 轻文档 （Document）
+    -  New
+      - Insert third-party service APIs `insertExternalApp`: Supports inserting third-party URLs
+- editor
+  - Light documents
+    -  New Features & Improvements
+      - Continuous minitables support inserting blank rows
+      - Text updates and UI issue fixes for the English version
+  - form
+    -  New Features & Improvements
+      - Text rotation
+      - Chart enhancements
+      - Support for inserting sparklines
+      - Gantt charts support rendering of multiple colors by category and configuration optimization
+      - Trend lines are added to the chart
+      - Bubble map configuration optimization
+      - You can modify the title directly on the chart
+      - Form comments support replies and likes
+      - Apply table style enhancements: add styling settings, support border lines, and add the last row and last column configuration
+      - Insert text boxes, support text box import and export
+      - Toolbar text alignment entry adjustment: vertical alignment and text wrapping function position swapping; support text truncation
+      - Description of the Subtotal parameter of the completion formula
+      - The weekday formula supports more parameter types: complete the calculation rules of type 11-17
+      - Copywriting updates and UI bug fixes for the English version
+      - Automatic summation formula input optimization
+      - Interaction optimization: Click the formula button in the toolbar to directly trigger automatic summing
+      - Optimized the timing of SUBTOTAL use: When there are filtered rows in the automatic summing region, SUBTOTAL is used to replace SUM, and the data is automatically filtered and summed
+      - Blank cell calculation rules: Click on blank cells to automatically sum, and the search logic of the summation range is optimized, which is more in line with Excel's calculation logic
+      - Performance optimization: Removed unnecessary global calculations
+      - Toolbar - "Clear Formatting" optimization, added drop-down menus (Clear All, Clear Content, Clear Format)
+      - Right-click menu - "Clear" position adjustment
+    -  repair
+      - Fixed the issue that copying pivot table column headers across Sheet needs to be pasted twice before it takes effect
+      - Fixed the issue that formulas were referencing exceptions across sheets
+      - Fixed the issue that the content could be seen after the export of locked invisible content
+      - Fixed the issue that the merge worksheet was updated slowly and the latest data was not updated
+      - Fixed the issue that cross-table reference results did not meet expectations
+      - Fixed the issue that filtering "empty" cells in non-Chinese environments was invalid
+      - Fixed the issue that the image was not displayed in the preview of Excel table attachments
+      - Fixed the issue that custom filters could not enter selection columns
+      - Fixed the issue that clicking the menu button on the worksheet was invalid
+      - Users without edit permissions are prohibited from copying content from the fx bar
+  - slide
+    -  New Features & Improvements
+      - Code tweaks and optimizations
+      - Click the Delete keyboard to support backward deletion
+      - International copywriting adjustment: sentence casing is uniformly adopted
+      - Images that fail to load on mobile can be reloaded
+      - Import OLE objects: OLE objects can be imported into a diagram for display
+      - Font enhancements
+      - Several performance optimizations
+    -  repair
+      - The cell background color setting is invalid
+      - Select Picture Fill, and when the Fill Method is changed to Tile, the background setting becomes No Fill
+      - Only users cannot delete their own comments or end their comments
+      - Copy-paste related bug fixes
+      - Fixed font rendering anomaly bugs
+  - Traditional documentation
+    -  New Features & Improvements
+      - Historical versions can filter automatically saved versions and manually saved versions
+      - Composite types of shapes and lines are supported, and support for the red-headed format of official documents such as "Letters" has been improved
+      - Full-screen mode: Allows you to view and edit documents in full screen, expanding the scope of the interface to help improve experience and focus
+      - Two-finger zoom is supported for touchpads on Mac devices
+      - Optimized the operation experience of the iOS menu bar;
+      - Magic Keyboard for iPad supports `Command(⌘) + C` shortcut keys such as`Command(⌘) + V` ,`Command(⌘) + X` ,`Command(⌘) + A` ,
+      - The mobile terminal supports clicking on the directory in the document to jump
+      - Print preview loading speed is optimized
+    -  repair
+      - Once the table is inserted, zoom in and out of the table, and then click on the cell edge to jump to the first page of the document
+      - In Safari, when scrolling through the page, the menu at the bottom of the browser disappears, leaving a blank space
+      - The first time an iOS device taps, the keyboard doesn't rise, and the tap toolbar is not at the right height
+      - After setting the paragraph shading in Word, the entire paragraph is copied and pasted into the traditional document, and the shading is lost
+      - After setting text shading in Word, the imported shading is missing
+      - After setting the highlight color, enter English, and the last space will not be highlighted
+      - If you enter English, the alignment of both ends is incorrect
+      - Insert the hyperlink of the bookmark itself into the bookmark position, and if you click it continuously, an error will be reported in the console
+      - If you use the @ function continuously, an error is reported on the search interface and an error message is displayed on the frontend
+      - Clicking the cursor does not automatically pop up the keyboard
+      - @ person, select Contacts and switch to the organizational structure, and an error message will appear
+      - @ people when the content can't be searched
+      - @ time, an error is reported in the console, and the document cannot be edited
+      - Some of the secondary menus in the toolbar have scroll bars
+      - Use  the key to confirm `Enter`when cropping an embedded image  to wrap the image
+      - An error is reported in the console during attachment preview
+      - Blank lines are used with `Delete` the key to delete, an exception is displayed, and the document triggers an infinite page
+      - When the bookmark is in the lower half of the current page of the document, the positioning jump does not jump to the corresponding position
+      - After entering the full-screen mode of editing, there will be a background color at the bottom
+      - When the scale setting in the lower right corner is raised, the cursor is positioned in the body and the settings page is not collapsed
+      - On the mobile web side, the content is not displayed after the page is enlarged to a certain scale
+      - When the document is enlarged, there is a background between the toolbar and the scroll bar at the bottom of the page
+      - On the mobile web, the comment button in the overlay menu should be disabled when an empty paragraph is selected
+      - When you open the reply comment page, scroll and see that the scroll bar overlaps with the comment page
+      - When the cursor is positioned in the middle of a paragraph, click the button to increase/decrease the font size, and the font size in the paragraph will change
+      - The translation of the secondary menu under the view menu is missing
+      - Under the Comment Only permission, full-screen editing in the menu bar is disabled, and the lower right corner is available
+      - If you click on a hyperlink, you will not be redirected
+- Server-side
+  - Generic interfaces
+    -  Removed or incompatible
+      - The license interface no longer fetches the current user, and the conditions are more stringent
+        - request `scope: license`
+        - It requires `exp` < 5min and is valid for less than 5 minutes
+        - Signature is allowed to manipulate data only if the following conditions are met
+          - The signature has not been used, i.e. the signature is not allowed to be reused
+          - The SIG `exp` has not expired
+    -  optimize
+      - If the callback address is not set, an explicit error message is returned
+        - If the accessing party callback interface address is not set `endpoint_url should be configured before use`
+        - If the callback address of the access party does not start with http(s):// `endpoint_url must start with http(s)://`
+  - Import and export
+    - Light documents
+      -  optimize
+        - Performance optimized for large document imports
+        - Stability optimization
+    - slide
+      -  New
+        - Support text outline import/export
+        - Gradient fill import/export is supported
+-  Access the document
+  - New
+    - Example of a date type OADate numeric conversion[ related to the Table API ](./apis.md#oadate-conversion-example)
+    - [SDK Error Codes](./errors.md) Description Supplement
+    - Add a description  of `permissions.copyable` the file permissions
+  -  correct
+    - For the time format description in the interface implemented by the accessing party, the example time format is changed instead `2022-01-01T09:00:01Z`of the format string form to avoid problems caused by the difference in time format usage in different languages
+
+## `Version 2022.7.1`
+### 2022-07
+
+-  Access the document
+  - Graphite interface
+    -  New
+      - Added  type description `应用表格 (table)`to the API for creating a file 
+  - Service Provider Interface
+    - `/events` In the event interface `评论``提及` , add the description of the application table
+
+----
+## `Version 2022.6.1`
+### 2022-05
+
+- JS SDK
+  - [The  minimum version of ](https://www.npmjs.com/package/shimo-js-sdk)shimo-js-sdk is required`0.15.0`, and some functions will be abnormal below this version
+  - 轻文档 （Document）
+    -  Removed or incompatible
+      - Saving a state change event should be used [`saveStatusChanged`](https://github.com/shimohq/shimo-js-sdk/blob/master/docs/interfaces/Document.EventMap.md#savestatuschanged), the original event [`saveStatusDidChange`](https://github.com/shimohq/shimo-js-sdk/blob/master/docs/interfaces/Document.EventMap.md#savestatusdidchange) is deprecated. 
+    -  New
+      - Show/hide comments sidebar API - showComments/hideComments
+      - Add and insert a third-party service API - insertExternalApp
+- editor
+  - Light documents
+    -  New
+      - @ Mention supports contacts and calendars at the bottom
+      - Paper and toolbar adaptive page widths
+      - Wide tables are supported
+    -  optimize
+      - List initialization performance
+  - form
+    -  New
+      - @ Mention supports contacts and calendars at the bottom
+      - Right-click cross-table pasting (Chrome 86 or later required)
+      - Cells support inserting multiple links
+      - Worksheet/cell text direction supports right to left
+      - Charts support summary diagram & style optimization
+    -  optimize
+      - Scrollbar interaction optimization
+      - Optimized the memory usage of table rendering > optimized the performance of batch operations
+    -  repair
+      - Fixed the issue that if you type @ after switching browser tabs, the pop-up box would be displayed in the upper left corner
+      - Fixed the issue that when there are frozen rows and merged cells, the filter button is drawn
+      - Fixed the switcher settings panel style wrapping issue
+      - Fixed the issue that the overflow formula link display was invalid
+  - slide
+    -  New
+      - @Mention in the comments supports the bottom address book
+      - Text direction and table orientation settings are supported
+      - Support thumbnail/note expansion and collapse
+      - Copy-paste, replace, and overwrite in small tables are supported
+      - Customize the font size
+      - Paste Special: The menu supports the permanent "Paste Special" entry
+      - Customize the zoom ratio
+    -  optimize
+      - When inserting/editing charts, canceling is supported
+      - The font list is updated
+      - The Mobile web responds to a hyperlink click event
+      - Theme resource updates
+      - Tooltip tweaks in the bottom status bar
+      - Slide bottom bar optimization
+    -  repair
+      - Clicking on the at person in the comment panel should not open a new page to jump
+      - At In the pop-up window, the international UI of English and Japanese is adapted
+      - When importing an unsupported video format, right-click the video, and the download video entry is grayed out
+      - Set the page cutting animation to automatically cut the page (duration 20 seconds), turn on autoplay in presentation mode, and after waiting for 20 seconds, the page will be played for 2 consecutive seconds, and there is no problem of waiting for 20 seconds
+      - Some slide files enter presentation mode, and the screenshot position of the home page slide is not displayed in Chinese
+      - After selecting the image, open it from the menu navigation bar to view a larger image, no response
+      - In the shape drop-down menu, the 2 icons under the rectangle in the screenshot are used incorrectly, which are inconsistent with the drawn shape
+      - After inserting multiple elements into the canvas, the Arrange menu in the navigation bar remains unavailable when all shortcuts are selected
+      - After copying the entire slide (with notes) and pasting it, the notes are lost
+      - After selecting an element to add an element animation, select the element and right-click to adjust the element arrangement level, the added element animation should not be deleted
+      - When you switch a topic in a specific environment, an error is reported in the console
+      - There is a certain probability that the document cannot be opened after the program is abnormal
+      - In the combination of text box and image, drag the position of the image element to move the position of the text box
+      - After copy-pasting text, the font size is applied incorrectly
+      - There are several problems with font detection and drawing
+      - In some cases, the text of the imported file is not centered
+      - There are a few issues with copy-pasting tables
+      - Pictures, Slides cut and paste into a picture problem
+  - Traditional documentation
+    -  New
+      - @ Mention supports contacts and calendars at the bottom
+    -  optimize
+      - Optimize the performance of revision cards
+    -  repair
+      - Fixed the preview error
+      - Fixed shape-related bugs
+      - Fixed bookmark positioning errors
+      - Fixed errors related to scientific formulas
+      - Fixed typography related errors
+      - Fixed header and footer related bugs
+- Server-side
+  - Generic interfaces
+    -  Removed or incompatible
+      - Deprecated **[Get Historical Interface](./apis.md#doc-sidebar-info)** Camel case form routing
+    -  New
+      - Support team and department access
+      - Import and export the new version of the API
+        - Import via incoming `文件下载地址` instead of `文件二进制` import is supported
+      - Preview the creation of a synchronization interface
+      - The preview supports watermark display, and the watermark content is obtained through the [watermark API](./impl.md#user-watermark)
+    -  repair
+      - When a version is created repeatedly, an incorrect message is displayed
+      - When activating/deactivating a user, the user state cache is immediately refreshed
+    -  optimize
+      - The stability of the service has been optimized
+      - Optimized the preview performance and stability of Word documents (doc, docx, wps, wpt).
+  - Import and export
+    - Traditional documentation
+      -  New
+        - Footnotes and endnotes support separator import and export
+      -  repair
+        - Cell properties are lost after a specific document is exported and then imported
+        - The directory for importing a specific document is displayed correctly, and the directory for exporting is missing
+    - form
+      -  New
+        - Thumbnails are exported to their original image
+        - Cross-tabular data validation, import and export are supported
+      -  repair
+        - Exporting a merged worksheet loses the text centering style
+        - Fixed the issue related to cell rich text hyperlinks
+    - slide
+      -  optimize
+        - Optimize service stability
+-  Access the document
+  -  Removed or incompatible
+    - Deprecated **[Get History List interface](./apis.md#doc-sidebar-info)** in camel form `/shimo-files/{fileId}/docSidebarInfo`, only provided `/shimo-files/{fileId}/doc-sidebar-info`
+  -  New
+    - **[Teams & Departments](./concepts/team_department.md)** Documentation of concepts and access party implementation interfaces
+    - The new version of the **[Import and Export](./apis.md#import-export)** API and the Import and Export API have added `获取进度结果缓存时间`and`任务最长执行时间` described
+  -  repair
+    - Removed descriptions of JS SDKs that can't be imported via js alone
+
+
+----
+## `Version 2022.5.1`
+### 2022-04
+
+- editor
+  - [The  minimum version of ](https://www.npmjs.com/package/shimo-js-sdk)shimo-js-sdk is required`0.15.0`, and some functions will be abnormal below this version
+  - Light documents
+    -  New
+      - Bottom status bar (presentation mode button)
+    -  optimize
+      - Initialization performance optimization
+  - form
+    -  Removed or incompatible
+      - Hide the Merge Worksheet Link input box
+    -  New
+      - Presentation mode entry has been added to the sheet bar
+    -  optimize
+      - Added printing shortcuts
+      - The Merge Worksheet pop-up box is highly adaptive
+      - Adjusted the attachment upload failure prompt
+      - Above-the-fold rendering optimizations
+    -  repair
+      - Fixed the issue that the filter permission judgment can only be used when the lock can only be recorded
+      - Fixed an issue where the Get link to this selection feature sheetId was incorrect
+      - Fixed the issue of finding and replacing styles on mobile devices
+      - Fixed an issue where selecting an entire column would scroll to the first row
+      - Fixed the issue that the range could not be selected for cross-table references
+  - slide
+    -  repair
+      - Fixed a search error during a comment
+      - Fix iPad Pro is Error Showing Up as PC View
+      - Fixed the issue that the toolbar was not updated when the shortcut key was selected all
+  - Traditional documentation
+    -  New
+      - Support for the Mobile Web Comment & at feature
+      - Support for Mobile Web Form editing
+      - The at time in the document is displayed according to the date and time zone
+    -  optimize
+      - Table properties added translations, UI tweaks
+      - Japanese translation
+      - Toolbar adds sequentially numbered entries
+    -  repair
+      - There is no paper content for the first render
+      - When the floating table pop-up box selects absolute positioning, the drop-down menu for relative positioning may not disappear
+      - The font marquee is blurred
+      - After opening the document map, refresh the document and the document map will not open automatically
+      - Preview error issue
+      - The cursor position is updated when the width of the document changes
+      - Fixed a logical error in drawing page numbers
+      - Fixed the issue that after inserting a table, the error message was undone after selecting the table cell
+      - Drag and drop is prohibited under Restricted Editing
+      - Known stability issues, known typography issues
+- Server-side
+  - Graphite interface
+    -  New
+      - The new version of the import file and the new version of the API for obtaining the import progress
+      - The new version of the import API allows you to import files by URL
+      - The new version of the export file and the new version of the API for obtaining export progress support the same document to export different types at the same time
+    -  repair
+      - Some invalid signatures do not return error messages correctly
+      - 签名部分 [`iat` (issued at time)](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims#reserved-claims) 字段容忍 5 分钟以内的误差
+        - When the signature is verified, if the absolute value of the error between the server's current time and the specified time of the IAT is less than 5 minutes, the signature is considered valid for IAT
+      - An error is reported when creating a copy of a large file
+  - Service Provider Interface
+    -  New
+      - SDK events add `版本` events, add  `更新`, operation`删除` data
+-  Access the document
+  - Graphite interface
+    - Fixed `创建协同文档副本` the example of the interface
+    - Added import and export error codes
+  - Service Provider Interface
+    - `/events` In the event interface [`版本`](./impl.md#events-revision) , add `更新`the data of the `删除` operation type and the operation
+    - Some APIs add `X-Shimo-Credential-Type` a credential type header description
+      - [Get File Meta Information - Collaborative Document Automated Task](./impl.md#file-meta-admin)
+      - [Obtain file meta information based on the specified user - collaborative document](./impl.md#file-meta-by-uid)
+
+----
+## `Version 2022.4.1`
+### 2022-03
+
+- editor
+  - Light documents
+    -  optimize
+      - Optimized the prompt text when copying is prohibited
+    -  repair
+      - Fixed the cutting issue of WeCom mini form
+  - form
+    -  optimize
+      - Cell/floating pictures support copying to WeChat
+    -  repair
+      - Fixed the issue that the position of the note on the view was not updated after sorting
+      - Fixed the issue of missing grouping when creating replicas
+      - Fix attachment preview clicking download will download multiple times
+      - Fixed the issue that the size of the inserted image was limited
+  - slide
+    -  optimize
+      - Collaboration UI cell Hover effect refinement
+    -  repair
+      - When the link box is closed, the input cannot be focused
+      - Indent data import is compatible
+      - Dragging a vertical text box renders exceptionally
+      - In read-only mode, collaborator information is not drawn
+  - Traditional documentation
+    -  New
+      - When initializing the editor, the parameter  is [positioned to the position of the person at](https://github.com/shimohq/shimo-js-sdk#%E6%89%93%E5%BC%80%E7%BC%96%E8%BE%91%E5%99%A8%E6%97%B6%E5%AE%9A%E4%BD%8D%E8%87%B3%E5%9C%A8%E6%AD%A3%E6%96%87%E4%B8%AD-at-%E6%9F%90%E7%94%A8%E6%88%B7%E7%9A%84%E4%BD%8D%E7%BD%AE)
+- Server-side
+  -  Removed or incompatible
+    - Graphite interface
+      - Remove `账号与应用管理` `创建接入账号` , , `登录接入账号` , `创建应用获取信息` `更新应用信息`
+      -  `石墨 API` `协同编辑` If the user information fails to be obtained, the corresponding error (HTTP `4XX` accessor`参数`,`回调` error, HTTP `5XX` graphite  error) will be returned as soon as possible `内部` , and the access will not continue as an anonymous identity to avoid unexpected problems
+  -  New
+    - Graphite interface
+      - Added `获取文件中的评论数` interface
+      - Added support for format in[ preview](./roll.md#preview-supported-types)
+        - `xlsm`
+        - `md`
+        - `heic`、`heif`
+        - `ofd`
+    - Service Provider Interface
+      - SDK events are added to `版本` the  event
+-  Access the document
+  - Graphite interface
+    - Added `获取历史列表` missing pagination parameter descriptions
+    - Supplemented with `获取历史列表` explanations of historical types in return data
+    - Added  a [ description of the ](./apis.md#get-comment-count)Get Comments in a File interface
+    - Corrects the JSON format in the interface response example
+  - Service Provider Interface
+    - Removed `文件` unnecessary fields from the Related Interfaces Example
+    - Added  descriptions of`文件` the relevant `file.fullUrl` interfaces 
+    - Corrects the JSON format in the interface response example
+    - Added `/search` a description of the meaning of`count` the , ,`page` , `pageSize`and fields `pageCount` in the interface response result 
+    - `/events` Event interface,`文件内容更新` event`文档协作者协同状态变化` header description
+    - `常见功能场景相关接口清单` - [`使用专业表格跨表格公式、合并工作表时`](./impl.md#feature-sheets) Description updates
+  - Development Resources
+    -  increase
+      - Added [ a description of the ](./resources.md#credential-types)Callback Credential Type
+
+## `Version 2022.2.2`
+### 2022-02
+
+- editor
+  - form
+    -  repair
+      - When commenting on an at file, the address is wrong and the link to the at file in the comment cannot be clicked after refreshing
+- Server-side
+  -  Removed or incompatible
+    -  `石墨 API` `协同编辑` If you fail to obtain the user information, an error will be returned and the access will no longer be used as an anonymous identity
+
+----
+
+## `Version 2022.2.1`
+### 2022-02
+
+- editor
+  - Light documents
+    -  New
+      - At Third-party non-graphite files, the file can be previewed in the editor, and the current user needs to have permission for the specified file `permissions.readable = true` [](./roll.md#preview-supported-types)
+      - When initializing the editor, the parameter  is [positioned to the position of the person at](https://github.com/shimohq/shimo-js-sdk#%E6%89%93%E5%BC%80%E7%BC%96%E8%BE%91%E5%99%A8%E6%97%B6%E5%AE%9A%E4%BD%8D%E8%87%B3%E5%9C%A8%E6%AD%A3%E6%96%87%E4%B8%AD-at-%E6%9F%90%E7%94%A8%E6%88%B7%E7%9A%84%E4%BD%8D%E7%BD%AE)
+    -  repair
+      - iOS header width issues
+      - iOS device title not sliding issue
+      - Unable to edit the default style issue
+  - form
+    -  New
+      - When initializing the editor, the parameter  is [positioned to the position of the person at](https://github.com/shimohq/shimo-js-sdk#%E6%89%93%E5%BC%80%E7%BC%96%E8%BE%91%E5%99%A8%E6%97%B6%E5%AE%9A%E4%BD%8D%E8%87%B3%E5%9C%A8%E6%AD%A3%E6%96%87%E4%B8%AD-at-%E6%9F%90%E7%94%A8%E6%88%B7%E7%9A%84%E4%BD%8D%E7%BD%AE)
+      - A full-screen button has been added to the bottom status bar
+    -  repair
+      - Date alert data synchronization issues
+      - iOS Safari failed to upload pictures
+      - Fixed  the issue that `post message timeout`the console was incorrect after switching tabs 
+  - Traditional documentation
+    -  Remove
+      - "Insert - Image - Upload Image from URL" feature
+    -  repair
+      - At file error and screen width adaptation issues
+  - slide
+    -  New
+      - Insert video support
+      - The thumbnail on the left shows collaborator information
+      - Add a full-screen button at the bottom
+    -  repair
+      - Display issues with list hanging indentation
+      - Font detection failure issue
+      - Mobile doesn't evoke keyboard issues
+- Server-side
+  -  Removed or incompatible
+    - Graphite interface
+      - By default `账号与应用管理` `创建接入账号` `登录接入账号` `创建应用获取信息` `更新应用信息` `appId` , `secret` 
+  -  New
+    - Graphite interface
+      - Added `获取文件内容中所有的 at 人信息列表` interface, supported file types:`轻文档` , ,`表格``传统文档`
+      - Add `获取 app 详情` the API to obtain the app name, available file types, number of activated users, total number of users, number of seats, license validity period, and callback address information
+      - Added `更新 app 回调地址` API to update the callback address of the corresponding service provider of the app
+      - Import `xlsm` format support
+    - Service Provider Interface
+      - SDK events are added to `文档协作者协同状态变化` the  event
+  -  repair
+    - When a file fails to be deleted, the data is abnormal
+    - Light document insertion date
+      - Multiple people checked "Remind me" and failed to save the status
+      - Incorrect event push data
+      - Insert an error issue with the date after the image
+    - An issue where the user status does not meet expectations when performing seat activation/seat cancellation operations within a short period of time
+-  Access the document
+  - Graphite interface
+    - Added  the Obtain List of [All at People in a File Content](./apis.md#获取文件内容中所有的-at-人信息列表), which is used to obtain the list of all at people in a file content, and supports file types:`轻文档` ,`表格` ,`传统文档`
+    - Added [the Get App Details](./apis.md#get-app-detail) interface
+    - Added [the Update App Callback Address](./apis.md#update-app-endpoint-url) API
+    - Added [the Document Collaborator Collaboration Status Change](./impl.md#文档协作者协同状态变化-collaborator) event
+    - Import and export
+      - Added `xlsm` format import support
+  - other
+    - You can view changes to APIs and documents by SDK version
+
+----
+## `Version 2022.1.1`
+### 2022-01
+
+-  Access the document
+  - Service Provider Interface
+    - The event push API subdivides the data structure of each sub-event
+    - Supplemental description  of permissions`permissions.manageable` in document metainformation 
+    - Fixed `GET /users/batch/get` the HTTP method for `POST /users/batch/get`
+  - Graphite interface
+    - Added a description of the file extensions supported by the preview
+    - Supplemental user seat in the`未使用` status and `自动激活席位`description
+  - other
+    - In the upper right corner, keyword search document support is added
+
+### 2021-12
+
+-  Access the document
+  - Service Provider Interface
+    - File Meta Info - Preview
+      - Add  a field `ext` to display the extension information of the specified file
+      - The  added `permissions.readable` field is used to verify the read permission of the preview user identity
+    - In the collaborator list interface, add  the field to `isManager` specify whether the corresponding user is the manager of this file, which is used to determine the permission to lock the form
+    - Event interface
+      - In the comment event, if there is an at user in the comment content, the `userIds` corresponding user list will be pushed through the field in the comment event
+    - Added a  description `/search`of the parameters in the API for keyword searching `type` 
+    - Added `水印接口`that the accessing party can be used to customize the watermark behavior of the editor
+    - Added **the list of callback interfaces related to common functions** to describe the interfaces used in common scenarios, so that the accessing party can understand the interfaces that need to be implemented
+    - Fixed the Get File List interface(`GET /files`s) interface field description
+  - Graphite interface
+    - Export, update the supported format information
