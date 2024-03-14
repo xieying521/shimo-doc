@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "latest",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.石墨 Awesome 文档": {
+    "message": "石墨 Awesome 文档",
+    "description": "The label for category 石墨 Awesome 文档 in sidebar tutorialSidebar"
+  }
+}
