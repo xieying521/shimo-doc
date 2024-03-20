@@ -9,15 +9,17 @@ sidebar_position: 3
 
 ## 工单流程图
 
+![flow-chart](./../image/userguide/flow-chart.png)
+
 ## 工单操作指导
 
-### 前置条件
+**前置条件**
 
 - 已购买并部署私有化产品
 - 已购买技术工单服务
-- 登录石墨开放服务平台，完成  [企业认证](./../userguide/enterprise-management.md)
+- 登录石墨开放服务平台，完成 [企业认证](./../userguide/enterprise-management.md)
 
-### 操作步骤
+**操作步骤**
 
 **步骤1：**单击页面右上角【私有化部署】下拉框，选择【服务台】。
 :::info 提示
@@ -40,7 +42,7 @@ sidebar_position: 3
 
 ![work-order1](./../image/userguide/work-order1.png)
 
-**步骤3：**勾选服务协议后，单击【提交】按钮，完成工单填写。
+**步骤3：**单击【提交】按钮，完成工单填写。
 
 **步骤4：**在私有化部署服务台导航栏，单击【工单记录】，可以查询已提交的工单列表和信息，还可以通过工单标题、日期等筛选工单。
 
