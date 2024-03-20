@@ -13,7 +13,7 @@ sidebar_position: 3
 
 ## 对接流程
 
-1. 接入方将 Open Telemetry Collector（简称 OTel Collector）部署到服务器，详细操作请参考 [Open Telemetry 官网](#https://opentelemetry.io/docs/)。
+1. 接入方将 Open Telemetry Collector（简称 OTel Collector）部署到服务器，详细操作请参考 [Open Telemetry 官网](https://opentelemetry.io/docs/)。
 
    ![open-telemetry.png](../image/awesome/open-telemetry.png)
 
