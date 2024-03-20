@@ -2,7 +2,7 @@
 title: 企业管理
 description: 如何申请企业认证、修改认证信息及查询认证进展。
 keywords: [石墨文档, 文档中台, 协同办公, 在线文档, 文件共享, 企业认证]
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 企业管理功能包括企业信息查询和企业成员管理，提供了企业认证入口、企业信息查看/修改、添加企业管理员的能力。
@@ -16,13 +16,13 @@ sidebar_position: 3
 
 :::
 
-![enterprise-certification1](./../image/enterprise-certification1.png)
+![enterprise-certification1](./../image/userguide/enterprise-certification1.png)
 
-![enterprise-certification2](./../image/enterprise-certification2.png)
+![enterprise-certification2](./../image/userguide/enterprise-certification2.png)
 
 企业认证通过的用户，可查看认证信息并修改联系方式。
 
-![enterprise-certification3](./../image/enterprise-certification3.png)
+![enterprise-certification3](./../image/userguide/enterprise-certification3.png)
 
 ## 企业成员
 
@@ -37,7 +37,7 @@ sidebar_position: 3
 
 :::
 
-![enterprise-certification4](./../image/enterprise-certification4.png)
+![enterprise-certification4](./../image/userguide/enterprise-certification4.png)
 
 ### 人员列表
 
@@ -67,7 +67,7 @@ sidebar_position: 3
 
 对于单用户归属多企业的场景，支持企业查看和切换功能。
 
-![enterprise-change](./../image/enterprise-change.png)
+![enterprise-change](./../image/userguide/enterprise-change.png)
 
 **我创建的企业**
 
