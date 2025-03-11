@@ -47,7 +47,7 @@ slug: /
     | PDF 文件     | .pdf .rtf                                  |
     | TXT 文件     | .txt                                       |
     | 音频 文件    | .mp3 .mp4                                  |
-    | 图片 文件    | .jpg .jpeg .png .gif .bmp .svg .heic .heif |
+    | 图片 文件    | .jpg .jpeg .png .gif .bmp .heic .heif |
     | 其它 文件    | .ofd .rtf .md                              |
 
 ## 石墨文档中台的产品优势
